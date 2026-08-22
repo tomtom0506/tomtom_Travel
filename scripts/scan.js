@@ -79,6 +79,7 @@ async function scanDestination(dest) {
 async function scanHotelOnly(dest) {
   const hotel = await cheapestHotel({
     cityCode: dest.code,
+    cityName: dest.name,
     checkIn: settings.departureDate,
     checkOut: settings.returnDate,
     adults: settings.hotelAdults || 2,
@@ -133,7 +134,7 @@ async function main() {
         const h = await scanHotelOnly(dest);
         if (h) hotelResults.push(h);
       } catch (err) {
-        console.warn(`Failed hotel scan ${dest.code}: ${err.message}`);
+        console.log(`HOTEL-DEBUG: Failed hotel scan ${dest.code}: ${err.message}`);
       }
     }
     hotelResults.sort((a, b) => a.price - b.price);
@@ -157,7 +158,7 @@ async function main() {
       const r = await scanDestination(dest);
       if (r) results.push(r);
     } catch (err) {
-      console.warn(`Failed scanning ${dest.code}: ${err.message}`);
+      console.log(`Failed scanning ${dest.code}: ${err.message}`);
     }
   }
 
@@ -174,6 +175,7 @@ async function main() {
   for (const r of topN) {
     const hotel = await cheapestHotel({
       cityCode: r.code,
+      cityName: r.name,
       checkIn: r.departureDate,
       checkOut: r.returnDate,
       adults: settings.hotelAdults || 2,
@@ -245,7 +247,7 @@ async function main() {
 
         history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
       } catch (err) {
-        console.warn(`Failed scanning watchlist item ${item.destination}: ${err.message}`);
+        console.log(`Failed scanning watchlist item ${item.destination}: ${err.message}`);
       }
     }
     fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
