@@ -1,0 +1,13 @@
+{
+  "name": "flight-hotel-tracker",
+  "version": "1.0.0",
+  "description": "Scans flight/hotel prices from TLV to Europe and alerts via Telegram on good deals",
+  "main": "scripts/scan.js",
+  "scripts": {
+    "scan": "node scripts/scan.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

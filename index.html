@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TLV ⇄ אירופה | לוח טיסות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e13;
+    --panel: #141a22;
+    --panel-border: #232b36;
+    --text: #edeff2;
+    --muted: #7c8797;
+    --amber: #ffb020;
+    --teal: #37b6a7;
+    --danger: #e85c4a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 64px;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+    direction: ltr;
+    text-align: right;
+  }
+  h1 span.arrow { color: var(--amber); }
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: left;
+    direction: ltr;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .updated b { color: var(--teal); }
+
+  .settings-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .chip {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .chip b { color: var(--text); }
+
+  .board {
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .board-header {
+    display: grid;
+    grid-template-columns: 90px 1fr 130px 90px 90px;
+    gap: 8px;
+    padding: 10px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 90px 1fr 130px 90px 90px;
+    gap: 8px;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--panel-border);
+    transition: background 0.2s ease;
+  }
+  .row:last-child { border-bottom: none; }
+  .row:hover { background: rgba(255,255,255,0.02); }
+  .row.deal { background: rgba(255, 176, 32, 0.08); }
+  .row.deal:hover { background: rgba(255, 176, 32, 0.13); }
+
+  .code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+  .dest .name { font-weight: 600; }
+  .dest .country { color: var(--muted); font-size: 12px; }
+  .dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    direction: ltr;
+    text-align: left;
+  }
+  .price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    direction: ltr;
+    text-align: left;
+  }
+  .discount {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    direction: ltr;
+  }
+  .discount.good { color: var(--amber); }
+  .discount.bad { color: var(--muted); }
+  .discount.none { color: var(--panel-border); }
+
+  .sparkline { margin-top: 3px; }
+
+  footer {
+    margin-top: 28px;
+    color: var(--panel-border);
+    font-size: 11px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 640px) {
+    .board-header { display: none; }
+    .row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+      padding: 14px;
+    }
+    .price, .discount, .dates { text-align: right; direction: rtl; }
+    .discount { direction: ltr; text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>TLV <span class="arrow">⇄</span> EUROPE</h1>
+      <div class="subtitle">לוח מחירי טיסות ומלונות — עדכון אוטומטי</div>
+    </div>
+    <div class="updated" id="updated">טוען...</div>
+  </header>
+
+  <div class="settings-bar" id="settingsBar"></div>
+
+  <div class="board" id="board">
+    <div class="board-header">
+      <div>יעד</div>
+      <div>עיר</div>
+      <div>תאריכים</div>
+      <div>מחיר</div>
+      <div>מהחציון</div>
+    </div>
+    <div id="rows"><div class="empty">טוען נתונים...</div></div>
+  </div>
+
+  <footer>מתעדכן אוטומטית כל 6 שעות באמצעות GitHub Actions</footer>
+</div>
+
+<script>
+async function loadData() {
+  const [latestRes, historyRes] = await Promise.all([
+    fetch('data/latest.json').catch(() => null),
+    fetch('data/history.json').catch(() => null),
+  ]);
+  const latest = latestRes && latestRes.ok ? await latestRes.json() : null;
+  const history = historyRes && historyRes.ok ? await historyRes.json() : {};
+  render(latest, history);
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleString('he-IL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+}
+
+function sparkline(points, w = 84, h = 24) {
+  if (!points || points.length < 2) return '';
+  const min = Math.min(...points), max = Math.max(...points);
+  const range = max - min || 1;
+  const step = w / (points.length - 1);
+  const path = points.map((p, i) => {
+    const x = i * step;
+    const y = h - ((p - min) / range) * h;
+    return (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+  }).join(' ');
+  return '<svg class="sparkline" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
+    '<path d="' + path + '" fill="none" stroke="#37b6a7" stroke-width="1.5" /></svg>';
+}
+
+function render(latest, history) {
+  document.getElementById('updated').innerHTML = latest && latest.lastRun
+    ? 'עדכון אחרון: <b>' + fmtDate(latest.lastRun) + '</b>'
+    : 'אין נתונים עדיין — ממתין לריצה ראשונה';
+
+  const s = (latest && latest.settings) || {};
+  const bar = document.getElementById('settingsBar');
+  if (s.departureDate) {
+    bar.innerHTML =
+      '<div class="chip">מוצא: <b>' + (s.origin || '-') + '</b></div>' +
+      '<div class="chip">יציאה: <b>' + s.departureDate + '</b></div>' +
+      '<div class="chip">חזרה: <b>' + s.returnDate + '</b></div>' +
+      '<div class="chip">גמישות: <b>' + (s.flexible ? '±' + s.flexDays + ' ימים' : 'תאריכים קבועים') + '</b></div>' +
+      '<div class="chip">סף התראה: <b>' + s.discountThresholdPercent + '%</b></div>';
+  }
+
+  const rowsEl = document.getElementById('rows');
+  const results = (latest && latest.results) || [];
+  if (results.length === 0) {
+    rowsEl.innerHTML = '<div class="empty">אין נתונים עדיין — ממתין לריצה ראשונה של ה-Action</div>';
+    return;
+  }
+
+  rowsEl.innerHTML = results.map((r) => {
+    const price = r.confirmedPrice || r.approxPrice;
+    const isDeal = r.discountPercent !== null && r.discountPercent >= (s.discountThresholdPercent || 999999);
+    const discountClass = r.discountPercent === null ? 'none' : (isDeal ? 'good' : 'bad');
+    const discountText = r.discountPercent === null ? 'אין היסטוריה' : (r.discountPercent > 0 ? '↓ ' + r.discountPercent + '%' : '↑ ' + Math.abs(r.discountPercent) + '%');
+    const points = (history[r.code] || []).map(p => p.price);
+    const hotelLine = r.hotel ? '<div class="country">מלון מ-' + Math.round(r.hotel.price) + ' ' + r.hotel.currency + '</div>' : '';
+
+    return '<div class="row ' + (isDeal ? 'deal' : '') + '">' +
+      '<div class="code">' + r.code + '</div>' +
+      '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div>' + hotelLine + '</div>' +
+      '<div class="dates">' + r.departureDate + ' → ' + r.returnDate + '</div>' +
+      '<div><div class="price">' + Math.round(price) + ' ' + (s.currency || 'ILS') + '</div>' + sparkline(points) + '</div>' +
+      '<div class="discount ' + discountClass + '">' + discountText + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+loadData();
+</script>
+</body>
+</html>
