@@ -17,5 +17,10 @@
 
   "_comment_hotels": "בודק מלונות רק ליעדים שנמצאה בהם עסקת טיסה טובה (top N), כדי לחסוך בקריאות API",
   "checkHotelsForTopDeals": 5,
-  "hotelAdults": 2
+  "hotelAdults": 2,
+
+  "_comment_watchlist": "חיפושים ספציפיים שתמיד מדווחים אליכם בטלגרם כשהמחיר משתנה, גם אם לא חוצה את סף ההנחה הכללי. destination = קוד יעד (למשל BCN), note = תיאור חופשי",
+  "watchlist": [
+    { "destination": "BCN", "departureDate": "2026-09-15", "returnDate": "2026-09-22", "note": "ברצלונה - לדוגמה, מחקו או ערכו" }
+  ]
 }
