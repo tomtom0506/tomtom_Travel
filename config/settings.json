@@ -1,0 +1,21 @@
+{
+  "origin": "TLV",
+  "currency": "ILS",
+
+  "_comment_dates": "ערכו תאריכים אלו ידנית בכל פעם שרוצים לבדוק טווח אחר. פורמט YYYY-MM-DD",
+  "departureDate": "2026-09-15",
+  "returnDate": "2026-09-22",
+
+  "_comment_flexible": "flexible=false -> בודק רק את התאריכים המדויקים למעלה. flexible=true -> בודק גם ±flexDays ימים סביב כל תאריך ובוחר את הזול ביותר",
+  "flexible": false,
+  "flexDays": 3,
+
+  "_comment_alerts": "יתריע כאשר המחיר נמוך מ-X אחוז מהמחיר החציוני ההיסטורי של אותו יעד, וגם מתחת לתקרת מחיר מוחלטת (אופציונלי)",
+  "discountThresholdPercent": 20,
+  "maxPriceILS": 1400,
+  "minHistoryPointsForDiscountAlert": 3,
+
+  "_comment_hotels": "בודק מלונות רק ליעדים שנמצאה בהם עסקת טיסה טובה (top N), כדי לחסוך בקריאות API",
+  "checkHotelsForTopDeals": 5,
+  "hotelAdults": 2
+}
