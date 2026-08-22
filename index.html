@@ -201,6 +201,91 @@
     color: var(--teal);
   }
 
+  .search-panel {
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    background: var(--panel);
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .search-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .search-grid .full { grid-column: 1 / -1; }
+  .field label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .field select, .field input[type="date"], .field input[type="number"] {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 10px 10px;
+    border-radius: 8px;
+  }
+  .flex-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    grid-column: 1 / -1;
+  }
+  .flex-row input[type="checkbox"] { width: 18px; height: 18px; }
+  .flex-row label { font-size: 13px; color: var(--text); }
+  .flex-row input[type="number"] {
+    width: 60px;
+    background: var(--bg);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .search-btn {
+    width: 100%;
+    background: var(--teal);
+    color: #06231f;
+    border: none;
+    border-radius: 8px;
+    padding: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .search-btn:disabled { opacity: 0.6; }
+  .search-status {
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .search-status.error { color: var(--danger); }
+  .search-status.success { color: var(--teal); }
+
+  .token-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
   .settings-bar {
     display: flex;
     flex-wrap: wrap;
@@ -360,8 +445,34 @@
 
   <div class="toolbar">
     <button class="version-badge" onclick="openVersionModal()" id="versionBadge">v...</button>
+    <button class="icon-btn" onclick="openTokenModal()" title="חיבור לחיפוש חי">🔑</button>
     <button class="icon-btn" onclick="refreshApp()" title="רענן לגרסה אחרונה">⟳</button>
     <button class="icon-btn" onclick="toggleTheme()" title="החלף מצב כהה/בהיר" id="themeToggleBtn">🌙</button>
+  </div>
+
+  <div class="search-panel">
+    <div class="search-grid">
+      <div class="field full">
+        <label>יעד</label>
+        <select id="searchDest"><option value="">כל אירופה (33 יעדים)</option></select>
+      </div>
+      <div class="field">
+        <label>יציאה</label>
+        <input type="date" id="searchDepart">
+      </div>
+      <div class="field">
+        <label>חזרה</label>
+        <input type="date" id="searchReturn">
+      </div>
+      <div class="flex-row">
+        <input type="checkbox" id="searchFlexible">
+        <label for="searchFlexible">תאריכים גמישים ±</label>
+        <input type="number" id="searchFlexDays" value="3" min="0" max="14">
+        <label>ימים</label>
+      </div>
+    </div>
+    <button class="search-btn" id="searchBtn" onclick="triggerSearch()">🔍 חפש טיסות ומלונות</button>
+    <div class="search-status" id="searchStatus"></div>
   </div>
 
   <div class="settings-bar" id="settingsBar"></div>
@@ -400,11 +511,158 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="tokenModal" onclick="if(event.target===this) closeTokenModal()">
+  <div class="modal">
+    <h2>חיבור לחיפוש חי <button class="close-x" onclick="closeTokenModal()">✕</button></h2>
+    <p style="font-size:13px; color:var(--muted); line-height:1.6;">
+      כדי שכפתור החיפוש יוכל להפעיל סריקה מיידית, צריך טוקן גישה אישי לגיטהאב (חד-פעמי, נשמר רק בדפדפן שלכם - לא נשלח לשום מקום חוץ מגיטהאב עצמו).
+    </p>
+    <ol style="font-size:13px; padding-right:18px; line-height:1.8;">
+      <li>גשו ל-<a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--teal);">יצירת טוקן חדש</a></li>
+      <li>Repository access → Only select repositories → tomtom_Travel</li>
+      <li>Permissions → Actions → Read and write</li>
+      <li>Generate token והדביקו אותו כאן:</li>
+    </ol>
+    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_...">
+    <button class="search-btn" onclick="saveToken()">שמור טוקן</button>
+    <div class="search-status" id="tokenStatus"></div>
+  </div>
+</div>
+
 <script>
-const APP_VERSION = "1.6.0";
+const APP_VERSION = "1.7.0";
+const GH_OWNER = "tomtom0506";
+const GH_REPO = "tomtom_Travel";
+const GH_WORKFLOW = "scan.yml";
 let allResults = [];
 let allHistory = {};
 let allSettings = {};
+
+// ---- GitHub token (stored only in this browser, used to trigger live searches) ----
+function getToken() { return localStorage.getItem("gh_pat") || ""; }
+function openTokenModal() {
+  document.getElementById("tokenInput").value = getToken();
+  document.getElementById("tokenModal").classList.add("open");
+}
+function closeTokenModal() { document.getElementById("tokenModal").classList.remove("open"); }
+function saveToken() {
+  const val = document.getElementById("tokenInput").value.trim();
+  const statusEl = document.getElementById("tokenStatus");
+  if (!val) { statusEl.textContent = "הדביקו טוקן תקין"; statusEl.className = "search-status error"; return; }
+  localStorage.setItem("gh_pat", val);
+  statusEl.textContent = "✓ נשמר";
+  statusEl.className = "search-status success";
+  setTimeout(closeTokenModal, 900);
+}
+
+// ---- live search: trigger the GitHub Action with chosen dates/destination ----
+function setSearchStatus(text, cls) {
+  const el = document.getElementById("searchStatus");
+  el.textContent = text;
+  el.className = "search-status" + (cls ? " " + cls : "");
+}
+
+async function triggerSearch() {
+  const token = getToken();
+  if (!token) { openTokenModal(); return; }
+
+  const dest = document.getElementById("searchDest").value;
+  const depart = document.getElementById("searchDepart").value;
+  const ret = document.getElementById("searchReturn").value;
+  const flexible = document.getElementById("searchFlexible").checked;
+  const flexDays = document.getElementById("searchFlexDays").value;
+
+  if (!depart || !ret) { setSearchStatus("בחרו תאריך יציאה וחזרה", "error"); return; }
+  if (new Date(ret) <= new Date(depart)) { setSearchStatus("תאריך החזרה חייב להיות אחרי היציאה", "error"); return; }
+
+  const btn = document.getElementById("searchBtn");
+  btn.disabled = true;
+  setSearchStatus("שולח בקשת חיפוש...", "");
+  const startedAt = new Date();
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ref: "main",
+          inputs: {
+            departureDate: depart,
+            returnDate: ret,
+            flexible: String(flexible),
+            flexDays: String(flexDays),
+            destination: dest || "",
+          },
+        }),
+      }
+    );
+
+    if (res.status === 204) {
+      setSearchStatus("מריץ חיפוש... זה יכול לקחת עד דקה", "");
+      pollForResult(startedAt, token, btn);
+    } else if (res.status === 401 || res.status === 403) {
+      setSearchStatus("הטוקן לא תקין/פג תוקף - פתחו 🔑 והזינו טוקן חדש", "error");
+      btn.disabled = false;
+    } else {
+      setSearchStatus("שגיאה מגיטהאב (קוד " + res.status + ")", "error");
+      btn.disabled = false;
+    }
+  } catch (e) {
+    setSearchStatus("שגיאת רשת - נסו שוב", "error");
+    btn.disabled = false;
+  }
+}
+
+function pollForResult(since, token, btn) {
+  let attempts = 0;
+  const maxAttempts = 24; // ~2.5 minutes at 6s interval
+  const poll = async () => {
+    attempts++;
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/runs?event=workflow_dispatch&per_page=5`,
+        { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+      );
+      const data = await res.json();
+      const run = (data.workflow_runs || []).find((r) => new Date(r.created_at) >= new Date(since.getTime() - 5000));
+      if (run) {
+        if (run.status === "completed") {
+          const ok = run.conclusion === "success";
+          setSearchStatus(ok ? "✓ החיפוש הושלם, טוען תוצאות..." : "החיפוש נכשל (" + run.conclusion + ")", ok ? "success" : "error");
+          btn.disabled = false;
+          if (ok) setTimeout(loadData, 1500);
+          return;
+        }
+        setSearchStatus("סורק... (" + run.status + ")", "");
+      }
+    } catch (e) {
+      /* keep polling */
+    }
+    if (attempts < maxAttempts) {
+      setTimeout(poll, 6000);
+    } else {
+      setSearchStatus("לוקח יותר מהצפוי - בדקו שוב עוד רגע (הדשבורד יתעדכן לבד)", "error");
+      btn.disabled = false;
+    }
+  };
+  setTimeout(poll, 5000); // give GitHub a moment to register the run
+}
+
+async function loadDestinationsIntoSearch() {
+  try {
+    const res = await fetch("config/destinations.json?_=" + Date.now());
+    const list = await res.json();
+    const select = document.getElementById("searchDest");
+    select.innerHTML = '<option value="">כל אירופה (' + list.length + ' יעדים)</option>' +
+      list.map((d) => '<option value="' + d.code + '">' + d.name + " (" + d.code + ")</option>").join("");
+  } catch (e) { /* leave default option */ }
+}
 
 // ---- theme ----
 function applyTheme(theme) {
@@ -459,6 +717,7 @@ async function loadData() {
   const latest = latestRes && latestRes.ok ? await latestRes.json() : null;
   const history = historyRes && historyRes.ok ? await historyRes.json() : {};
   render(latest, history);
+  loadDestinationsIntoSearch();
 }
 
 function fmtDate(iso) {
@@ -536,6 +795,13 @@ function render(latest, history) {
       '<div class="chip">חזרה: <b>' + s.returnDate + '</b></div>' +
       '<div class="chip">גמישות: <b>' + (s.flexible ? '±' + s.flexDays + ' ימים' : 'תאריכים קבועים') + '</b></div>' +
       '<div class="chip">סף התראה: <b>' + s.discountThresholdPercent + '%</b></div>';
+
+    const departField = document.getElementById('searchDepart');
+    const returnField = document.getElementById('searchReturn');
+    if (!departField.value) departField.value = s.departureDate;
+    if (!returnField.value) returnField.value = s.returnDate;
+    document.getElementById('searchFlexible').checked = !!s.flexible;
+    document.getElementById('searchFlexDays').value = s.flexDays || 3;
   }
 
   allResults = (latest && latest.results) || [];
