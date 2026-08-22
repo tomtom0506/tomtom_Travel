@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>TLV ⇄ אירופה | לוח טיסות</title>
+<title>החופשה שלי | TLV ⇄ אירופה</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b0e13">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -49,6 +54,17 @@
     text-align: right;
   }
   h1 span.arrow { color: var(--amber); }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand img {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
   .subtitle {
     color: var(--muted);
     font-size: 13px;
@@ -69,7 +85,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .chip {
     background: var(--panel);
@@ -82,6 +98,27 @@
   }
   .chip b { color: var(--text); }
 
+  .filter-bar {
+    margin-bottom: 24px;
+  }
+  .filter-bar select {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c8797' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+    background-size: 18px;
+  }
+  .filter-bar select:focus { outline: 2px solid var(--teal); }
+
   .board {
     border: 1px solid var(--panel-border);
     border-radius: 10px;
@@ -90,7 +127,7 @@
   }
   .board-header {
     display: grid;
-    grid-template-columns: 90px 1fr 130px 90px 90px;
+    grid-template-columns: 70px 1fr 120px 85px 85px 80px;
     gap: 8px;
     padding: 10px 16px;
     font-family: 'IBM Plex Mono', monospace;
@@ -102,7 +139,7 @@
   }
   .row {
     display: grid;
-    grid-template-columns: 90px 1fr 130px 90px 90px;
+    grid-template-columns: 70px 1fr 120px 85px 85px 80px;
     gap: 8px;
     align-items: center;
     padding: 14px 16px;
@@ -132,9 +169,19 @@
   .price {
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 15px;
     direction: ltr;
     text-align: left;
+  }
+  .price.empty-val { color: var(--panel-border); font-weight: 400; }
+  .col-label {
+    display: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
   }
   .discount {
     font-family: 'IBM Plex Mono', monospace;
@@ -167,33 +214,45 @@
   @media (max-width: 640px) {
     .board-header { display: none; }
     .row {
-      grid-template-columns: 1fr;
-      gap: 4px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 4px;
       padding: 14px;
     }
-    .price, .discount, .dates { text-align: right; direction: rtl; }
+    .row .code, .row .dest { grid-column: 1 / -1; }
+    .dates, .discount { text-align: right; direction: rtl; }
     .discount { direction: ltr; text-align: left; }
+    .col-label { display: block; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div>
-      <h1>TLV <span class="arrow">⇄</span> EUROPE</h1>
-      <div class="subtitle">לוח מחירי טיסות ומלונות — עדכון אוטומטי</div>
+    <div class="brand">
+      <img src="icon-192.png" alt="החופשה שלי">
+      <div>
+        <h1>TLV <span class="arrow">⇄</span> EUROPE</h1>
+        <div class="subtitle">החופשה שלי — לוח מחירי טיסות ומלונות</div>
+      </div>
     </div>
     <div class="updated" id="updated">טוען...</div>
   </header>
 
   <div class="settings-bar" id="settingsBar"></div>
 
+  <div class="filter-bar">
+    <select id="destFilter" onchange="applyFilter()">
+      <option value="">כל היעדים</option>
+    </select>
+  </div>
+
   <div class="board" id="board">
     <div class="board-header">
-      <div>יעד</div>
+      <div>קוד</div>
       <div>עיר</div>
       <div>תאריכים</div>
-      <div>מחיר</div>
+      <div>טיסה</div>
+      <div>מלון</div>
       <div>מהחציון</div>
     </div>
     <div id="rows"><div class="empty">טוען נתונים...</div></div>
@@ -203,6 +262,10 @@
 </div>
 
 <script>
+let allResults = [];
+let allHistory = {};
+let allSettings = {};
+
 async function loadData() {
   const [latestRes, historyRes] = await Promise.all([
     fetch('data/latest.json').catch(() => null),
@@ -219,7 +282,7 @@ function fmtDate(iso) {
   return d.toLocaleString('he-IL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 }
 
-function sparkline(points, w = 84, h = 24) {
+function sparkline(points, w = 76, h = 22) {
   if (!points || points.length < 2) return '';
   const min = Math.min(...points), max = Math.max(...points);
   const range = max - min || 1;
@@ -233,12 +296,53 @@ function sparkline(points, w = 84, h = 24) {
     '<path d="' + path + '" fill="none" stroke="#37b6a7" stroke-width="1.5" /></svg>';
 }
 
+function populateFilter(results) {
+  const select = document.getElementById('destFilter');
+  select.innerHTML = '<option value="">כל היעדים (' + results.length + ')</option>' +
+    results.map((r) => '<option value="' + r.code + '">' + r.name + ' (' + r.code + ')</option>').join('');
+}
+
+function applyFilter() {
+  const code = document.getElementById('destFilter').value;
+  const filtered = code ? allResults.filter((r) => r.code === code) : allResults;
+  renderRows(filtered);
+}
+
+function renderRows(results) {
+  const rowsEl = document.getElementById('rows');
+  if (results.length === 0) {
+    rowsEl.innerHTML = '<div class="empty">אין תוצאות ליעד הזה</div>';
+    return;
+  }
+
+  rowsEl.innerHTML = results.map((r) => {
+    const flightPrice = r.confirmedPrice || r.approxPrice;
+    const isDeal = r.discountPercent !== null && r.discountPercent >= (allSettings.discountThresholdPercent || 999999);
+    const discountClass = r.discountPercent === null ? 'none' : (isDeal ? 'good' : 'bad');
+    const discountText = r.discountPercent === null ? 'אין היסטוריה' : (r.discountPercent > 0 ? '↓ ' + r.discountPercent + '%' : '↑ ' + Math.abs(r.discountPercent) + '%');
+    const points = (allHistory[r.code] || []).map(p => p.price);
+    const hotelCell = r.hotel
+      ? '<div class="price">' + Math.round(r.hotel.price) + ' ' + r.hotel.currency + '</div>'
+      : '<div class="price empty-val">—</div>';
+
+    return '<div class="row ' + (isDeal ? 'deal' : '') + '">' +
+      '<div class="code">' + r.code + '</div>' +
+      '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div></div>' +
+      '<div class="dates">' + r.departureDate + ' → ' + r.returnDate + '</div>' +
+      '<div><span class="col-label">טיסה</span><div class="price">' + Math.round(flightPrice) + ' ' + (allSettings.currency || 'ILS') + '</div>' + sparkline(points) + '</div>' +
+      '<div><span class="col-label">מלון (ללילה)</span>' + hotelCell + '</div>' +
+      '<div><span class="col-label">מהחציון</span><div class="discount ' + discountClass + '">' + discountText + '</div></div>' +
+    '</div>';
+  }).join('');
+}
+
 function render(latest, history) {
   document.getElementById('updated').innerHTML = latest && latest.lastRun
     ? 'עדכון אחרון: <b>' + fmtDate(latest.lastRun) + '</b>'
     : 'אין נתונים עדיין — ממתין לריצה ראשונה';
 
   const s = (latest && latest.settings) || {};
+  allSettings = s;
   const bar = document.getElementById('settingsBar');
   if (s.departureDate) {
     bar.innerHTML =
@@ -249,29 +353,16 @@ function render(latest, history) {
       '<div class="chip">סף התראה: <b>' + s.discountThresholdPercent + '%</b></div>';
   }
 
-  const rowsEl = document.getElementById('rows');
-  const results = (latest && latest.results) || [];
-  if (results.length === 0) {
-    rowsEl.innerHTML = '<div class="empty">אין נתונים עדיין — ממתין לריצה ראשונה של ה-Action</div>';
+  allResults = (latest && latest.results) || [];
+  allHistory = history || {};
+
+  if (allResults.length === 0) {
+    document.getElementById('rows').innerHTML = '<div class="empty">אין נתונים עדיין — ממתין לריצה ראשונה של ה-Action</div>';
     return;
   }
 
-  rowsEl.innerHTML = results.map((r) => {
-    const price = r.confirmedPrice || r.approxPrice;
-    const isDeal = r.discountPercent !== null && r.discountPercent >= (s.discountThresholdPercent || 999999);
-    const discountClass = r.discountPercent === null ? 'none' : (isDeal ? 'good' : 'bad');
-    const discountText = r.discountPercent === null ? 'אין היסטוריה' : (r.discountPercent > 0 ? '↓ ' + r.discountPercent + '%' : '↑ ' + Math.abs(r.discountPercent) + '%');
-    const points = (history[r.code] || []).map(p => p.price);
-    const hotelLine = r.hotel ? '<div class="country">מלון מ-' + Math.round(r.hotel.price) + ' ' + r.hotel.currency + '</div>' : '';
-
-    return '<div class="row ' + (isDeal ? 'deal' : '') + '">' +
-      '<div class="code">' + r.code + '</div>' +
-      '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div>' + hotelLine + '</div>' +
-      '<div class="dates">' + r.departureDate + ' → ' + r.returnDate + '</div>' +
-      '<div><div class="price">' + Math.round(price) + ' ' + (s.currency || 'ILS') + '</div>' + sparkline(points) + '</div>' +
-      '<div class="discount ' + discountClass + '">' + discountText + '</div>' +
-    '</div>';
-  }).join('');
+  populateFilter(allResults);
+  renderRows(allResults);
 }
 
 loadData();
