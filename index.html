@@ -208,6 +208,34 @@
     padding: 16px;
     margin-bottom: 20px;
   }
+  .trip-type-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .trip-type-btn {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--panel-border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .trip-type-btn.active {
+    background: rgba(55, 182, 167, 0.15);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .search-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  .search-buttons .search-btn { flex: 1; }
+  .search-btn.hotels { background: var(--amber); color: #241800; }
   .search-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -451,16 +479,20 @@
   </div>
 
   <div class="search-panel">
+    <div class="trip-type-row">
+      <button type="button" class="trip-type-btn active" id="tripRoundtrip" onclick="setTripType('roundtrip')">הלוך-חזור</button>
+      <button type="button" class="trip-type-btn" id="tripOneway" onclick="setTripType('oneway')">הלוך בלבד</button>
+    </div>
     <div class="search-grid">
       <div class="field full">
         <label>יעד</label>
-        <select id="searchDest"><option value="">כל אירופה (33 יעדים)</option></select>
+        <select id="searchDest"><option value="">כל אירופה (34 יעדים)</option></select>
       </div>
-      <div class="field">
+      <div class="field" id="departField">
         <label>יציאה</label>
         <input type="date" id="searchDepart">
       </div>
-      <div class="field">
+      <div class="field" id="returnField">
         <label>חזרה</label>
         <input type="date" id="searchReturn">
       </div>
@@ -471,7 +503,10 @@
         <label>ימים</label>
       </div>
     </div>
-    <button class="search-btn" id="searchBtn" onclick="triggerSearch()">🔍 חפש טיסות ומלונות</button>
+    <div class="search-buttons">
+      <button class="search-btn flights" id="searchFlightsBtn" onclick="triggerSearch('flights')">🛫 חפש טיסות</button>
+      <button class="search-btn hotels" id="searchHotelsBtn" onclick="triggerSearch('hotels')">🏨 חפש מלונות</button>
+    </div>
     <div class="search-status" id="searchStatus"></div>
   </div>
 
@@ -480,7 +515,7 @@
   <div class="watchlist-box" id="watchlistBox" style="display:none;">
     <h3>👀 רשימת מעקב אישית</h3>
     <div id="watchlistRows"></div>
-    <a class="edit-link" href="https://github.com/tomtom0506/tomtom_Travel/edit/main/config/settings.json" target="_blank">+ הוספת חיפוש למעקב</a>
+    <a class="edit-link" href="javascript:void(0)" onclick="openWatchlistModal()">+ הוספת חיפוש למעקב</a>
   </div>
 
   <div class="filter-bar">
@@ -490,7 +525,7 @@
   </div>
 
   <div class="board" id="board">
-    <div class="board-header">
+    <div class="board-header" id="boardHeader">
       <div>קוד</div>
       <div>עיר</div>
       <div>תאריכים</div>
@@ -499,6 +534,16 @@
       <div>מהחציון</div>
     </div>
     <div id="rows"><div class="empty">טוען נתונים...</div></div>
+  </div>
+
+  <div class="board" id="hotelOnlyBoard" style="display:none;">
+    <div class="board-header" style="grid-template-columns: 70px 1fr 140px 100px;">
+      <div>קוד</div>
+      <div>עיר / מלון</div>
+      <div>תאריכים</div>
+      <div>מחיר ללילה</div>
+    </div>
+    <div id="hotelOnlyRows"></div>
   </div>
 
   <footer>מתעדכן אוטומטית כל 6 שעות באמצעות GitHub Actions</footer>
@@ -515,12 +560,13 @@
   <div class="modal">
     <h2>חיבור לחיפוש חי <button class="close-x" onclick="closeTokenModal()">✕</button></h2>
     <p style="font-size:13px; color:var(--muted); line-height:1.6;">
-      כדי שכפתור החיפוש יוכל להפעיל סריקה מיידית, צריך טוקן גישה אישי לגיטהאב (חד-פעמי, נשמר רק בדפדפן שלכם - לא נשלח לשום מקום חוץ מגיטהאב עצמו).
+      טוקן גישה אישי לגיטהאב (חד-פעמי, נשמר רק בדפדפן שלכם). כדי שגם החיפוש החי וגם הוספה לרשימת המעקב יעבדו, צריך שתי הרשאות.
     </p>
     <ol style="font-size:13px; padding-right:18px; line-height:1.8;">
       <li>גשו ל-<a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--teal);">יצירת טוקן חדש</a></li>
       <li>Repository access → Only select repositories → tomtom_Travel</li>
       <li>Permissions → Actions → Read and write</li>
+      <li>Permissions → Contents → Read and write</li>
       <li>Generate token והדביקו אותו כאן:</li>
     </ol>
     <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_...">
@@ -529,8 +575,34 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="watchlistModal" onclick="if(event.target===this) closeWatchlistModal()">
+  <div class="modal">
+    <h2>הוספה לרשימת מעקב <button class="close-x" onclick="closeWatchlistModal()">✕</button></h2>
+    <div class="field full" style="margin-bottom:10px;">
+      <label>יעד</label>
+      <select id="wlDest"></select>
+    </div>
+    <div class="search-grid" style="margin-bottom:10px;">
+      <div class="field">
+        <label>יציאה</label>
+        <input type="date" id="wlDepart">
+      </div>
+      <div class="field">
+        <label>חזרה</label>
+        <input type="date" id="wlReturn">
+      </div>
+    </div>
+    <div class="field full" style="margin-bottom:10px;">
+      <label>הערה (מה זה בשבילכם)</label>
+      <input type="text" class="token-input" id="wlNote" placeholder="למשל: יום הולדת בברצלונה" style="margin-bottom:0;">
+    </div>
+    <button class="search-btn" onclick="submitWatchlistItem()">הוסף למעקב</button>
+    <div class="search-status" id="watchlistModalStatus"></div>
+  </div>
+</div>
+
 <script>
-const APP_VERSION = "1.7.0";
+const APP_VERSION = "1.8.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -555,6 +627,16 @@ function saveToken() {
   setTimeout(closeTokenModal, 900);
 }
 
+// ---- trip type toggle ----
+let currentTripType = "roundtrip";
+function setTripType(type) {
+  currentTripType = type;
+  document.getElementById("tripRoundtrip").classList.toggle("active", type === "roundtrip");
+  document.getElementById("tripOneway").classList.toggle("active", type === "oneway");
+  document.getElementById("returnField").style.display = type === "oneway" ? "none" : "block";
+  document.getElementById("searchHotelsBtn").style.display = type === "oneway" ? "none" : "block";
+}
+
 // ---- live search: trigger the GitHub Action with chosen dates/destination ----
 function setSearchStatus(text, cls) {
   const el = document.getElementById("searchStatus");
@@ -562,7 +644,7 @@ function setSearchStatus(text, cls) {
   el.className = "search-status" + (cls ? " " + cls : "");
 }
 
-async function triggerSearch() {
+async function triggerSearch(mode) {
   const token = getToken();
   if (!token) { openTokenModal(); return; }
 
@@ -572,12 +654,16 @@ async function triggerSearch() {
   const flexible = document.getElementById("searchFlexible").checked;
   const flexDays = document.getElementById("searchFlexDays").value;
 
-  if (!depart || !ret) { setSearchStatus("בחרו תאריך יציאה וחזרה", "error"); return; }
-  if (new Date(ret) <= new Date(depart)) { setSearchStatus("תאריך החזרה חייב להיות אחרי היציאה", "error"); return; }
+  if (!depart) { setSearchStatus("בחרו תאריך יציאה", "error"); return; }
+  if (mode !== "hotels" && currentTripType === "roundtrip" && !ret) { setSearchStatus("בחרו תאריך חזרה", "error"); return; }
+  if (mode === "hotels" && !ret) { setSearchStatus("מלון צריך גם תאריך צ'ק-אאוט (חזרה)", "error"); return; }
+  if (ret && new Date(ret) <= new Date(depart)) { setSearchStatus("תאריך החזרה חייב להיות אחרי היציאה", "error"); return; }
 
-  const btn = document.getElementById("searchBtn");
-  btn.disabled = true;
-  setSearchStatus("שולח בקשת חיפוש...", "");
+  const flightsBtn = document.getElementById("searchFlightsBtn");
+  const hotelsBtn = document.getElementById("searchHotelsBtn");
+  flightsBtn.disabled = true;
+  hotelsBtn.disabled = true;
+  setSearchStatus(mode === "hotels" ? "שולח בקשת חיפוש מלונות..." : "שולח בקשת חיפוש טיסות...", "");
   const startedAt = new Date();
 
   try {
@@ -594,10 +680,12 @@ async function triggerSearch() {
           ref: "main",
           inputs: {
             departureDate: depart,
-            returnDate: ret,
+            returnDate: ret || "",
             flexible: String(flexible),
             flexDays: String(flexDays),
             destination: dest || "",
+            tripType: currentTripType,
+            searchMode: mode,
           },
         }),
       }
@@ -605,21 +693,25 @@ async function triggerSearch() {
 
     if (res.status === 204) {
       setSearchStatus("מריץ חיפוש... זה יכול לקחת עד דקה", "");
-      pollForResult(startedAt, token, btn);
+      pollForResult(startedAt, token, [flightsBtn, hotelsBtn]);
     } else if (res.status === 401 || res.status === 403) {
       setSearchStatus("הטוקן לא תקין/פג תוקף - פתחו 🔑 והזינו טוקן חדש", "error");
-      btn.disabled = false;
+      flightsBtn.disabled = false;
+      hotelsBtn.disabled = false;
     } else {
       setSearchStatus("שגיאה מגיטהאב (קוד " + res.status + ")", "error");
-      btn.disabled = false;
+      flightsBtn.disabled = false;
+      hotelsBtn.disabled = false;
     }
   } catch (e) {
     setSearchStatus("שגיאת רשת - נסו שוב", "error");
-    btn.disabled = false;
+    flightsBtn.disabled = false;
+    hotelsBtn.disabled = false;
   }
 }
 
-function pollForResult(since, token, btn) {
+function pollForResult(since, token, btns) {
+  const enableButtons = () => btns.forEach((b) => { b.disabled = false; });
   let attempts = 0;
   const maxAttempts = 24; // ~2.5 minutes at 6s interval
   const poll = async () => {
@@ -635,7 +727,7 @@ function pollForResult(since, token, btn) {
         if (run.status === "completed") {
           const ok = run.conclusion === "success";
           setSearchStatus(ok ? "✓ החיפוש הושלם, טוען תוצאות..." : "החיפוש נכשל (" + run.conclusion + ")", ok ? "success" : "error");
-          btn.disabled = false;
+          enableButtons();
           if (ok) setTimeout(loadData, 1500);
           return;
         }
@@ -648,7 +740,7 @@ function pollForResult(since, token, btn) {
       setTimeout(poll, 6000);
     } else {
       setSearchStatus("לוקח יותר מהצפוי - בדקו שוב עוד רגע (הדשבורד יתעדכן לבד)", "error");
-      btn.disabled = false;
+      enableButtons();
     }
   };
   setTimeout(poll, 5000); // give GitHub a moment to register the run
@@ -658,10 +750,78 @@ async function loadDestinationsIntoSearch() {
   try {
     const res = await fetch("config/destinations.json?_=" + Date.now());
     const list = await res.json();
-    const select = document.getElementById("searchDest");
-    select.innerHTML = '<option value="">כל אירופה (' + list.length + ' יעדים)</option>' +
+    const opts = '<option value="">בחרו יעד</option>' +
       list.map((d) => '<option value="' + d.code + '">' + d.name + " (" + d.code + ")</option>").join("");
+    const searchSelect = document.getElementById("searchDest");
+    searchSelect.innerHTML = '<option value="">כל אירופה (' + list.length + ' יעדים)</option>' +
+      list.map((d) => '<option value="' + d.code + '">' + d.name + " (" + d.code + ")</option>").join("");
+    document.getElementById("wlDest").innerHTML = opts;
   } catch (e) { /* leave default option */ }
+}
+
+// ---- watchlist: add item by writing directly to config/settings.json via GitHub Contents API ----
+function openWatchlistModal() {
+  document.getElementById("wlDepart").value = document.getElementById("searchDepart").value || "";
+  document.getElementById("wlReturn").value = document.getElementById("searchReturn").value || "";
+  document.getElementById("watchlistModal").classList.add("open");
+}
+function closeWatchlistModal() { document.getElementById("watchlistModal").classList.remove("open"); }
+
+async function submitWatchlistItem() {
+  const token = getToken();
+  if (!token) { closeWatchlistModal(); openTokenModal(); return; }
+
+  const dest = document.getElementById("wlDest").value;
+  const depart = document.getElementById("wlDepart").value;
+  const ret = document.getElementById("wlReturn").value;
+  const note = document.getElementById("wlNote").value.trim();
+  const statusEl = document.getElementById("watchlistModalStatus");
+
+  if (!dest || !depart || !ret) { statusEl.textContent = "מלאו יעד ושני תאריכים"; statusEl.className = "search-status error"; return; }
+  if (new Date(ret) <= new Date(depart)) { statusEl.textContent = "תאריך החזרה חייב להיות אחרי היציאה"; statusEl.className = "search-status error"; return; }
+
+  statusEl.textContent = "שומר...";
+  statusEl.className = "search-status";
+
+  try {
+    const path = "config/settings.json";
+    const getRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" },
+    });
+    if (!getRes.ok) throw new Error("לא ניתן לקרוא את settings.json (בדקו שלטוקן יש הרשאת Contents)");
+    const fileData = await getRes.json();
+    const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+
+    if (!Array.isArray(content.watchlist)) content.watchlist = [];
+    content.watchlist.push({ destination: dest, departureDate: depart, returnDate: ret, note: note || dest });
+
+    const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2) + "\n")));
+    const putRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "Add watchlist item: " + (note || dest),
+        content: updatedContent,
+        sha: fileData.sha,
+      }),
+    });
+
+    if (!putRes.ok) {
+      const body = await putRes.json().catch(() => ({}));
+      throw new Error(body.message || ("שגיאה " + putRes.status));
+    }
+
+    statusEl.textContent = "✓ נוסף! הסריקה הבאה תתחיל לעקוב";
+    statusEl.className = "search-status success";
+    setTimeout(closeWatchlistModal, 1200);
+  } catch (e) {
+    statusEl.textContent = "שגיאה: " + e.message;
+    statusEl.className = "search-status error";
+  }
 }
 
 // ---- theme ----
@@ -772,7 +932,7 @@ function renderRows(results) {
     return '<div class="row ' + (isDeal ? 'deal' : '') + '">' +
       '<div class="code">' + r.code + '</div>' +
       '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div></div>' +
-      '<div class="dates">' + r.departureDate + ' → ' + r.returnDate + '</div>' +
+      '<div class="dates">' + (r.returnDate ? (r.departureDate + ' → ' + r.returnDate) : (r.departureDate + ' (הלוך בלבד)')) + '</div>' +
       '<div><span class="col-label">טיסה</span><div class="price">' + Math.round(flightPrice) + ' ' + (allSettings.currency || 'ILS') + '</div>' + sparkline(points) + '</div>' +
       '<div><span class="col-label">מלון (ללילה)</span>' + hotelCell + '</div>' +
       '<div><span class="col-label">מהחציון</span><div class="discount ' + discountClass + '">' + discountText + '</div></div>' +
@@ -806,6 +966,7 @@ function render(latest, history) {
 
   allResults = (latest && latest.results) || [];
   allHistory = history || {};
+  const hotelOnly = (latest && latest.hotelOnlyResults) || [];
 
   const watchlistResults = (latest && latest.watchlistResults) || [];
   const watchBox = document.getElementById('watchlistBox');
@@ -821,8 +982,31 @@ function render(latest, history) {
     watchBox.style.display = 'none';
   }
 
+  // Hotel-only search result: show a dedicated simple list instead of the flight board
+  if (hotelOnly.length > 0) {
+    document.getElementById('board').style.display = 'none';
+    document.querySelector('.filter-bar').style.display = 'none';
+    const hb = document.getElementById('hotelOnlyBoard');
+    hb.style.display = 'block';
+    document.getElementById('hotelOnlyRows').innerHTML = hotelOnly.map((h) => (
+      '<div class="row" style="grid-template-columns: 70px 1fr 140px 100px;">' +
+        '<div class="code">' + h.code + '</div>' +
+        '<div class="dest"><div class="name">' + h.name + (h.hotelName ? ' · ' + h.hotelName : '') + '</div><div class="country">' + h.country + '</div></div>' +
+        '<div class="dates">' + h.checkIn + ' → ' + h.checkOut + '</div>' +
+        '<div class="price">' + Math.round(h.price) + ' ' + h.currency + '</div>' +
+      '</div>'
+    )).join('');
+    return;
+  } else {
+    document.getElementById('board').style.display = 'block';
+    document.querySelector('.filter-bar').style.display = 'block';
+    document.getElementById('hotelOnlyBoard').style.display = 'none';
+  }
+
   if (allResults.length === 0) {
-    document.getElementById('rows').innerHTML = '<div class="empty">אין נתונים עדיין — ממתין לריצה ראשונה של ה-Action</div>';
+    document.getElementById('rows').innerHTML = latest && latest.lastRun
+      ? '<div class="empty">לא נמצאו טיסות עבור החיפוש האחרון. ייתכן שאין מחיר במטמון ליעד/תאריכים האלה — נסו טווח תאריכים אחר או הפעילו "תאריכים גמישים".</div>'
+      : '<div class="empty">אין נתונים עדיין — ממתין לריצה ראשונה של ה-Action</div>';
     return;
   }
 
