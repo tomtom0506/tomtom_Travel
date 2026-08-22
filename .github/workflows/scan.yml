@@ -23,6 +23,12 @@ on:
       destination:
         description: "Search a single destination code only (e.g. BCN). Empty = scan all destinations"
         required: false
+      tripType:
+        description: "roundtrip or oneway"
+        required: false
+      searchMode:
+        description: "both, flights, or hotels"
+        required: false
 
 permissions:
   contents: write
@@ -55,6 +61,8 @@ jobs:
           OVERRIDE_FLEXIBLE: ${{ github.event.inputs.flexible }}
           OVERRIDE_FLEX_DAYS: ${{ github.event.inputs.flexDays }}
           OVERRIDE_DESTINATION: ${{ github.event.inputs.destination }}
+          OVERRIDE_TRIP_TYPE: ${{ github.event.inputs.tripType }}
+          OVERRIDE_SEARCH_MODE: ${{ github.event.inputs.searchMode }}
         run: node scripts/scan.js
 
       - name: Commit updated data
