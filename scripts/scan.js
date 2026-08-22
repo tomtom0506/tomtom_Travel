@@ -11,6 +11,21 @@ const history = JSON.parse(fs.readFileSync(historyPath, "utf8"));
 
 const HISTORY_LIMIT = 60; // keep last N data points per destination
 
+// ---- one-off search overrides (set when the dashboard triggers a live search) ----
+// These only affect this run's in-memory settings - config/settings.json on disk is never touched.
+if (process.env.OVERRIDE_DEPARTURE_DATE) settings.departureDate = process.env.OVERRIDE_DEPARTURE_DATE;
+if (process.env.OVERRIDE_RETURN_DATE) settings.returnDate = process.env.OVERRIDE_RETURN_DATE;
+if (process.env.OVERRIDE_FLEXIBLE) settings.flexible = process.env.OVERRIDE_FLEXIBLE === "true";
+if (process.env.OVERRIDE_FLEX_DAYS) settings.flexDays = parseInt(process.env.OVERRIDE_FLEX_DAYS, 10);
+
+let destinationsToScan = destinations;
+if (process.env.OVERRIDE_DESTINATION) {
+  const code = process.env.OVERRIDE_DESTINATION.toUpperCase().trim();
+  const match = destinations.find((d) => d.code === code) || { code, name: code, country: "" };
+  destinationsToScan = [match];
+  console.log(`One-off search: scanning only ${code}`);
+}
+
 function median(nums) {
   if (nums.length === 0) return null;
   const sorted = [...nums].sort((a, b) => a - b);
@@ -72,10 +87,10 @@ function watchKey(item) {
 }
 
 async function main() {
-  console.log(`Scanning ${destinations.length} destinations from ${settings.origin}...`);
+  console.log(`Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
   const results = [];
 
-  for (const dest of destinations) {
+  for (const dest of destinationsToScan) {
     try {
       const r = await scanDestination(dest);
       if (r) results.push(r);
