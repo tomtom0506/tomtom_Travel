@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-22T17:24:36.834Z",
+  "lastRun": "2026-08-22T18:22:37.394Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -15,7 +15,16 @@
     "minHistoryPointsForDiscountAlert": 3,
     "_comment_hotels": "בודק מלונות רק ליעדים שנמצאה בהם עסקת טיסה טובה (top N), כדי לחסוך בקריאות API",
     "checkHotelsForTopDeals": 5,
-    "hotelAdults": 2
+    "hotelAdults": 2,
+    "_comment_watchlist": "חיפושים ספציפיים שתמיד מדווחים אליכם בטלגרם כשהמחיר משתנה, גם אם לא חוצה את סף ההנחה הכללי. destination = קוד יעד (למשל BCN), note = תיאור חופשי",
+    "watchlist": [
+      {
+        "destination": "BCN",
+        "departureDate": "2026-09-15",
+        "returnDate": "2026-09-22",
+        "note": "ברצלונה - לדוגמה, מחקו או ערכו"
+      }
+    ]
   },
   "results": [
     {
@@ -27,7 +36,7 @@
       "approxPrice": 743,
       "historyMedian": 756,
       "discountPercent": 2,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "LON",
@@ -38,7 +47,7 @@
       "approxPrice": 905,
       "historyMedian": 905,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "BER",
@@ -49,7 +58,7 @@
       "approxPrice": 876,
       "historyMedian": 876,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "MAD",
@@ -60,7 +69,7 @@
       "approxPrice": 1286,
       "historyMedian": 1286,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "LIS",
@@ -71,7 +80,7 @@
       "approxPrice": 1002,
       "historyMedian": 1002,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "VIE",
@@ -82,7 +91,7 @@
       "approxPrice": 1447,
       "historyMedian": 1447,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "PRG",
@@ -93,7 +102,7 @@
       "approxPrice": 1206,
       "historyMedian": 1206,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "ARN",
@@ -104,7 +113,7 @@
       "approxPrice": 962,
       "historyMedian": 962,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "HEL",
@@ -115,7 +124,7 @@
       "approxPrice": 1305,
       "historyMedian": 1305,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "ZRH",
@@ -126,7 +135,7 @@
       "approxPrice": 1216,
       "historyMedian": 1216,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "GVA",
@@ -137,7 +146,7 @@
       "approxPrice": 1514,
       "historyMedian": 1514,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "BRU",
@@ -148,7 +157,7 @@
       "approxPrice": 988,
       "historyMedian": 988,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "IST",
@@ -159,7 +168,7 @@
       "approxPrice": 879,
       "historyMedian": 879,
       "discountPercent": 0,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "SOF",
@@ -170,40 +179,7 @@
       "approxPrice": 973,
       "historyMedian": 973,
       "discountPercent": 0,
-      "historyPoints": 2
-    },
-    {
-      "code": "BEG",
-      "name": "בלגרד",
-      "country": "סרביה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1141,
-      "historyMedian": 1141,
-      "discountPercent": 0,
-      "historyPoints": 1
-    },
-    {
-      "code": "NAP",
-      "name": "נאפולי",
-      "country": "איטליה",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-20",
-      "approxPrice": 938,
-      "historyMedian": 938,
-      "discountPercent": 0,
-      "historyPoints": 1
-    },
-    {
-      "code": "NCE",
-      "name": "ניס",
-      "country": "צרפת",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 1224,
-      "historyMedian": 1224,
-      "discountPercent": 0,
-      "historyPoints": 1
+      "historyPoints": 3
     },
     {
       "code": "AMS",
@@ -214,18 +190,7 @@
       "approxPrice": 1337,
       "historyMedian": 1304,
       "discountPercent": -3,
-      "historyPoints": 2
-    },
-    {
-      "code": "ZAG",
-      "name": "זאגרב",
-      "country": "קרואטיה",
-      "departureDate": "2026-09-19",
-      "returnDate": "2026-09-25",
-      "approxPrice": 1492,
-      "historyMedian": 1444,
-      "discountPercent": -3,
-      "historyPoints": 1
+      "historyPoints": 3
     },
     {
       "code": "BUD",
@@ -236,7 +201,7 @@
       "approxPrice": 788,
       "historyMedian": 741,
       "discountPercent": -6,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "PAR",
@@ -247,7 +212,7 @@
       "approxPrice": 1142,
       "historyMedian": 1061,
       "discountPercent": -8,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "MIL",
@@ -258,18 +223,7 @@
       "approxPrice": 916,
       "historyMedian": 822,
       "discountPercent": -11,
-      "historyPoints": 2
-    },
-    {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 564,
-      "historyMedian": 510,
-      "discountPercent": -11,
-      "historyPoints": 1
+      "historyPoints": 3
     },
     {
       "code": "MUC",
@@ -280,7 +234,7 @@
       "approxPrice": 1238,
       "historyMedian": 1105,
       "discountPercent": -12,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "ROM",
@@ -291,7 +245,7 @@
       "approxPrice": 1146,
       "historyMedian": 989,
       "discountPercent": -16,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "BCN",
@@ -302,18 +256,7 @@
       "approxPrice": 1069,
       "historyMedian": 914,
       "discountPercent": -17,
-      "historyPoints": 2
-    },
-    {
-      "code": "VLC",
-      "name": "ולנסיה",
-      "country": "ספרד",
-      "departureDate": "2026-09-18",
-      "returnDate": "2026-09-26",
-      "approxPrice": 1341,
-      "historyMedian": 1144,
-      "discountPercent": -17,
-      "historyPoints": 1
+      "historyPoints": 3
     },
     {
       "code": "ATH",
@@ -324,7 +267,7 @@
       "approxPrice": 697,
       "historyMedian": 489,
       "discountPercent": -43,
-      "historyPoints": 2
+      "historyPoints": 3
     },
     {
       "code": "WAW",
@@ -335,7 +278,7 @@
       "approxPrice": 1332,
       "historyMedian": 647,
       "discountPercent": -106,
-      "historyPoints": 2
+      "historyPoints": 3
     }
   ]
 }
