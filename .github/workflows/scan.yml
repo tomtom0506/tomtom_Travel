@@ -3,13 +3,30 @@ name: Scan flight & hotel prices
 on:
   schedule:
     - cron: "0 */6 * * *" # every 6 hours (UTC)
-  workflow_dispatch: {} # allows manual "Run workflow" button in the Actions tab
   push:
     paths:
       - "config/**" # editing settings/destinations triggers an immediate QA check + scan
+  workflow_dispatch:
+    inputs:
+      departureDate:
+        description: "Override departure date (YYYY-MM-DD). Empty = use config/settings.json"
+        required: false
+      returnDate:
+        description: "Override return date (YYYY-MM-DD). Empty = use config/settings.json"
+        required: false
+      flexible:
+        description: "Override flexible (true/false). Empty = use config/settings.json"
+        required: false
+      flexDays:
+        description: "Override flex days (number). Empty = use config/settings.json"
+        required: false
+      destination:
+        description: "Search a single destination code only (e.g. BCN). Empty = scan all destinations"
+        required: false
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: flight-scan
@@ -33,6 +50,11 @@ jobs:
           TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          OVERRIDE_DEPARTURE_DATE: ${{ github.event.inputs.departureDate }}
+          OVERRIDE_RETURN_DATE: ${{ github.event.inputs.returnDate }}
+          OVERRIDE_FLEXIBLE: ${{ github.event.inputs.flexible }}
+          OVERRIDE_FLEX_DAYS: ${{ github.event.inputs.flexDays }}
+          OVERRIDE_DESTINATION: ${{ github.event.inputs.destination }}
         run: node scripts/scan.js
 
       - name: Commit updated data
@@ -40,5 +62,18 @@ jobs:
           git config user.name "flight-tracker-bot"
           git config user.email "actions@github.com"
           git add data/history.json data/latest.json
-          git diff --cached --quiet || git commit -m "Update price data [skip ci]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+          git commit -m "Update price data [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              echo "Pushed successfully."
+              exit 0
+            fi
+            echo "Push attempt $i failed (likely a concurrent update) - retrying in 5s..."
+            sleep 5
+          done
+          echo "Failed to push after multiple retries."
+          exit 1
