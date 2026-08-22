@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-22T19:07:37.562Z",
+  "lastRun": "2026-08-22T19:29:44.382Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -7,7 +7,7 @@
     "departureDate": "2026-08-29",
     "returnDate": "2026-09-11",
     "_comment_flexible": "flexible=false -> בודק רק את התאריכים המדויקים למעלה. flexible=true -> בודק גם ±flexDays ימים סביב כל תאריך ובוחר את הזול ביותר",
-    "flexible": false,
+    "flexible": true,
     "flexDays": 3,
     "_comment_alerts": "יתריע כאשר המחיר נמוך מ-X אחוז מהמחיר החציוני ההיסטורי של אותו יעד, וגם מתחת לתקרת מחיר מוחלטת (אופציונלי)",
     "discountThresholdPercent": 20,
@@ -27,13 +27,6 @@
     ]
   },
   "results": [],
-  "watchlistResults": [
-    {
-      "code": "BCN",
-      "note": "ברצלונה - לדוגמה, מחקו או ערכו",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "price": 1069
-    }
-  ]
+  "hotelOnlyResults": [],
+  "watchlistResults": []
 }
