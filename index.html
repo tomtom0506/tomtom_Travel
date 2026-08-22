@@ -252,7 +252,7 @@
     color: var(--muted);
     margin-bottom: 4px;
   }
-  .field select, .field input[type="date"], .field input[type="number"] {
+  .field select, .field input[type="date"], .field input[type="number"], .field input[type="text"].dest-text-input {
     width: 100%;
     background: var(--bg);
     border: 1px solid var(--panel-border);
@@ -262,6 +262,32 @@
     padding: 10px 10px;
     border-radius: 8px;
   }
+  .suggestions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 30;
+    background: var(--panel);
+    border: 1px solid var(--teal);
+    border-radius: 8px;
+    margin-top: 4px;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .suggestions.open { display: block; }
+  .suggestion-item {
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .suggestion-item:last-child { border-bottom: none; }
+  .suggestion-item:hover, .suggestion-item.active { background: rgba(55,182,167,0.12); }
+  .suggestion-item .s-name { font-weight: 600; }
+  .suggestion-item .s-sub { color: var(--muted); font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+  .suggestion-loading { padding: 10px 12px; font-size: 12px; color: var(--muted); }
   .flex-row {
     display: flex;
     align-items: center;
@@ -484,9 +510,11 @@
       <button type="button" class="trip-type-btn" id="tripOneway" onclick="setTripType('oneway')">הלוך בלבד</button>
     </div>
     <div class="search-grid">
-      <div class="field full">
-        <label>יעד</label>
-        <select id="searchDest"><option value="">כל אירופה (34 יעדים)</option></select>
+      <div class="field full" style="position:relative;">
+        <label>יעד (הקלידו כל מקום בעולם, או השאירו ריק לכל אירופה)</label>
+        <input type="text" id="searchDestText" class="dest-text-input" placeholder="לדוגמה: לפקדה, ברצלונה, טוקיו..." autocomplete="off" oninput="onDestInput(this.value)">
+        <input type="hidden" id="searchDestCode" value="">
+        <div class="suggestions" id="destSuggestions"></div>
       </div>
       <div class="field" id="departField">
         <label>יציאה</label>
@@ -602,7 +630,7 @@
 </div>
 
 <script>
-const APP_VERSION = "1.8.0";
+const APP_VERSION = "1.9.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -648,7 +676,17 @@ async function triggerSearch(mode) {
   const token = getToken();
   if (!token) { openTokenModal(); return; }
 
-  const dest = document.getElementById("searchDest").value;
+  let dest = document.getElementById("searchDestCode").value;
+  const typedText = document.getElementById("searchDestText").value.trim();
+  if (!dest && typedText && lastSuggestions.length > 0) {
+    // user typed a place but didn't tap a suggestion - use the best match automatically
+    dest = lastSuggestions[0].code;
+    document.getElementById("searchDestCode").value = dest;
+  }
+  if (!dest && typedText) {
+    setSearchStatus("בחרו יעד מתוך רשימת ההצעות (הקלידו ובחרו מהתפריט שנפתח)", "error");
+    return;
+  }
   const depart = document.getElementById("searchDepart").value;
   const ret = document.getElementById("searchReturn").value;
   const flexible = document.getElementById("searchFlexible").checked;
@@ -746,18 +784,91 @@ function pollForResult(since, token, btns) {
   setTimeout(poll, 5000); // give GitHub a moment to register the run
 }
 
-async function loadDestinationsIntoSearch() {
+async function loadDestinationsIntoWatchlistSelect() {
   try {
     const res = await fetch("config/destinations.json?_=" + Date.now());
     const list = await res.json();
-    const opts = '<option value="">בחרו יעד</option>' +
+    document.getElementById("wlDest").innerHTML = '<option value="">בחרו יעד</option>' +
       list.map((d) => '<option value="' + d.code + '">' + d.name + " (" + d.code + ")</option>").join("");
-    const searchSelect = document.getElementById("searchDest");
-    searchSelect.innerHTML = '<option value="">כל אירופה (' + list.length + ' יעדים)</option>' +
-      list.map((d) => '<option value="' + d.code + '">' + d.name + " (" + d.code + ")</option>").join("");
-    document.getElementById("wlDest").innerHTML = opts;
   } catch (e) { /* leave default option */ }
 }
+
+// ---- free-text destination autocomplete (any place worldwide, not just the curated list) ----
+let lastSuggestions = [];
+let autocompleteTimer = null;
+let jsonpCounter = 0;
+
+function jsonpFetch(url) {
+  return new Promise((resolve, reject) => {
+    const cbName = "tpCallback" + (jsonpCounter++);
+    const script = document.createElement("script");
+    let done = false;
+    window[cbName] = (data) => {
+      done = true;
+      resolve(data);
+      delete window[cbName];
+      script.remove();
+    };
+    script.onerror = () => {
+      if (!done) reject(new Error("network"));
+      delete window[cbName];
+      script.remove();
+    };
+    script.src = url + (url.includes("?") ? "&" : "?") + "callback=" + cbName;
+    document.body.appendChild(script);
+    setTimeout(() => { if (!done) { reject(new Error("timeout")); delete window[cbName]; script.remove(); } }, 6000);
+  });
+}
+
+function onDestInput(value) {
+  document.getElementById("searchDestCode").value = ""; // typing invalidates a previous selection
+  clearTimeout(autocompleteTimer);
+  const box = document.getElementById("destSuggestions");
+  if (!value || value.trim().length < 2) {
+    box.classList.remove("open");
+    box.innerHTML = "";
+    return;
+  }
+  box.classList.add("open");
+  box.innerHTML = '<div class="suggestion-loading">מחפש...</div>';
+  autocompleteTimer = setTimeout(() => runAutocomplete(value.trim()), 300);
+}
+
+async function runAutocomplete(term) {
+  const box = document.getElementById("destSuggestions");
+  try {
+    const url = "https://autocomplete.travelpayouts.com/places2?term=" + encodeURIComponent(term) + "&locale=he&types[]=city&types[]=airport";
+    const data = await jsonpFetch(url);
+    lastSuggestions = (data || []).slice(0, 8);
+    if (lastSuggestions.length === 0) {
+      box.innerHTML = '<div class="suggestion-loading">לא נמצא — נסו לאיית אחרת, או הקרובה ביותר בעל שדה תעופה</div>';
+      return;
+    }
+    box.innerHTML = lastSuggestions.map((s, i) => (
+      '<div class="suggestion-item" onclick="selectSuggestion(' + i + ')">' +
+        '<div class="s-name">' + s.name + (s.country_name ? ', ' + s.country_name : '') + '</div>' +
+        '<div class="s-sub">' + (s.type === 'city' ? 'עיר' : 'שדה תעופה') + ' · ' + s.code + '</div>' +
+      '</div>'
+    )).join('');
+  } catch (e) {
+    box.innerHTML = '<div class="suggestion-loading">שגיאת חיפוש - נסו שוב</div>';
+  }
+}
+
+function selectSuggestion(i) {
+  const s = lastSuggestions[i];
+  if (!s) return;
+  document.getElementById("searchDestText").value = s.name + (s.country_name ? ', ' + s.country_name : '');
+  document.getElementById("searchDestCode").value = s.code;
+  document.getElementById("destSuggestions").classList.remove("open");
+}
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-grid .full")) {
+    const box = document.getElementById("destSuggestions");
+    if (box) box.classList.remove("open");
+  }
+});
 
 // ---- watchlist: add item by writing directly to config/settings.json via GitHub Contents API ----
 function openWatchlistModal() {
@@ -877,7 +988,7 @@ async function loadData() {
   const latest = latestRes && latestRes.ok ? await latestRes.json() : null;
   const history = historyRes && historyRes.ok ? await historyRes.json() : {};
   render(latest, history);
-  loadDestinationsIntoSearch();
+  loadDestinationsIntoWatchlistSelect();
 }
 
 function fmtDate(iso) {
