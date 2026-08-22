@@ -72,6 +72,30 @@ if (settings) {
   if (typeof settings.checkHotelsForTopDeals !== "number" || settings.checkHotelsForTopDeals < 0) {
     fail('settings.json: "checkHotelsForTopDeals" חייב להיות מספר 0 ומעלה');
   }
+  if (settings.watchlist !== undefined) {
+    if (!Array.isArray(settings.watchlist)) {
+      fail('settings.json: "watchlist" חייב להיות מערך (אפשר ריק: [])');
+    } else {
+      settings.watchlist.forEach((item, i) => {
+        if (!item.destination || !/^[A-Z]{2,4}$/.test(item.destination)) {
+          fail(`settings.json: watchlist #${i + 1} - "destination" חייב להיות קוד יעד 2-4 אותיות גדולות (למשל "BCN")`);
+        }
+        if (!isValidDate(item.departureDate)) {
+          fail(`settings.json: watchlist #${i + 1} - "departureDate" חייב להיות בפורמט YYYY-MM-DD`);
+        }
+        if (!isValidDate(item.returnDate)) {
+          fail(`settings.json: watchlist #${i + 1} - "returnDate" חייב להיות בפורמט YYYY-MM-DD`);
+        }
+        if (isValidDate(item.departureDate) && isValidDate(item.returnDate)) {
+          const dep = new Date(item.departureDate + "T00:00:00Z");
+          const ret = new Date(item.returnDate + "T00:00:00Z");
+          if (ret <= dep) {
+            fail(`settings.json: watchlist #${i + 1} - "returnDate" חייב להיות אחרי "departureDate"`);
+          }
+        }
+      });
+    }
+  }
 }
 
 // ---- destinations.json ----

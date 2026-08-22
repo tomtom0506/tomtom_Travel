@@ -47,6 +47,30 @@ async function scanDestination(dest) {
   };
 }
 
+async function scanWatchlistItem(item) {
+  const best = await cheapestRoundTrip({
+    origin: settings.origin,
+    destination: item.destination,
+    departureDate: item.departureDate,
+    returnDate: item.returnDate,
+    flexible: settings.flexible,
+    flexDays: settings.flexDays,
+    currency: settings.currency,
+  });
+  if (!best) return null;
+  return {
+    code: item.destination,
+    note: item.note || item.destination,
+    departureDate: best.departDate,
+    returnDate: best.returnDate,
+    price: Math.round(best.price),
+  };
+}
+
+function watchKey(item) {
+  return `watch:${item.destination}:${item.departureDate}:${item.returnDate}`;
+}
+
 async function main() {
   console.log(`Scanning ${destinations.length} destinations from ${settings.origin}...`);
   const results = [];
@@ -112,14 +136,49 @@ async function main() {
     console.log("No deals crossed the alert threshold this run.");
   }
 
+  // ---- watchlist: specific searches the person asked to always be notified about ----
+  const watchlist = settings.watchlist || [];
+  const watchlistResults = [];
+  for (const item of watchlist) {
+    try {
+      const w = await scanWatchlistItem(item);
+      if (!w) continue;
+      watchlistResults.push(w);
+
+      const key = watchKey(item);
+      const prevPoints = history[key] || [];
+      const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
+
+      if (lastPrice === null || lastPrice !== w.price) {
+        const changeText = lastPrice === null
+          ? "נבדק לראשונה"
+          : (w.price < lastPrice ? `ירד מ-${lastPrice} ל-${w.price}` : `עלה מ-${lastPrice} ל-${w.price}`);
+        await sendTelegramMessage(
+          [
+            `👀 <b>עדכון לחיפוש שסימנת: ${w.note}</b>`,
+            `${settings.origin} ⇄ ${w.code}`,
+            `${w.departureDate} → ${w.returnDate}`,
+            `מחיר: <b>${w.price} ${settings.currency}</b> (${changeText})`,
+          ].join("\n")
+        );
+      }
+
+      history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
+    } catch (err) {
+      console.warn(`Failed scanning watchlist item ${item.destination}: ${err.message}`);
+    }
+  }
+  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+
   const latest = {
     lastRun: new Date().toISOString(),
     settings,
     results,
+    watchlistResults,
   };
   fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));
 
-  console.log(`Done. ${results.length} destinations scanned, ${alerts.length} alerts sent.`);
+  console.log(`Done. ${results.length} destinations scanned, ${alerts.length} alerts sent, ${watchlistResults.length} watchlist items checked.`);
 }
 
 main().catch((err) => {
