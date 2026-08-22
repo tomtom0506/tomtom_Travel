@@ -25,6 +25,7 @@ async function scanDestination(dest) {
     departureDate: settings.departureDate,
     returnDate: settings.returnDate,
     flexible: settings.flexible,
+    flexDays: settings.flexDays,
     currency: settings.currency,
   });
   if (!best) return null;

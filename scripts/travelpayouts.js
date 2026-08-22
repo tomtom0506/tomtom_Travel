@@ -50,12 +50,32 @@ async function weekMatrix({ origin, destination, departDate, returnDate, currenc
   }
 }
 
-function pickBest(entries, { exactDepartDate, flexible }) {
+function daysBetween(a, b) {
+  const d1 = new Date(a + "T00:00:00Z");
+  const d2 = new Date(b + "T00:00:00Z");
+  return Math.round((d2 - d1) / 86400000);
+}
+
+// The week-matrix cache sometimes pairs a depart_date from one cached search
+// with a return_date from an unrelated one, producing nonsensical "trips"
+// (e.g. returning before departing, or a 90-day trip when 7 was requested).
+// We only trust entries whose actual trip length is close to what was asked for.
+function pickBest(entries, { exactDepartDate, exactReturnDate, flexible, flexDays }) {
   if (!entries || entries.length === 0) return null;
-  const candidates = flexible
-    ? entries
-    : entries.filter((e) => e.depart_date === exactDepartDate);
-  const pool = candidates.length > 0 ? candidates : entries; // fallback if exact date missing from cache
+
+  const intendedDuration = daysBetween(exactDepartDate, exactReturnDate);
+  const tolerance = flexible ? flexDays + 1 : 1;
+
+  const sane = entries.filter((e) => {
+    if (!e.depart_date || !e.return_date) return false;
+    const duration = daysBetween(e.depart_date, e.return_date);
+    return duration > 0 && Math.abs(duration - intendedDuration) <= tolerance;
+  });
+  if (sane.length === 0) return null; // cache had nothing trustworthy for this route
+
+  const candidates = flexible ? sane : sane.filter((e) => e.depart_date === exactDepartDate);
+  const pool = candidates.length > 0 ? candidates : sane; // fallback within the sane set only
+
   let best = null;
   for (const e of pool) {
     if (!best || e.value < best.value) best = e;
@@ -64,9 +84,9 @@ function pickBest(entries, { exactDepartDate, flexible }) {
   return { departDate: best.depart_date, returnDate: best.return_date, price: best.value };
 }
 
-async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, currency }) {
+async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency }) {
   const entries = await weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency });
-  return pickBest(entries, { exactDepartDate: departureDate, flexible });
+  return pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
 }
 
 // Hotellook (also a Travelpayouts product, same API token) - best-effort.
