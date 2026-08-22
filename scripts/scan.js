@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { cheapestRoundTrip, cheapestHotel } = require("./travelpayouts");
+const { cheapestRoundTrip, cheapestOneWay, cheapestHotel } = require("./travelpayouts");
 const { sendTelegramMessage } = require("./telegram");
 
 const ROOT = path.join(__dirname, "..");
@@ -13,10 +13,14 @@ const HISTORY_LIMIT = 60; // keep last N data points per destination
 
 // ---- one-off search overrides (set when the dashboard triggers a live search) ----
 // These only affect this run's in-memory settings - config/settings.json on disk is never touched.
+const isOneOffSearch = !!(process.env.OVERRIDE_DEPARTURE_DATE || process.env.OVERRIDE_DESTINATION);
 if (process.env.OVERRIDE_DEPARTURE_DATE) settings.departureDate = process.env.OVERRIDE_DEPARTURE_DATE;
 if (process.env.OVERRIDE_RETURN_DATE) settings.returnDate = process.env.OVERRIDE_RETURN_DATE;
 if (process.env.OVERRIDE_FLEXIBLE) settings.flexible = process.env.OVERRIDE_FLEXIBLE === "true";
 if (process.env.OVERRIDE_FLEX_DAYS) settings.flexDays = parseInt(process.env.OVERRIDE_FLEX_DAYS, 10);
+
+const tripType = process.env.OVERRIDE_TRIP_TYPE === "oneway" ? "oneway" : "roundtrip";
+const searchMode = ["flights", "hotels"].includes(process.env.OVERRIDE_SEARCH_MODE) ? process.env.OVERRIDE_SEARCH_MODE : "both";
 
 let destinationsToScan = destinations;
 if (process.env.OVERRIDE_DESTINATION) {
@@ -34,15 +38,24 @@ function median(nums) {
 }
 
 async function scanDestination(dest) {
-  const best = await cheapestRoundTrip({
-    origin: settings.origin,
-    destination: dest.code,
-    departureDate: settings.departureDate,
-    returnDate: settings.returnDate,
-    flexible: settings.flexible,
-    flexDays: settings.flexDays,
-    currency: settings.currency,
-  });
+  const best = tripType === "oneway"
+    ? await cheapestOneWay({
+        origin: settings.origin,
+        destination: dest.code,
+        departureDate: settings.departureDate,
+        flexible: settings.flexible,
+        flexDays: settings.flexDays,
+        currency: settings.currency,
+      })
+    : await cheapestRoundTrip({
+        origin: settings.origin,
+        destination: dest.code,
+        departureDate: settings.departureDate,
+        returnDate: settings.returnDate,
+        flexible: settings.flexible,
+        flexDays: settings.flexDays,
+        currency: settings.currency,
+      });
   if (!best) return null;
 
   const pastPrices = (history[dest.code] || []).map((p) => p.price);
@@ -53,12 +66,34 @@ async function scanDestination(dest) {
     code: dest.code,
     name: dest.name,
     country: dest.country,
+    tripType,
     departureDate: best.departDate,
     returnDate: best.returnDate,
     approxPrice: Math.round(best.price),
     historyMedian: hist,
     discountPercent,
     historyPoints: pastPrices.length,
+  };
+}
+
+async function scanHotelOnly(dest) {
+  const hotel = await cheapestHotel({
+    cityCode: dest.code,
+    checkIn: settings.departureDate,
+    checkOut: settings.returnDate,
+    adults: settings.hotelAdults || 2,
+    currency: settings.currency,
+  });
+  if (!hotel) return null;
+  return {
+    code: dest.code,
+    name: dest.name,
+    country: dest.country,
+    checkIn: settings.departureDate,
+    checkOut: settings.returnDate,
+    price: Math.round(hotel.price),
+    currency: hotel.currency,
+    hotelName: hotel.hotelName || null,
   };
 }
 
@@ -87,9 +122,36 @@ function watchKey(item) {
 }
 
 async function main() {
-  console.log(`Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
-  const results = [];
+  console.log(`Mode: ${searchMode}, tripType: ${tripType}. Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
+  const today = new Date().toISOString().slice(0, 10);
 
+  // ---- hotels-only mode: skip flights entirely ----
+  if (searchMode === "hotels") {
+    const hotelResults = [];
+    for (const dest of destinationsToScan) {
+      try {
+        const h = await scanHotelOnly(dest);
+        if (h) hotelResults.push(h);
+      } catch (err) {
+        console.warn(`Failed hotel scan ${dest.code}: ${err.message}`);
+      }
+    }
+    hotelResults.sort((a, b) => a.price - b.price);
+
+    const latest = {
+      lastRun: new Date().toISOString(),
+      settings,
+      results: [],
+      hotelOnlyResults: hotelResults,
+      watchlistResults: [],
+    };
+    fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));
+    console.log(`Done. ${hotelResults.length} hotel-only results.`);
+    return;
+  }
+
+  // ---- flights (with optional hotel add-on for top deals) ----
+  const results = [];
   for (const dest of destinationsToScan) {
     try {
       const r = await scanDestination(dest);
@@ -106,7 +168,8 @@ async function main() {
     return a.approxPrice - b.approxPrice;
   });
 
-  const topN = results.slice(0, settings.checkHotelsForTopDeals || 5);
+  const wantHotels = searchMode === "both" && tripType === "roundtrip";
+  const topN = wantHotels ? results.slice(0, settings.checkHotelsForTopDeals || 5) : [];
 
   for (const r of topN) {
     const hotel = await cheapestHotel({
@@ -119,13 +182,14 @@ async function main() {
     if (hotel) r.hotel = hotel;
   }
 
-  const today = new Date().toISOString().slice(0, 10);
-  for (const r of results) {
-    if (!history[r.code]) history[r.code] = [];
-    history[r.code].push({ date: today, price: r.approxPrice });
-    history[r.code] = history[r.code].slice(-HISTORY_LIMIT);
+  if (!isOneOffSearch) {
+    for (const r of results) {
+      if (!history[r.code]) history[r.code] = [];
+      history[r.code].push({ date: today, price: r.approxPrice });
+      history[r.code] = history[r.code].slice(-HISTORY_LIMIT);
+    }
+    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
   }
-  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
 
   const alerts = topN.filter((r) => {
     const enoughHistory = r.historyPoints >= (settings.minHistoryPointsForDiscountAlert || 3);
@@ -151,44 +215,47 @@ async function main() {
     console.log("No deals crossed the alert threshold this run.");
   }
 
-  // ---- watchlist: specific searches the person asked to always be notified about ----
-  const watchlist = settings.watchlist || [];
+  // ---- watchlist: only on real scheduled/config-triggered runs, not one-off dashboard searches ----
   const watchlistResults = [];
-  for (const item of watchlist) {
-    try {
-      const w = await scanWatchlistItem(item);
-      if (!w) continue;
-      watchlistResults.push(w);
+  if (!isOneOffSearch) {
+    const watchlist = settings.watchlist || [];
+    for (const item of watchlist) {
+      try {
+        const w = await scanWatchlistItem(item);
+        if (!w) continue;
+        watchlistResults.push(w);
 
-      const key = watchKey(item);
-      const prevPoints = history[key] || [];
-      const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
+        const key = watchKey(item);
+        const prevPoints = history[key] || [];
+        const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
 
-      if (lastPrice === null || lastPrice !== w.price) {
-        const changeText = lastPrice === null
-          ? "נבדק לראשונה"
-          : (w.price < lastPrice ? `ירד מ-${lastPrice} ל-${w.price}` : `עלה מ-${lastPrice} ל-${w.price}`);
-        await sendTelegramMessage(
-          [
-            `👀 <b>עדכון לחיפוש שסימנת: ${w.note}</b>`,
-            `${settings.origin} ⇄ ${w.code}`,
-            `${w.departureDate} → ${w.returnDate}`,
-            `מחיר: <b>${w.price} ${settings.currency}</b> (${changeText})`,
-          ].join("\n")
-        );
+        if (lastPrice === null || lastPrice !== w.price) {
+          const changeText = lastPrice === null
+            ? "נבדק לראשונה"
+            : (w.price < lastPrice ? `ירד מ-${lastPrice} ל-${w.price}` : `עלה מ-${lastPrice} ל-${w.price}`);
+          await sendTelegramMessage(
+            [
+              `👀 <b>עדכון לחיפוש שסימנת: ${w.note}</b>`,
+              `${settings.origin} ⇄ ${w.code}`,
+              `${w.departureDate} → ${w.returnDate}`,
+              `מחיר: <b>${w.price} ${settings.currency}</b> (${changeText})`,
+            ].join("\n")
+          );
+        }
+
+        history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
+      } catch (err) {
+        console.warn(`Failed scanning watchlist item ${item.destination}: ${err.message}`);
       }
-
-      history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
-    } catch (err) {
-      console.warn(`Failed scanning watchlist item ${item.destination}: ${err.message}`);
     }
+    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
   }
-  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
 
   const latest = {
     lastRun: new Date().toISOString(),
     settings,
     results,
+    hotelOnlyResults: [],
     watchlistResults,
   };
   fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));

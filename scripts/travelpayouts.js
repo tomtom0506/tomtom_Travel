@@ -89,6 +89,47 @@ async function cheapestRoundTrip({ origin, destination, departureDate, returnDat
   return pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
 }
 
+// One-way fare for a single date (or nearby, when flexible) using the
+// dedicated one-way endpoint - week-matrix always returns round-trip totals
+// and can't be reused for accurate one-way pricing.
+async function cheapestOneWay({ origin, destination, departureDate, flexible, flexDays, currency }) {
+  try {
+    const departAt = flexible ? departureDate.slice(0, 7) : departureDate; // YYYY-MM lets the API scan the whole month when flexible
+    const data = await tpGet("/aviasales/v3/prices_for_dates", {
+      origin,
+      destination,
+      departure_at: departAt,
+      one_way: true,
+      direct: false,
+      sorting: "price",
+      limit: flexible ? 30 : 1,
+      currency,
+    });
+    const entries = data.data || [];
+    if (entries.length === 0) return null;
+
+    let pool = entries;
+    if (flexible) {
+      const target = new Date(departureDate + "T00:00:00Z").getTime();
+      pool = entries.filter((e) => {
+        const d = new Date(e.departure_at).getTime();
+        return Math.abs(d - target) / 86400000 <= flexDays;
+      });
+      if (pool.length === 0) pool = entries; // fall back to cheapest in the month if nothing in range
+    }
+
+    let best = null;
+    for (const e of pool) {
+      if (!best || e.price < best.price) best = e;
+    }
+    if (!best) return null;
+    return { departDate: best.departure_at.slice(0, 10), returnDate: null, price: best.price };
+  } catch (err) {
+    console.warn(`  cheapestOneWay ${origin}->${destination}: ${err.message}`);
+    return null;
+  }
+}
+
 // Hotellook (also a Travelpayouts product, same API token) - best-effort.
 // If your account isn't yet linked to the Hotellook program this may return
 // empty results; the flight alerts are the core feature and work regardless.
@@ -122,4 +163,4 @@ async function cheapestHotel({ cityCode, checkIn, checkOut, adults, currency }) 
   }
 }
 
-module.exports = { cheapestRoundTrip, cheapestHotel };
+module.exports = { cheapestRoundTrip, cheapestOneWay, cheapestHotel };
