@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 */6 * * *" # every 6 hours (UTC)
   workflow_dispatch: {} # allows manual "Run workflow" button in the Actions tab
+  push:
+    paths:
+      - "config/**" # editing settings/destinations triggers an immediate QA check + scan
 
 permissions:
   contents: write
@@ -21,6 +24,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: QA - validate config files
+        run: node scripts/validate-config.js
 
       - name: Run scan
         env:
