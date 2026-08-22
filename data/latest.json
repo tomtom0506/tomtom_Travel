@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-22T17:08:29.336Z",
+  "lastRun": "2026-08-22T17:08:50.248Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -19,191 +19,15 @@
   },
   "results": [
     {
-      "code": "ATH",
-      "name": "אתונה",
-      "country": "יוון",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-25",
-      "approxPrice": 489,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-20",
-      "approxPrice": 510,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "WAW",
-      "name": "ורשה",
-      "country": "פולין",
-      "departureDate": "2026-09-12",
-      "returnDate": "2026-09-25",
-      "approxPrice": 647,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "BUD",
-      "name": "בודפשט",
-      "country": "הונגריה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-20",
-      "approxPrice": 741,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "KRK",
-      "name": "קרקוב",
-      "country": "פולין",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-26",
-      "approxPrice": 756,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "MIL",
-      "name": "מילאנו",
-      "country": "איטליה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-19",
-      "approxPrice": 822,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "BER",
-      "name": "ברלין",
-      "country": "גרמניה",
-      "departureDate": "2026-09-12",
-      "returnDate": "2026-09-19",
-      "approxPrice": 876,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "IST",
-      "name": "איסטנבול",
-      "country": "טורקיה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 879,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
       "code": "LON",
       "name": "לונדון",
       "country": "בריטניה",
       "departureDate": "2026-09-12",
       "returnDate": "2026-09-19",
       "approxPrice": 905,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "BCN",
-      "name": "ברצלונה",
-      "country": "ספרד",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-19",
-      "approxPrice": 914,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "NAP",
-      "name": "נאפולי",
-      "country": "איטליה",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-20",
-      "approxPrice": 938,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "ARN",
-      "name": "שטוקהולם",
-      "country": "שוודיה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 962,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "SOF",
-      "name": "סופיה",
-      "country": "בולגריה",
-      "departureDate": "2026-09-18",
-      "returnDate": "2026-09-25",
-      "approxPrice": 973,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "BRU",
-      "name": "בריסל",
-      "country": "בלגיה",
-      "departureDate": "2026-09-14",
-      "returnDate": "2026-09-20",
-      "approxPrice": 988,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "ROM",
-      "name": "רומא",
-      "country": "איטליה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-20",
-      "approxPrice": 989,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "LIS",
-      "name": "ליסבון",
-      "country": "פורטוגל",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1002,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "SKG",
-      "name": "סלוניקי",
-      "country": "יוון",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1026,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 905,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "PAR",
@@ -212,9 +36,42 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-19",
       "approxPrice": 1061,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1061,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "ROM",
+      "name": "רומא",
+      "country": "איטליה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-20",
+      "approxPrice": 989,
+      "historyMedian": 989,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "MIL",
+      "name": "מילאנו",
+      "country": "איטליה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-19",
+      "approxPrice": 822,
+      "historyMedian": 822,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "BER",
+      "name": "ברלין",
+      "country": "גרמניה",
+      "departureDate": "2026-09-12",
+      "returnDate": "2026-09-19",
+      "approxPrice": 876,
+      "historyMedian": 876,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "MUC",
@@ -223,75 +80,9 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-24",
       "approxPrice": 1105,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "BEG",
-      "name": "בלגרד",
-      "country": "סרביה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1141,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "VLC",
-      "name": "ולנסיה",
-      "country": "ספרד",
-      "departureDate": "2026-09-16",
-      "returnDate": "2026-09-26",
-      "approxPrice": 1144,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "PRG",
-      "name": "פראג",
-      "country": "צ'כיה",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1206,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "ZRH",
-      "name": "ציריך",
-      "country": "שוויץ",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-20",
-      "approxPrice": 1216,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "NCE",
-      "name": "ניס",
-      "country": "צרפת",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 1224,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "MAD",
-      "name": "מדריד",
-      "country": "ספרד",
-      "departureDate": "2026-09-16",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1286,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1105,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "AMS",
@@ -300,31 +91,53 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-19",
       "approxPrice": 1304,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1304,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
-      "code": "HEL",
-      "name": "הלסינקי",
-      "country": "פינלנד",
-      "departureDate": "2026-09-14",
-      "returnDate": "2026-09-20",
-      "approxPrice": 1305,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
-    },
-    {
-      "code": "ZAG",
-      "name": "זאגרב",
-      "country": "קרואטיה",
+      "code": "BCN",
+      "name": "ברצלונה",
+      "country": "ספרד",
       "departureDate": "2026-09-15",
-      "returnDate": "2026-09-26",
-      "approxPrice": 1444,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "returnDate": "2026-09-19",
+      "approxPrice": 914,
+      "historyMedian": 914,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "MAD",
+      "name": "מדריד",
+      "country": "ספרד",
+      "departureDate": "2026-09-16",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1286,
+      "historyMedian": 1286,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "LIS",
+      "name": "ליסבון",
+      "country": "פורטוגל",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1002,
+      "historyMedian": 1002,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "ATH",
+      "name": "אתונה",
+      "country": "יוון",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-25",
+      "approxPrice": 489,
+      "historyMedian": 489,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "VIE",
@@ -333,20 +146,53 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1447,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1447,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
-      "code": "OSL",
-      "name": "אוסלו",
-      "country": "נורווגיה",
-      "departureDate": "2026-09-18",
-      "returnDate": "2026-09-21",
-      "approxPrice": 1459,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "code": "PRG",
+      "name": "פראג",
+      "country": "צ'כיה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1206,
+      "historyMedian": 1206,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "BUD",
+      "name": "בודפשט",
+      "country": "הונגריה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-20",
+      "approxPrice": 741,
+      "historyMedian": 741,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "WAW",
+      "name": "ורשה",
+      "country": "פולין",
+      "departureDate": "2026-09-12",
+      "returnDate": "2026-09-25",
+      "approxPrice": 647,
+      "historyMedian": 647,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "KRK",
+      "name": "קרקוב",
+      "country": "פולין",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-26",
+      "approxPrice": 756,
+      "historyMedian": 756,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "CPH",
@@ -355,9 +201,53 @@
       "departureDate": "2026-09-19",
       "returnDate": "2026-09-24",
       "approxPrice": 1460,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1460,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "OSL",
+      "name": "אוסלו",
+      "country": "נורווגיה",
+      "departureDate": "2026-09-18",
+      "returnDate": "2026-09-21",
+      "approxPrice": 1459,
+      "historyMedian": 1459,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "ARN",
+      "name": "שטוקהולם",
+      "country": "שוודיה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 962,
+      "historyMedian": 962,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "HEL",
+      "name": "הלסינקי",
+      "country": "פינלנד",
+      "departureDate": "2026-09-14",
+      "returnDate": "2026-09-20",
+      "approxPrice": 1305,
+      "historyMedian": 1305,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "ZRH",
+      "name": "ציריך",
+      "country": "שוויץ",
+      "departureDate": "2026-09-13",
+      "returnDate": "2026-09-20",
+      "approxPrice": 1216,
+      "historyMedian": 1216,
+      "discountPercent": 0,
+      "historyPoints": 1
     },
     {
       "code": "GVA",
@@ -366,9 +256,42 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 1514,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
+      "historyMedian": 1514,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "BRU",
+      "name": "בריסל",
+      "country": "בלגיה",
+      "departureDate": "2026-09-14",
+      "returnDate": "2026-09-20",
+      "approxPrice": 988,
+      "historyMedian": 988,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "IST",
+      "name": "איסטנבול",
+      "country": "טורקיה",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 879,
+      "historyMedian": 879,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
+      "code": "SOF",
+      "name": "סופיה",
+      "country": "בולגריה",
+      "departureDate": "2026-09-18",
+      "returnDate": "2026-09-25",
+      "approxPrice": 973,
+      "historyMedian": 973,
+      "discountPercent": 0,
+      "historyPoints": 1
     }
   ]
 }
