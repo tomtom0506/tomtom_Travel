@@ -32,19 +32,21 @@ async function tpGet(path, params) {
 // Always-constructible search link (unlike the per-entry "link" field from the
 // cache, which is only present when that exact ticket was actually cached -
 // this works 100% of the time since it only needs origin/destination/dates).
+// Uses the compact widget-style format (www.aviasales.com/search/CODE) since
+// the newer search.aviasales.com/flights/ URL was geo-redirecting to aviasales.ru
+// regardless of the locale param.
 function aviasalesSearchLink({ origin, destination, departDate, returnDate, oneWay, adults }) {
-  const url = new URL("https://search.aviasales.com/flights/");
-  url.searchParams.set("origin_iata", origin);
-  url.searchParams.set("destination_iata", destination);
-  url.searchParams.set("depart_date", departDate);
-  if (returnDate) url.searchParams.set("return_date", returnDate);
-  url.searchParams.set("adults", adults || 1);
-  url.searchParams.set("children", 0);
-  url.searchParams.set("infants", 0);
-  url.searchParams.set("trip_class", 0);
-  url.searchParams.set("locale", "he");
-  url.searchParams.set("one_way", oneWay ? "true" : "false");
-  return url.toString();
+  const fmtDate = (d) => {
+    const dt = new Date(d + "T00:00:00Z");
+    const dd = String(dt.getUTCDate()).padStart(2, "0");
+    const mm = String(dt.getUTCMonth() + 1).padStart(2, "0");
+    return dd + mm;
+  };
+  const passengers = adults || 1;
+  const code = returnDate
+    ? `${origin}${fmtDate(departDate)}${destination}${fmtDate(returnDate)}${passengers}`
+    : `${origin}${fmtDate(departDate)}${destination}${passengers}`;
+  return `https://www.aviasales.com/search/${code}`;
 }
 
 // One call returns a week-wide window of cached round-trip prices
