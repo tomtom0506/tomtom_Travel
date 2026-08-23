@@ -81,7 +81,14 @@ function pickBest(entries, { exactDepartDate, exactReturnDate, flexible, flexDay
     if (!best || e.value < best.value) best = e;
   }
   if (!best) return null;
-  return { departDate: best.depart_date, returnDate: best.return_date, price: best.value };
+  return {
+    departDate: best.depart_date,
+    returnDate: best.return_date,
+    price: best.value,
+    airline: best.airline || null,
+    transfers: typeof best.transfers === "number" ? best.transfers : null,
+    bookingLink: best.link ? `https://www.aviasales.com${best.link}` : null,
+  };
 }
 
 async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency }) {
@@ -123,102 +130,58 @@ async function cheapestOneWay({ origin, destination, departureDate, flexible, fl
       if (!best || e.price < best.price) best = e;
     }
     if (!best) return null;
-    return { departDate: best.departure_at.slice(0, 10), returnDate: null, price: best.price };
+    return {
+      departDate: best.departure_at.slice(0, 10),
+      returnDate: null,
+      price: best.price,
+      airline: best.airline || null,
+      transfers: typeof best.transfers === "number" ? best.transfers : null,
+      bookingLink: best.link ? `https://www.aviasales.com${best.link}` : null,
+    };
   } catch (err) {
     console.log(`  cheapestOneWay ${origin}->${destination}: ${err.message}`);
     return null;
   }
 }
 
-// Hotellook (also a Travelpayouts product, same API token).
-// IMPORTANT: your Travelpayouts account must be separately joined to the
-// Hotellook partner program (not just Aviasales) or this silently returns
-// nothing. Join at: https://www.travelpayouts.com/programs -> Hotellook.
-async function fetchHotelCache(location, { checkIn, checkOut, adults, currency }) {
-  const url = new URL("https://engine.hotellook.com/api/v2/cache.json");
-  url.searchParams.set("location", location);
-  url.searchParams.set("checkIn", checkIn);
-  url.searchParams.set("checkOut", checkOut);
-  url.searchParams.set("currency", currency);
-  url.searchParams.set("adults", adults);
-  url.searchParams.set("limit", 5);
-  url.searchParams.set("token", getToken());
-
-  let res;
-  try {
-    res = await fetch(url);
-  } catch (err) {
-    console.log(`HOTEL-DEBUG: network error calling hotellook for "${location}": ${err.message}`);
-    return [];
-  }
-
-  const bodyText = await res.text();
-  if (!res.ok) {
-    console.log(`HOTEL-DEBUG: hotellook cache.json (${location}) HTTP ${res.status}: ${bodyText.slice(0, 300)}`);
-    return [];
-  }
-  let data;
-  try {
-    data = JSON.parse(bodyText);
-  } catch {
-    console.log(`HOTEL-DEBUG: hotellook cache.json (${location}) returned non-JSON: ${bodyText.slice(0, 200)}`);
-    return [];
-  }
-  if (!Array.isArray(data)) {
-    console.log(`HOTEL-DEBUG: hotellook cache.json (${location}) unexpected shape: ${bodyText.slice(0, 200)}`);
-    return [];
-  }
-  console.log(`HOTEL-DEBUG: hotellook cache.json (${location}) returned ${data.length} hotel(s)`);
-  return data;
-}
-
-async function resolveHotelLocationName(query) {
-  try {
-    const url = new URL("https://engine.hotellook.com/api/v2/lookup.json");
-    url.searchParams.set("query", query);
-    url.searchParams.set("lang", "en");
-    url.searchParams.set("lookFor", "city");
-    url.searchParams.set("limit", 1);
-    url.searchParams.set("token", getToken());
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.log(`HOTEL-DEBUG: lookup.json for "${query}" HTTP ${res.status}`);
-      return null;
-    }
-    const data = await res.json();
-    const loc = data?.results?.locations?.[0];
-    console.log(`HOTEL-DEBUG: lookup.json for "${query}" resolved to: ${loc ? (loc.fullName || loc.name) : "nothing"}`);
-    return loc ? loc.fullName || loc.name : null;
-  } catch (err) {
-    console.log(`HOTEL-DEBUG: lookup.json network error for "${query}": ${err.message}`);
-    return null;
-  }
+// Hotellook shut down completely in October 2025 (confirmed: the whole
+// engine.hotellook.com API now returns 404). There is no equivalent free
+// hotel-price API to replace it with, so instead of a price we generate a
+// direct Booking.com search link, pre-filled with the destination and exact
+// dates - one tap shows real live prices there.
+function bookingComLink({ cityName, checkIn, checkOut, adults }) {
+  const url = new URL("https://www.booking.com/searchresults.html");
+  url.searchParams.set("ss", cityName);
+  url.searchParams.set("checkin", checkIn);
+  url.searchParams.set("checkout", checkOut);
+  url.searchParams.set("group_adults", adults || 2);
+  url.searchParams.set("no_rooms", 1);
+  return url.toString();
 }
 
 async function cheapestHotel({ cityCode, cityName, checkIn, checkOut, adults, currency }) {
-  let data = await fetchHotelCache(cityCode, { checkIn, checkOut, adults, currency });
-
-  if (data.length === 0 && cityName) {
-    const resolved = await resolveHotelLocationName(cityName);
-    if (resolved && resolved !== cityCode) {
-      console.log(`HOTEL-DEBUG: retrying with resolved name "${resolved}" instead of "${cityCode}"`);
-      data = await fetchHotelCache(resolved, { checkIn, checkOut, adults, currency });
-    }
-  }
-
-  if (data.length === 0) {
-    console.log(`HOTEL-DEBUG: no hotel prices found for ${cityCode}${cityName ? " (" + cityName + ")" : ""}`);
-    return null;
-  }
-
-  let cheapest = null;
-  for (const h of data) {
-    const price = h.priceFrom || h.price;
-    if (price && (!cheapest || price < cheapest.price)) {
-      cheapest = { price, currency, hotelName: h.hotelName || h.name };
-    }
-  }
-  return cheapest;
+  return {
+    price: null,
+    currency,
+    hotelName: null,
+    bookingUrl: bookingComLink({ cityName: cityName || cityCode, checkIn, checkOut, adults }),
+  };
 }
 
-module.exports = { cheapestRoundTrip, cheapestOneWay, cheapestHotel };
+let airlinesCache = null;
+async function getAirlineName(code) {
+  if (!code) return null;
+  if (!airlinesCache) {
+    try {
+      const res = await fetch("https://api.travelpayouts.com/data/en/airlines.json");
+      const list = await res.json();
+      airlinesCache = {};
+      for (const a of list) airlinesCache[a.code] = a.name;
+    } catch {
+      airlinesCache = {};
+    }
+  }
+  return airlinesCache[code] || code;
+}
+
+module.exports = { cheapestRoundTrip, cheapestOneWay, cheapestHotel, getAirlineName };
