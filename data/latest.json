@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-23T18:22:20.511Z",
+  "lastRun": "2026-08-23T20:15:44.412Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -35,9 +35,18 @@
       "departureDate": "2026-09-12",
       "returnDate": "2026-09-19",
       "approxPrice": 577,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 973,
       "discountPercent": 41,
-      "historyPoints": 9
+      "historyPoints": 10,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A1%D7%95%D7%A4%D7%99%D7%94&checkin=2026-09-12&checkout=2026-09-19&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "PRG",
@@ -47,9 +56,18 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1038,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1206,
       "discountPercent": 14,
-      "historyPoints": 9
+      "historyPoints": 10,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A4%D7%A8%D7%90%D7%92&checkin=2026-09-15&checkout=2026-09-22&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "ROM",
@@ -59,9 +77,18 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1146,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1146,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "MIL",
@@ -71,9 +98,18 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 916,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 916,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9E%D7%99%D7%9C%D7%90%D7%A0%D7%95&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "BCN",
@@ -83,9 +119,18 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1069,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1069,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%91%D7%A8%D7%A6%D7%9C%D7%95%D7%A0%D7%94&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "MAD",
@@ -95,9 +140,12 @@
       "departureDate": "2026-09-16",
       "returnDate": "2026-09-23",
       "approxPrice": 1286,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1286,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "LIS",
@@ -107,9 +155,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 1002,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1002,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "ATH",
@@ -119,9 +170,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 697,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 697,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "VIE",
@@ -131,9 +185,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1447,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1447,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "WAW",
@@ -143,9 +200,12 @@
       "departureDate": "2026-09-18",
       "returnDate": "2026-09-24",
       "approxPrice": 1332,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1332,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "KRK",
@@ -155,9 +215,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-19",
       "approxPrice": 743,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 743,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "ARN",
@@ -167,9 +230,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 962,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 962,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "HEL",
@@ -179,9 +245,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-20",
       "approxPrice": 1305,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1305,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "ZRH",
@@ -191,9 +260,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 1216,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1216,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "GVA",
@@ -203,9 +275,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 1514,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "BRU",
@@ -215,9 +290,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-20",
       "approxPrice": 988,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 988,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "IST",
@@ -227,9 +305,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 879,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 879,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "BEG",
@@ -239,9 +320,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1141,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1141,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "ZAG",
@@ -251,9 +335,12 @@
       "departureDate": "2026-09-19",
       "returnDate": "2026-09-25",
       "approxPrice": 1492,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1492,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "LCA",
@@ -263,9 +350,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 564,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 564,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "NAP",
@@ -275,9 +365,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 938,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 938,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "VLC",
@@ -287,9 +380,12 @@
       "departureDate": "2026-09-18",
       "returnDate": "2026-09-26",
       "approxPrice": 1341,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1341,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "NCE",
@@ -299,9 +395,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1224,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1224,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "BUD",
@@ -311,9 +410,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 795,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 788,
       "discountPercent": -1,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "PAR",
@@ -323,9 +425,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 1166,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1142,
       "discountPercent": -2,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "BER",
@@ -335,9 +440,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-19",
       "approxPrice": 899,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 876,
       "discountPercent": -3,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "AMS",
@@ -347,9 +455,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1462,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1337,
       "discountPercent": -9,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "LON",
@@ -359,9 +470,12 @@
       "departureDate": "2026-09-16",
       "returnDate": "2026-09-23",
       "approxPrice": 1042,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 905,
       "discountPercent": -15,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "MUC",
@@ -371,9 +485,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-22",
       "approxPrice": 1458,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null,
       "historyMedian": 1238,
       "discountPercent": -18,
-      "historyPoints": 10
+      "historyPoints": 11
     }
   ],
   "hotelOnlyResults": [],
@@ -383,7 +500,10 @@
       "note": "ברצלונה - לדוגמה, מחקו או ערכו",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "price": 1069
+      "price": 1069,
+      "bookingLink": null,
+      "airline": null,
+      "transfers": null
     }
   ]
 }
