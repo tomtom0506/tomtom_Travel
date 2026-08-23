@@ -703,7 +703,7 @@
 </div>
 
 <script>
-const APP_VERSION = "1.12.2";
+const APP_VERSION = "1.13.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -908,6 +908,35 @@ function jsonpFetch(url) {
   });
 }
 
+// Travelpayouts' autocomplete has weak Hebrew coverage - translate common
+// Hebrew destination names to English before querying so "אתונה" finds Athens.
+const HEBREW_DEST_MAP = {
+  "אתונה": "Athens", "לונדון": "London", "פריז": "Paris", "רומא": "Rome",
+  "מילאנו": "Milan", "ברלין": "Berlin", "מינכן": "Munich", "אמסטרדם": "Amsterdam",
+  "ברצלונה": "Barcelona", "מדריד": "Madrid", "ולנסיה": "Valencia", "ליסבון": "Lisbon",
+  "וינה": "Vienna", "פראג": "Prague", "בודפשט": "Budapest", "ורשה": "Warsaw",
+  "קרקוב": "Krakow", "דבלין": "Dublin", "קופנהגן": "Copenhagen", "אוסלו": "Oslo",
+  "שטוקהולם": "Stockholm", "הלסינקי": "Helsinki", "ציריך": "Zurich", "גנבה": "Geneva",
+  "ג'נבה": "Geneva", "בריסל": "Brussels", "איסטנבול": "Istanbul", "סופיה": "Sofia",
+  "בלגרד": "Belgrade", "זאגרב": "Zagreb", "סלוניקי": "Thessaloniki", "לרנקה": "Larnaca",
+  "ניקוסיה": "Nicosia", "רודוס": "Rhodes", "כרתים": "Crete", "סנטוריני": "Santorini",
+  "מיקונוס": "Mykonos", "לפקדה": "Lefkada", "קורפו": "Corfu", "ניס": "Nice",
+  "פלמה": "Palma", "מיורקה": "Mallorca", "נאפולי": "Naples", "ונציה": "Venice",
+  "פירנצה": "Florence", "טוקיו": "Tokyo", "בנגקוק": "Bangkok", "דובאי": "Dubai",
+  "ניו יורק": "New York", "לוס אנג'לס": "Los Angeles", "מיאמי": "Miami",
+  "מוסקבה": "Moscow", "קייב": "Kyiv",
+  "בנגלור": "Bangalore", "בייג'ינג": "Beijing", "שנחאי": "Shanghai", "סיאול": "Seoul",
+  "סינגפור": "Singapore", "בלי": "Bali", "פוקט": "Phuket", "קייפטאון": "Cape Town",
+};
+
+function translateDestQuery(term) {
+  const trimmed = term.trim();
+  if (HEBREW_DEST_MAP[trimmed]) return HEBREW_DEST_MAP[trimmed];
+  // partial typing (e.g. "אתונ") - match by prefix against the dictionary keys
+  const match = Object.keys(HEBREW_DEST_MAP).find((k) => k.startsWith(trimmed) || trimmed.startsWith(k));
+  return match ? HEBREW_DEST_MAP[match] : term;
+}
+
 function onDestInput(value) {
   document.getElementById("searchDestCode").value = ""; // typing invalidates a previous selection
   clearTimeout(autocompleteTimer);
@@ -922,14 +951,15 @@ function onDestInput(value) {
   autocompleteTimer = setTimeout(() => runAutocomplete(value.trim()), 300);
 }
 
-async function runAutocomplete(term) {
+async function runAutocomplete(rawTerm) {
   const box = document.getElementById("destSuggestions");
+  const term = translateDestQuery(rawTerm);
   try {
-    const url = "https://autocomplete.travelpayouts.com/places2?term=" + encodeURIComponent(term) + "&locale=he&types[]=city&types[]=airport";
+    const url = "https://autocomplete.travelpayouts.com/places2?term=" + encodeURIComponent(term) + "&locale=en&types[]=city&types[]=airport";
     const data = await jsonpFetch(url);
     lastSuggestions = (data || []).slice(0, 8);
     if (lastSuggestions.length === 0) {
-      box.innerHTML = '<div class="suggestion-loading">לא נמצא — נסו לאיית אחרת, או הקרובה ביותר בעל שדה תעופה</div>';
+      box.innerHTML = '<div class="suggestion-loading">לא נמצא — נסו לאיית באנגלית, או את שדה התעופה הקרוב ביותר</div>';
       return;
     }
     box.innerHTML = lastSuggestions.map((s, i) => (
