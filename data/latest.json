@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-23T06:33:25.765Z",
+  "lastRun": "2026-08-23T12:31:02.694Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -28,16 +28,28 @@
   },
   "results": [
     {
-      "code": "LON",
-      "name": "לונדון",
-      "country": "בריטניה",
+      "code": "SOF",
+      "name": "סופיה",
+      "country": "בולגריה",
       "tripType": "roundtrip",
       "departureDate": "2026-09-12",
       "returnDate": "2026-09-19",
-      "approxPrice": 905,
-      "historyMedian": 905,
-      "discountPercent": 0,
-      "historyPoints": 7
+      "approxPrice": 577,
+      "historyMedian": 973,
+      "discountPercent": 41,
+      "historyPoints": 8
+    },
+    {
+      "code": "PRG",
+      "name": "פראג",
+      "country": "צ'כיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1038,
+      "historyMedian": 1206,
+      "discountPercent": 14,
+      "historyPoints": 8
     },
     {
       "code": "ROM",
@@ -49,7 +61,7 @@
       "approxPrice": 1146,
       "historyMedian": 1146,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "MIL",
@@ -61,31 +73,7 @@
       "approxPrice": 916,
       "historyMedian": 916,
       "discountPercent": 0,
-      "historyPoints": 8
-    },
-    {
-      "code": "BER",
-      "name": "ברלין",
-      "country": "גרמניה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-12",
-      "returnDate": "2026-09-19",
-      "approxPrice": 876,
-      "historyMedian": 876,
-      "discountPercent": 0,
-      "historyPoints": 7
-    },
-    {
-      "code": "MUC",
-      "name": "מינכן",
-      "country": "גרמניה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-12",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1238,
-      "historyMedian": 1238,
-      "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "BCN",
@@ -97,7 +85,7 @@
       "approxPrice": 1069,
       "historyMedian": 1069,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "MAD",
@@ -109,7 +97,7 @@
       "approxPrice": 1286,
       "historyMedian": 1286,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "LIS",
@@ -121,7 +109,7 @@
       "approxPrice": 1002,
       "historyMedian": 1002,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "ATH",
@@ -133,7 +121,7 @@
       "approxPrice": 697,
       "historyMedian": 697,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "VIE",
@@ -144,30 +132,6 @@
       "returnDate": "2026-09-22",
       "approxPrice": 1447,
       "historyMedian": 1447,
-      "discountPercent": 0,
-      "historyPoints": 7
-    },
-    {
-      "code": "PRG",
-      "name": "פראג",
-      "country": "צ'כיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1206,
-      "historyMedian": 1206,
-      "discountPercent": 0,
-      "historyPoints": 7
-    },
-    {
-      "code": "BUD",
-      "name": "בודפשט",
-      "country": "הונגריה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 788,
-      "historyMedian": 788,
       "discountPercent": 0,
       "historyPoints": 8
     },
@@ -181,7 +145,7 @@
       "approxPrice": 1332,
       "historyMedian": 1332,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "KRK",
@@ -193,7 +157,7 @@
       "approxPrice": 743,
       "historyMedian": 743,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "ARN",
@@ -205,7 +169,7 @@
       "approxPrice": 962,
       "historyMedian": 962,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "HEL",
@@ -217,7 +181,7 @@
       "approxPrice": 1305,
       "historyMedian": 1305,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "ZRH",
@@ -229,7 +193,7 @@
       "approxPrice": 1216,
       "historyMedian": 1216,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "GVA",
@@ -241,7 +205,7 @@
       "approxPrice": 1514,
       "historyMedian": 1514,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "BRU",
@@ -253,7 +217,7 @@
       "approxPrice": 988,
       "historyMedian": 988,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "IST",
@@ -265,19 +229,7 @@
       "approxPrice": 879,
       "historyMedian": 879,
       "discountPercent": 0,
-      "historyPoints": 7
-    },
-    {
-      "code": "SOF",
-      "name": "סופיה",
-      "country": "בולגריה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-18",
-      "returnDate": "2026-09-25",
-      "approxPrice": 973,
-      "historyMedian": 973,
-      "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "BEG",
@@ -289,7 +241,7 @@
       "approxPrice": 1141,
       "historyMedian": 1141,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "ZAG",
@@ -301,7 +253,7 @@
       "approxPrice": 1492,
       "historyMedian": 1492,
       "discountPercent": 0,
-      "historyPoints": 5
+      "historyPoints": 6
     },
     {
       "code": "LCA",
@@ -313,7 +265,7 @@
       "approxPrice": 564,
       "historyMedian": 564,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "NAP",
@@ -325,7 +277,7 @@
       "approxPrice": 938,
       "historyMedian": 938,
       "discountPercent": 0,
-      "historyPoints": 5
+      "historyPoints": 6
     },
     {
       "code": "VLC",
@@ -337,7 +289,7 @@
       "approxPrice": 1341,
       "historyMedian": 1341,
       "discountPercent": 0,
-      "historyPoints": 5
+      "historyPoints": 6
     },
     {
       "code": "NCE",
@@ -349,7 +301,19 @@
       "approxPrice": 1224,
       "historyMedian": 1224,
       "discountPercent": 0,
-      "historyPoints": 5
+      "historyPoints": 6
+    },
+    {
+      "code": "BUD",
+      "name": "בודפשט",
+      "country": "הונגריה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-21",
+      "approxPrice": 795,
+      "historyMedian": 788,
+      "discountPercent": -1,
+      "historyPoints": 9
     },
     {
       "code": "PAR",
@@ -361,6 +325,18 @@
       "approxPrice": 1166,
       "historyMedian": 1142,
       "discountPercent": -2,
+      "historyPoints": 9
+    },
+    {
+      "code": "BER",
+      "name": "ברלין",
+      "country": "גרמניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-13",
+      "returnDate": "2026-09-19",
+      "approxPrice": 899,
+      "historyMedian": 876,
+      "discountPercent": -3,
       "historyPoints": 8
     },
     {
@@ -368,12 +344,36 @@
       "name": "אמסטרדם",
       "country": "הולנד",
       "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1462,
+      "historyMedian": 1337,
+      "discountPercent": -9,
+      "historyPoints": 9
+    },
+    {
+      "code": "LON",
+      "name": "לונדון",
+      "country": "בריטניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-16",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1042,
+      "historyMedian": 905,
+      "discountPercent": -15,
+      "historyPoints": 8
+    },
+    {
+      "code": "MUC",
+      "name": "מינכן",
+      "country": "גרמניה",
+      "tripType": "roundtrip",
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-22",
-      "approxPrice": 1394,
-      "historyMedian": 1337,
-      "discountPercent": -4,
-      "historyPoints": 8
+      "approxPrice": 1458,
+      "historyMedian": 1238,
+      "discountPercent": -18,
+      "historyPoints": 9
     }
   ],
   "hotelOnlyResults": [],
