@@ -37,7 +37,12 @@ function googleFlightsLink({ origin, destination, departDate, returnDate }) {
   const q = returnDate
     ? `Flights from ${origin} to ${destination} on ${departDate} through ${returnDate}`
     : `Flights from ${origin} to ${destination} on ${departDate}`;
-  return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
+  const url = new URL("https://www.google.com/travel/flights");
+  url.searchParams.set("q", q);
+  url.searchParams.set("hl", "he");
+  url.searchParams.set("gl", "IL");
+  url.searchParams.set("curr", "ILS");
+  return url.toString();
 }
 
 // One call returns a week-wide window of cached round-trip prices
