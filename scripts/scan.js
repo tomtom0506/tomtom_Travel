@@ -47,6 +47,7 @@ async function scanDestination(dest) {
         flexible: settings.flexible,
         flexDays: settings.flexDays,
         currency: settings.currency,
+        adults: settings.hotelAdults || 1,
       })
     : await cheapestRoundTrip({
         origin: settings.origin,
@@ -56,6 +57,7 @@ async function scanDestination(dest) {
         flexible: settings.flexible,
         flexDays: settings.flexDays,
         currency: settings.currency,
+        adults: settings.hotelAdults || 1,
       });
   if (!best) return null;
 
@@ -109,6 +111,7 @@ async function scanWatchlistItem(item) {
     flexible: settings.flexible,
     flexDays: settings.flexDays,
     currency: settings.currency,
+    adults: settings.hotelAdults || 1,
   });
   if (!best) return null;
   return {

@@ -29,6 +29,24 @@ async function tpGet(path, params) {
   return data;
 }
 
+// Always-constructible search link (unlike the per-entry "link" field from the
+// cache, which is only present when that exact ticket was actually cached -
+// this works 100% of the time since it only needs origin/destination/dates).
+function aviasalesSearchLink({ origin, destination, departDate, returnDate, oneWay, adults }) {
+  const url = new URL("https://search.aviasales.com/flights/");
+  url.searchParams.set("origin_iata", origin);
+  url.searchParams.set("destination_iata", destination);
+  url.searchParams.set("depart_date", departDate);
+  if (returnDate) url.searchParams.set("return_date", returnDate);
+  url.searchParams.set("adults", adults || 1);
+  url.searchParams.set("children", 0);
+  url.searchParams.set("infants", 0);
+  url.searchParams.set("trip_class", 0);
+  url.searchParams.set("locale", "he");
+  url.searchParams.set("one_way", oneWay ? "true" : "false");
+  return url.toString();
+}
+
 // One call returns a week-wide window of cached round-trip prices
 // (3 days before -> 4 days after each given date). Used for both the
 // "exact date" and "flexible ± days" modes: for exact mode we look for the
@@ -91,15 +109,25 @@ function pickBest(entries, { exactDepartDate, exactReturnDate, flexible, flexDay
   };
 }
 
-async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency }) {
+async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency, adults }) {
   const entries = await weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency });
-  return pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
+  const best = pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
+  if (!best) return null;
+  best.bookingLink = aviasalesSearchLink({
+    origin,
+    destination,
+    departDate: best.departDate,
+    returnDate: best.returnDate,
+    oneWay: false,
+    adults,
+  });
+  return best;
 }
 
 // One-way fare for a single date (or nearby, when flexible) using the
 // dedicated one-way endpoint - week-matrix always returns round-trip totals
 // and can't be reused for accurate one-way pricing.
-async function cheapestOneWay({ origin, destination, departureDate, flexible, flexDays, currency }) {
+async function cheapestOneWay({ origin, destination, departureDate, flexible, flexDays, currency, adults }) {
   try {
     const departAt = flexible ? departureDate.slice(0, 7) : departureDate; // YYYY-MM lets the API scan the whole month when flexible
     const data = await tpGet("/aviasales/v3/prices_for_dates", {
@@ -136,7 +164,14 @@ async function cheapestOneWay({ origin, destination, departureDate, flexible, fl
       price: best.price,
       airline: best.airline || null,
       transfers: typeof best.transfers === "number" ? best.transfers : null,
-      bookingLink: best.link ? `https://www.aviasales.com${best.link}` : null,
+      bookingLink: aviasalesSearchLink({
+        origin,
+        destination,
+        departDate: best.departure_at.slice(0, 10),
+        returnDate: null,
+        oneWay: true,
+        adults,
+      }),
     };
   } catch (err) {
     console.log(`  cheapestOneWay ${origin}->${destination}: ${err.message}`);
