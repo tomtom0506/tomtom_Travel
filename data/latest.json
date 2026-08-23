@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-23T12:31:02.694Z",
+  "lastRun": "2026-08-23T18:22:20.511Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -37,7 +37,7 @@
       "approxPrice": 577,
       "historyMedian": 973,
       "discountPercent": 41,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "PRG",
@@ -49,7 +49,7 @@
       "approxPrice": 1038,
       "historyMedian": 1206,
       "discountPercent": 14,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "ROM",
@@ -61,7 +61,7 @@
       "approxPrice": 1146,
       "historyMedian": 1146,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "MIL",
@@ -73,7 +73,7 @@
       "approxPrice": 916,
       "historyMedian": 916,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "BCN",
@@ -85,7 +85,7 @@
       "approxPrice": 1069,
       "historyMedian": 1069,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "MAD",
@@ -97,7 +97,7 @@
       "approxPrice": 1286,
       "historyMedian": 1286,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "LIS",
@@ -109,7 +109,7 @@
       "approxPrice": 1002,
       "historyMedian": 1002,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "ATH",
@@ -121,7 +121,7 @@
       "approxPrice": 697,
       "historyMedian": 697,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "VIE",
@@ -133,7 +133,7 @@
       "approxPrice": 1447,
       "historyMedian": 1447,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "WAW",
@@ -145,7 +145,7 @@
       "approxPrice": 1332,
       "historyMedian": 1332,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "KRK",
@@ -157,7 +157,7 @@
       "approxPrice": 743,
       "historyMedian": 743,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "ARN",
@@ -169,7 +169,7 @@
       "approxPrice": 962,
       "historyMedian": 962,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "HEL",
@@ -181,7 +181,7 @@
       "approxPrice": 1305,
       "historyMedian": 1305,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "ZRH",
@@ -193,7 +193,7 @@
       "approxPrice": 1216,
       "historyMedian": 1216,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "GVA",
@@ -205,7 +205,7 @@
       "approxPrice": 1514,
       "historyMedian": 1514,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "BRU",
@@ -217,7 +217,7 @@
       "approxPrice": 988,
       "historyMedian": 988,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "IST",
@@ -229,7 +229,7 @@
       "approxPrice": 879,
       "historyMedian": 879,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "BEG",
@@ -241,7 +241,7 @@
       "approxPrice": 1141,
       "historyMedian": 1141,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "ZAG",
@@ -253,7 +253,7 @@
       "approxPrice": 1492,
       "historyMedian": 1492,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "LCA",
@@ -265,7 +265,7 @@
       "approxPrice": 564,
       "historyMedian": 564,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "NAP",
@@ -277,7 +277,7 @@
       "approxPrice": 938,
       "historyMedian": 938,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "VLC",
@@ -289,7 +289,7 @@
       "approxPrice": 1341,
       "historyMedian": 1341,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "NCE",
@@ -301,7 +301,7 @@
       "approxPrice": 1224,
       "historyMedian": 1224,
       "discountPercent": 0,
-      "historyPoints": 6
+      "historyPoints": 7
     },
     {
       "code": "BUD",
@@ -313,7 +313,7 @@
       "approxPrice": 795,
       "historyMedian": 788,
       "discountPercent": -1,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "PAR",
@@ -325,7 +325,7 @@
       "approxPrice": 1166,
       "historyMedian": 1142,
       "discountPercent": -2,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "BER",
@@ -337,7 +337,7 @@
       "approxPrice": 899,
       "historyMedian": 876,
       "discountPercent": -3,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "AMS",
@@ -349,7 +349,7 @@
       "approxPrice": 1462,
       "historyMedian": 1337,
       "discountPercent": -9,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "LON",
@@ -361,7 +361,7 @@
       "approxPrice": 1042,
       "historyMedian": 905,
       "discountPercent": -15,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "MUC",
@@ -373,7 +373,7 @@
       "approxPrice": 1458,
       "historyMedian": 1238,
       "discountPercent": -18,
-      "historyPoints": 9
+      "historyPoints": 10
     }
   ],
   "hotelOnlyResults": [],
