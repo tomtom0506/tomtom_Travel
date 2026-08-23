@@ -29,24 +29,15 @@ async function tpGet(path, params) {
   return data;
 }
 
-// Always-constructible search link (unlike the per-entry "link" field from the
-// cache, which is only present when that exact ticket was actually cached -
-// this works 100% of the time since it only needs origin/destination/dates).
-// Uses the compact widget-style format (www.aviasales.com/search/CODE) since
-// the newer search.aviasales.com/flights/ URL was geo-redirecting to aviasales.ru
-// regardless of the locale param.
-function aviasalesSearchLink({ origin, destination, departDate, returnDate, oneWay, adults }) {
-  const fmtDate = (d) => {
-    const dt = new Date(d + "T00:00:00Z");
-    const dd = String(dt.getUTCDate()).padStart(2, "0");
-    const mm = String(dt.getUTCMonth() + 1).padStart(2, "0");
-    return dd + mm;
-  };
-  const passengers = adults || 1;
-  const code = returnDate
-    ? `${origin}${fmtDate(departDate)}${destination}${fmtDate(returnDate)}${passengers}`
-    : `${origin}${fmtDate(departDate)}${destination}${passengers}`;
-  return `https://www.aviasales.com/search/${code}`;
+// Aviasales geo-redirects Israeli IPs to aviasales.ru regardless of URL
+// format or locale params - this is server-side geo-detection we can't
+// override from a link. Google Flights respects browser/account locale
+// properly and needs no API key, so we use that as the booking link instead.
+function googleFlightsLink({ origin, destination, departDate, returnDate }) {
+  const q = returnDate
+    ? `Flights from ${origin} to ${destination} on ${departDate} through ${returnDate}`
+    : `Flights from ${origin} to ${destination} on ${departDate}`;
+  return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
 }
 
 // One call returns a week-wide window of cached round-trip prices
@@ -115,13 +106,11 @@ async function cheapestRoundTrip({ origin, destination, departureDate, returnDat
   const entries = await weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency });
   const best = pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
   if (!best) return null;
-  best.bookingLink = aviasalesSearchLink({
+  best.bookingLink = googleFlightsLink({
     origin,
     destination,
     departDate: best.departDate,
     returnDate: best.returnDate,
-    oneWay: false,
-    adults,
   });
   return best;
 }
@@ -166,13 +155,11 @@ async function cheapestOneWay({ origin, destination, departureDate, flexible, fl
       price: best.price,
       airline: best.airline || null,
       transfers: typeof best.transfers === "number" ? best.transfers : null,
-      bookingLink: aviasalesSearchLink({
+      bookingLink: googleFlightsLink({
         origin,
         destination,
         departDate: best.departure_at.slice(0, 10),
         returnDate: null,
-        oneWay: true,
-        adults,
       }),
     };
   } catch (err) {
