@@ -29,6 +29,9 @@ on:
       searchMode:
         description: "both, flights, or hotels"
         required: false
+      adults:
+        description: "number of travelers"
+        required: false
 
 permissions:
   contents: write
@@ -63,6 +66,7 @@ jobs:
           OVERRIDE_DESTINATION: ${{ github.event.inputs.destination }}
           OVERRIDE_TRIP_TYPE: ${{ github.event.inputs.tripType }}
           OVERRIDE_SEARCH_MODE: ${{ github.event.inputs.searchMode }}
+          OVERRIDE_ADULTS: ${{ github.event.inputs.adults }}
         run: node scripts/scan.js
 
       - name: Commit updated data
