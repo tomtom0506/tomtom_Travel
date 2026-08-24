@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-08-23T20:29:19.071Z",
+  "lastRun": "2026-08-24T01:01:02.054Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -35,12 +35,12 @@
       "departureDate": "2026-09-12",
       "returnDate": "2026-09-19",
       "approxPrice": 577,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=SOF&depart_date=2026-09-12&return_date=2026-09-19&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-12+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 973,
       "discountPercent": 41,
-      "historyPoints": 11,
+      "historyPoints": 12,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -56,17 +56,59 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1038,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=PRG&depart_date=2026-09-15&return_date=2026-09-22&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1206,
       "discountPercent": 14,
-      "historyPoints": 11,
+      "historyPoints": 12,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A4%D7%A8%D7%90%D7%92&checkin=2026-09-15&checkout=2026-09-22&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "LCA",
+      "name": "לרנקה",
+      "country": "קפריסין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-21",
+      "approxPrice": 532,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 564,
+      "discountPercent": 6,
+      "historyPoints": 11,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "PAR",
+      "name": "פריז",
+      "country": "צרפת",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1166,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1166,
+      "discountPercent": 0,
+      "historyPoints": 13,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A4%D7%A8%D7%99%D7%96&checkin=2026-09-15&checkout=2026-09-23&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -77,12 +119,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1146,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=ROM&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1146,
       "discountPercent": 0,
-      "historyPoints": 12,
+      "historyPoints": 13,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -98,18 +140,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 916,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=MIL&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 916,
       "discountPercent": 0,
-      "historyPoints": 12,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9E%D7%99%D7%9C%D7%90%D7%A0%D7%95&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 13
     },
     {
       "code": "BCN",
@@ -119,18 +155,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1069,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BCN&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1069,
       "discountPercent": 0,
-      "historyPoints": 12,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%91%D7%A8%D7%A6%D7%9C%D7%95%D7%A0%D7%94&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 13
     },
     {
       "code": "MAD",
@@ -140,12 +170,12 @@
       "departureDate": "2026-09-16",
       "returnDate": "2026-09-23",
       "approxPrice": 1286,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=MAD&depart_date=2026-09-16&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MAD+on+2026-09-16+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1286,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "LIS",
@@ -155,12 +185,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 1002,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=LIS&depart_date=2026-09-15&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1002,
       "discountPercent": 0,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "ATH",
@@ -170,12 +200,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 697,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=ATH&depart_date=2026-09-15&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 697,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "VIE",
@@ -185,12 +215,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1447,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=VIE&depart_date=2026-09-15&return_date=2026-09-22&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1447,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "WAW",
@@ -200,12 +230,12 @@
       "departureDate": "2026-09-18",
       "returnDate": "2026-09-24",
       "approxPrice": 1332,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=WAW&depart_date=2026-09-18&return_date=2026-09-24&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-18+through+2026-09-24&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1332,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "KRK",
@@ -215,12 +245,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-19",
       "approxPrice": 743,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=KRK&depart_date=2026-09-13&return_date=2026-09-19&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 743,
       "discountPercent": 0,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "ARN",
@@ -230,12 +260,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 962,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=ARN&depart_date=2026-09-15&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "HEL",
@@ -245,12 +275,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-20",
       "approxPrice": 1305,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=HEL&depart_date=2026-09-14&return_date=2026-09-20&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+HEL+on+2026-09-14+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1305,
       "discountPercent": 0,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "ZRH",
@@ -260,12 +290,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 1216,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=ZRH&depart_date=2026-09-13&return_date=2026-09-20&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZRH+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1216,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "GVA",
@@ -275,12 +305,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 1514,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=GVA&depart_date=2026-09-13&return_date=2026-09-20&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+GVA+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "BRU",
@@ -290,12 +320,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-20",
       "approxPrice": 988,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BRU&depart_date=2026-09-14&return_date=2026-09-20&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BRU+on+2026-09-14+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "IST",
@@ -305,12 +335,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
       "approxPrice": 879,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=IST&depart_date=2026-09-15&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+IST+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 879,
       "discountPercent": 0,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "BEG",
@@ -320,12 +350,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1141,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BEG&depart_date=2026-09-15&return_date=2026-09-22&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1141,
       "discountPercent": 0,
-      "historyPoints": 10
+      "historyPoints": 11
     },
     {
       "code": "ZAG",
@@ -335,25 +365,10 @@
       "departureDate": "2026-09-19",
       "returnDate": "2026-09-25",
       "approxPrice": 1492,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=ZAG&depart_date=2026-09-19&return_date=2026-09-25&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-19+through+2026-09-25&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1492,
-      "discountPercent": 0,
-      "historyPoints": 9
-    },
-    {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 564,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=LCA&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 564,
       "discountPercent": 0,
       "historyPoints": 10
     },
@@ -365,12 +380,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-20",
       "approxPrice": 938,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=NAP&depart_date=2026-09-13&return_date=2026-09-20&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NAP+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "VLC",
@@ -380,12 +395,12 @@
       "departureDate": "2026-09-18",
       "returnDate": "2026-09-26",
       "approxPrice": 1341,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=VLC&depart_date=2026-09-18&return_date=2026-09-26&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VLC+on+2026-09-18+through+2026-09-26&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": 0,
-      "historyPoints": 9
+      "historyPoints": 10
     },
     {
       "code": "NCE",
@@ -395,27 +410,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 1224,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=NCE&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1224,
       "discountPercent": 0,
-      "historyPoints": 9
-    },
-    {
-      "code": "PAR",
-      "name": "פריז",
-      "country": "צרפת",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1166,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=PAR&depart_date=2026-09-15&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1154,
-      "discountPercent": -1,
-      "historyPoints": 12
+      "historyPoints": 10
     },
     {
       "code": "BUD",
@@ -425,12 +425,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "approxPrice": 795,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BUD&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 788,
       "discountPercent": -1,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "BER",
@@ -440,12 +440,12 @@
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-19",
       "approxPrice": 899,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BER&depart_date=2026-09-13&return_date=2026-09-19&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BER+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 876,
       "discountPercent": -3,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "AMS",
@@ -455,12 +455,12 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
       "approxPrice": 1462,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=AMS&depart_date=2026-09-15&return_date=2026-09-22&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1337,
       "discountPercent": -9,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "LON",
@@ -470,12 +470,12 @@
       "departureDate": "2026-09-16",
       "returnDate": "2026-09-23",
       "approxPrice": 1042,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=LON&depart_date=2026-09-16&return_date=2026-09-23&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-09-16+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 905,
       "discountPercent": -15,
-      "historyPoints": 11
+      "historyPoints": 12
     },
     {
       "code": "MUC",
@@ -485,12 +485,12 @@
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-22",
       "approxPrice": 1458,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=MUC&depart_date=2026-09-14&return_date=2026-09-22&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1238,
       "discountPercent": -18,
-      "historyPoints": 12
+      "historyPoints": 13
     }
   ],
   "hotelOnlyResults": [],
@@ -501,7 +501,7 @@
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
       "price": 1069,
-      "bookingLink": "https://search.aviasales.com/flights/?origin_iata=TLV&destination_iata=BCN&depart_date=2026-09-15&return_date=2026-09-21&adults=2&children=0&infants=0&trip_class=0&locale=he&one_way=false",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
     }
