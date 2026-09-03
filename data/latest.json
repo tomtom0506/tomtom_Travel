@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-03T10:35:48.412Z",
+  "lastRun": "2026-09-03T15:41:47.680Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -46,7 +46,7 @@
       "transfers": null,
       "historyMedian": 1447,
       "discountPercent": 31,
-      "historyPoints": 48,
+      "historyPoints": 49,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -67,7 +67,7 @@
       "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 22,
-      "historyPoints": 45,
+      "historyPoints": 46,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -82,13 +82,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-22",
-      "approxPrice": 926,
+      "approxPrice": 923,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1139.5,
+      "historyMedian": 1133,
       "discountPercent": 19,
-      "historyPoints": 48,
+      "historyPoints": 49,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -107,9 +107,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SKG+on+2026-09-16+through+2026-09-24&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 930,
+      "historyMedian": 929.5,
       "discountPercent": 18,
-      "historyPoints": 29,
+      "historyPoints": 30,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -130,7 +130,7 @@
       "transfers": null,
       "historyMedian": 1458,
       "discountPercent": 16,
-      "historyPoints": 49,
+      "historyPoints": 50,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -149,9 +149,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1150,
-      "discountPercent": 11,
-      "historyPoints": 49
+      "historyMedian": 1149.5,
+      "discountPercent": 10,
+      "historyPoints": 50
     },
     {
       "code": "ZAG",
@@ -166,7 +166,7 @@
       "transfers": null,
       "historyMedian": 1492,
       "discountPercent": 9,
-      "historyPoints": 31
+      "historyPoints": 32
     },
     {
       "code": "LON",
@@ -181,7 +181,7 @@
       "transfers": null,
       "historyMedian": 985,
       "discountPercent": 7,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "LCA",
@@ -190,28 +190,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
-      "approxPrice": 496,
+      "approxPrice": 494,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 513,
-      "discountPercent": 3,
-      "historyPoints": 47
-    },
-    {
-      "code": "BCN",
-      "name": "ברצלונה",
-      "country": "ספרד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1047,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1069,
-      "discountPercent": 2,
-      "historyPoints": 49
+      "discountPercent": 4,
+      "historyPoints": 48
     },
     {
       "code": "OSL",
@@ -226,21 +211,21 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": 2,
-      "historyPoints": 34
+      "historyPoints": 35
     },
     {
-      "code": "BUD",
-      "name": "בודפשט",
-      "country": "הונגריה",
+      "code": "IST",
+      "name": "איסטנבול",
+      "country": "טורקיה",
       "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 788,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-09-13",
+      "returnDate": "2026-09-19",
+      "approxPrice": 1061,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+IST+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 793,
-      "discountPercent": 1,
+      "historyMedian": 1084,
+      "discountPercent": 2,
       "historyPoints": 49
     },
     {
@@ -250,13 +235,28 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 986,
+      "approxPrice": 982,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 990,
-      "discountPercent": 0,
-      "historyPoints": 49
+      "historyMedian": 989.5,
+      "discountPercent": 1,
+      "historyPoints": 50
+    },
+    {
+      "code": "BUD",
+      "name": "בודפשט",
+      "country": "הונגריה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 786,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 792,
+      "discountPercent": 1,
+      "historyPoints": 50
     },
     {
       "code": "AMS",
@@ -271,7 +271,22 @@
       "transfers": null,
       "historyMedian": 1334,
       "discountPercent": 0,
-      "historyPoints": 49
+      "historyPoints": 50
+    },
+    {
+      "code": "BCN",
+      "name": "ברצלונה",
+      "country": "ספרד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1056,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1058,
+      "discountPercent": 0,
+      "historyPoints": 50
     },
     {
       "code": "MAD",
@@ -285,21 +300,6 @@
       "airline": null,
       "transfers": null,
       "historyMedian": 1285,
-      "discountPercent": 0,
-      "historyPoints": 48
-    },
-    {
-      "code": "LIS",
-      "name": "ליסבון",
-      "country": "פורטוגל",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-20",
-      "approxPrice": 1467,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1467,
       "discountPercent": 0,
       "historyPoints": 49
     },
@@ -316,37 +316,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": 0,
-      "historyPoints": 20
-    },
-    {
-      "code": "BEG",
-      "name": "בלגרד",
-      "country": "סרביה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1138,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1141,
-      "discountPercent": 0,
-      "historyPoints": 47
-    },
-    {
-      "code": "IST",
-      "name": "איסטנבול",
-      "country": "טורקיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-12",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1126,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+IST+on+2026-09-12+through+2026-09-19&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1084,
-      "discountPercent": -4,
-      "historyPoints": 48
+      "historyPoints": 21
     },
     {
       "code": "ATH",
@@ -361,7 +331,7 @@
       "transfers": null,
       "historyMedian": 697,
       "discountPercent": -7,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "ZRH",
@@ -376,7 +346,7 @@
       "transfers": null,
       "historyMedian": 1216,
       "discountPercent": -7,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "PRG",
@@ -385,13 +355,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
-      "approxPrice": 1237,
+      "approxPrice": 1232,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1138,
-      "discountPercent": -9,
-      "historyPoints": 48
+      "discountPercent": -8,
+      "historyPoints": 49
     },
     {
       "code": "SOF",
@@ -400,13 +370,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 832,
+      "approxPrice": 829,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 760,
       "discountPercent": -9,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "BER",
@@ -421,7 +391,7 @@
       "transfers": null,
       "historyMedian": 899,
       "discountPercent": -17,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "KRK",
@@ -434,9 +404,24 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 872,
-      "discountPercent": -25,
-      "historyPoints": 49
+      "historyMedian": 929.5,
+      "discountPercent": -18,
+      "historyPoints": 50
+    },
+    {
+      "code": "BEG",
+      "name": "בלגרד",
+      "country": "סרביה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-14",
+      "returnDate": "2026-09-20",
+      "approxPrice": 1353,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-09-14+through+2026-09-20&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1139.5,
+      "discountPercent": -19,
+      "historyPoints": 48
     },
     {
       "code": "ARN",
@@ -451,7 +436,7 @@
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": -25,
-      "historyPoints": 41
+      "historyPoints": 42
     },
     {
       "code": "MIL",
@@ -460,13 +445,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 1205,
+      "approxPrice": 1201,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 901,
-      "discountPercent": -34,
-      "historyPoints": 49
+      "discountPercent": -33,
+      "historyPoints": 50
     },
     {
       "code": "HEL",
@@ -481,7 +466,7 @@
       "transfers": null,
       "historyMedian": 1305,
       "discountPercent": -44,
-      "historyPoints": 25
+      "historyPoints": 26
     }
   ],
   "hotelOnlyResults": [],
@@ -491,7 +476,7 @@
       "note": "ברצלונה - לדוגמה, מחקו או ערכו",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
-      "price": 1047,
+      "price": 1056,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
