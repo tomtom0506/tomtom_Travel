@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-04T20:12:12.434Z",
+  "lastRun": "2026-09-05T02:41:00.761Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -46,12 +46,33 @@
       "transfers": null,
       "historyMedian": 1447,
       "discountPercent": 33,
-      "historyPoints": 54,
+      "historyPoints": 55,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%95%D7%99%D7%A0%D7%94&checkin=2026-09-12&checkout=2026-09-19&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "ZAG",
+      "name": "זאגרב",
+      "country": "קרואטיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-13",
+      "returnDate": "2026-09-19",
+      "approxPrice": 1079,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1492,
+      "discountPercent": 28,
+      "historyPoints": 38,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -67,7 +88,7 @@
       "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 22,
-      "historyPoints": 51,
+      "historyPoints": 52,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -86,9 +107,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1131.5,
+      "historyMedian": 1130,
       "discountPercent": 18,
-      "historyPoints": 54,
+      "historyPoints": 55,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -109,7 +130,7 @@
       "transfers": null,
       "historyMedian": 929,
       "discountPercent": 18,
-      "historyPoints": 35,
+      "historyPoints": 36,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -130,13 +151,7 @@
       "transfers": null,
       "historyMedian": 1457,
       "discountPercent": 17,
-      "historyPoints": 55,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9E%D7%99%D7%A0%D7%9B%D7%9F&checkin=2026-09-15&checkout=2026-09-22&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 56
     },
     {
       "code": "BUD",
@@ -149,24 +164,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 791,
+      "historyMedian": 790.5,
       "discountPercent": 10,
-      "historyPoints": 55
-    },
-    {
-      "code": "ZAG",
-      "name": "זאגרב",
-      "country": "קרואטיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-18",
-      "returnDate": "2026-09-25",
-      "approxPrice": 1360,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-18+through+2026-09-25&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1492,
-      "discountPercent": 9,
-      "historyPoints": 37
+      "historyPoints": 56
     },
     {
       "code": "LCA",
@@ -181,7 +181,7 @@
       "transfers": null,
       "historyMedian": 513,
       "discountPercent": 4,
-      "historyPoints": 53
+      "historyPoints": 54
     },
     {
       "code": "LIS",
@@ -196,7 +196,7 @@
       "transfers": null,
       "historyMedian": 1467,
       "discountPercent": 3,
-      "historyPoints": 50
+      "historyPoints": 51
     },
     {
       "code": "LON",
@@ -211,7 +211,7 @@
       "transfers": null,
       "historyMedian": 985,
       "discountPercent": 2,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "OSL",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": 2,
-      "historyPoints": 40
+      "historyPoints": 41
     },
     {
       "code": "IST",
@@ -241,7 +241,7 @@
       "transfers": null,
       "historyMedian": 1084,
       "discountPercent": 2,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "BCN",
@@ -256,7 +256,7 @@
       "transfers": null,
       "historyMedian": 1056,
       "discountPercent": 0,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "MAD",
@@ -271,7 +271,7 @@
       "transfers": null,
       "historyMedian": 1285,
       "discountPercent": 0,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "ROM",
@@ -286,7 +286,7 @@
       "transfers": null,
       "historyMedian": 989,
       "discountPercent": -2,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "BER",
@@ -299,9 +299,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BER+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1012.5,
+      "historyMedian": 1014,
       "discountPercent": -4,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "AMS",
@@ -315,6 +315,21 @@
       "airline": null,
       "transfers": null,
       "historyMedian": 1334,
+      "discountPercent": -6,
+      "historyPoints": 56
+    },
+    {
+      "code": "PRG",
+      "name": "פראג",
+      "country": "צ'כיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1234,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1163,
       "discountPercent": -6,
       "historyPoints": 55
     },
@@ -331,7 +346,7 @@
       "transfers": null,
       "historyMedian": 1034,
       "discountPercent": -6,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "ATH",
@@ -346,22 +361,7 @@
       "transfers": null,
       "historyMedian": 697,
       "discountPercent": -7,
-      "historyPoints": 54
-    },
-    {
-      "code": "PRG",
-      "name": "פראג",
-      "country": "צ'כיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1234,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1153,
-      "discountPercent": -7,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "SOF",
@@ -376,7 +376,7 @@
       "transfers": null,
       "historyMedian": 760,
       "discountPercent": -9,
-      "historyPoints": 54
+      "historyPoints": 55
     },
     {
       "code": "BEG",
@@ -391,7 +391,7 @@
       "transfers": null,
       "historyMedian": 1141,
       "discountPercent": -19,
-      "historyPoints": 53
+      "historyPoints": 54
     },
     {
       "code": "NCE",
@@ -406,7 +406,7 @@
       "transfers": null,
       "historyMedian": 1224,
       "discountPercent": -23,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "ARN",
@@ -421,7 +421,7 @@
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": -25,
-      "historyPoints": 47
+      "historyPoints": 48
     },
     {
       "code": "PAR",
@@ -434,9 +434,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1142,
+      "historyMedian": 1143.5,
       "discountPercent": -26,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "MIL",
@@ -451,7 +451,7 @@
       "transfers": null,
       "historyMedian": 901,
       "discountPercent": -33,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "HEL",
@@ -466,7 +466,7 @@
       "transfers": null,
       "historyMedian": 1305,
       "discountPercent": -44,
-      "historyPoints": 31
+      "historyPoints": 32
     }
   ],
   "hotelOnlyResults": [],
