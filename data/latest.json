@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-06T02:38:29.171Z",
+  "lastRun": "2026-09-06T10:10:49.139Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -46,7 +46,7 @@
       "transfers": null,
       "historyMedian": 1412,
       "discountPercent": 31,
-      "historyPoints": 59,
+      "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -67,7 +67,7 @@
       "transfers": null,
       "historyMedian": 1492,
       "discountPercent": 28,
-      "historyPoints": 42,
+      "historyPoints": 43,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -88,7 +88,7 @@
       "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 22,
-      "historyPoints": 56,
+      "historyPoints": 57,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -109,7 +109,7 @@
       "transfers": null,
       "historyMedian": 1285,
       "discountPercent": 18,
-      "historyPoints": 59,
+      "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -130,7 +130,7 @@
       "transfers": null,
       "historyMedian": 929,
       "discountPercent": 18,
-      "historyPoints": 40,
+      "historyPoints": 41,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -149,9 +149,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 511.5,
+      "historyMedian": 510,
       "discountPercent": 12,
-      "historyPoints": 58
+      "historyPoints": 59
     },
     {
       "code": "BUD",
@@ -181,7 +181,7 @@
       "transfers": null,
       "historyMedian": 966,
       "discountPercent": 4,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "MUC",
@@ -211,7 +211,7 @@
       "transfers": null,
       "historyMedian": 1050,
       "discountPercent": 0,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "LIS",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 1419,
       "discountPercent": 0,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "WAW",
@@ -241,7 +241,7 @@
       "transfers": null,
       "historyMedian": 984,
       "discountPercent": 0,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "KRK",
@@ -271,7 +271,7 @@
       "transfers": null,
       "historyMedian": 1061,
       "discountPercent": 0,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "ROM",
@@ -284,8 +284,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 997,
-      "discountPercent": -3,
+      "historyMedian": 1004,
+      "discountPercent": -2,
       "historyPoints": 60
     },
     {
@@ -314,7 +314,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1149.5,
+      "historyMedian": 1150.5,
       "discountPercent": -7,
       "historyPoints": 60
     },
@@ -331,7 +331,7 @@
       "transfers": null,
       "historyMedian": 697,
       "discountPercent": -7,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "SOF",
@@ -346,21 +346,6 @@
       "transfers": null,
       "historyMedian": 760,
       "discountPercent": -9,
-      "historyPoints": 59
-    },
-    {
-      "code": "AMS",
-      "name": "אמסטרדם",
-      "country": "הולנד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-14",
-      "returnDate": "2026-09-20",
-      "approxPrice": 1486,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-14+through+2026-09-20&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1337,
-      "discountPercent": -11,
       "historyPoints": 60
     },
     {
@@ -376,7 +361,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": -11,
-      "historyPoints": 45
+      "historyPoints": 46
     },
     {
       "code": "PRG",
@@ -384,14 +369,14 @@
       "country": "צ'כיה",
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 1322,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1334,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1182,
+      "historyMedian": 1194,
       "discountPercent": -12,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "NAP",
@@ -406,7 +391,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": -12,
-      "historyPoints": 29
+      "historyPoints": 30
     },
     {
       "code": "NCE",
@@ -421,7 +406,7 @@
       "transfers": null,
       "historyMedian": 1224,
       "discountPercent": -23,
-      "historyPoints": 53
+      "historyPoints": 54
     },
     {
       "code": "ARN",
@@ -436,7 +421,22 @@
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": -25,
-      "historyPoints": 52
+      "historyPoints": 53
+    },
+    {
+      "code": "AMS",
+      "name": "אמסטרדם",
+      "country": "הולנד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-21",
+      "approxPrice": 1723,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1337,
+      "discountPercent": -29,
+      "historyPoints": 60
     },
     {
       "code": "MIL",
@@ -449,7 +449,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 914.5,
+      "historyMedian": 916,
       "discountPercent": -31,
       "historyPoints": 60
     },
@@ -466,7 +466,7 @@
       "transfers": null,
       "historyMedian": 1141,
       "discountPercent": -32,
-      "historyPoints": 58
+      "historyPoints": 59
     },
     {
       "code": "HEL",
@@ -481,7 +481,7 @@
       "transfers": null,
       "historyMedian": 1305,
       "discountPercent": -44,
-      "historyPoints": 36
+      "historyPoints": 37
     }
   ],
   "hotelOnlyResults": [],
