@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-06T19:55:03.858Z",
+  "lastRun": "2026-09-07T02:36:12.539Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -44,7 +44,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1412,
+      "historyMedian": 1402.5,
       "discountPercent": 45,
       "historyPoints": 60,
       "hotel": {
@@ -88,7 +88,7 @@
       "transfers": null,
       "historyMedian": 1492,
       "discountPercent": 28,
-      "historyPoints": 45,
+      "historyPoints": 46,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -109,7 +109,7 @@
       "transfers": null,
       "historyMedian": 1514,
       "discountPercent": 22,
-      "historyPoints": 59,
+      "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -151,7 +151,7 @@
       "transfers": null,
       "historyMedian": 929,
       "discountPercent": 18,
-      "historyPoints": 43
+      "historyPoints": 44
     },
     {
       "code": "LCA",
@@ -164,7 +164,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 497.5,
+      "historyMedian": 497,
       "discountPercent": 10,
       "historyPoints": 60
     },
@@ -181,7 +181,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 29
+      "historyPoints": 30
     },
     {
       "code": "LON",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 32
+      "historyPoints": 33
     },
     {
       "code": "BER",
@@ -256,7 +256,7 @@
       "transfers": null,
       "historyMedian": 1419,
       "discountPercent": 0,
-      "historyPoints": 58
+      "historyPoints": 59
     },
     {
       "code": "WAW",
@@ -346,7 +346,7 @@
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": -5,
-      "historyPoints": 55
+      "historyPoints": 56
     },
     {
       "code": "PAR",
@@ -376,7 +376,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": -11,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "PRG",
@@ -421,7 +421,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 23
+      "historyPoints": 24
     },
     {
       "code": "NCE",
@@ -436,7 +436,7 @@
       "transfers": null,
       "historyMedian": 1224,
       "discountPercent": -23,
-      "historyPoints": 56
+      "historyPoints": 57
     },
     {
       "code": "AMS",
@@ -449,8 +449,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1337,
-      "discountPercent": -29,
+      "historyMedian": 1354,
+      "discountPercent": -27,
       "historyPoints": 60
     },
     {
@@ -511,7 +511,7 @@
       "transfers": null,
       "historyMedian": 1305,
       "discountPercent": -44,
-      "historyPoints": 39
+      "historyPoints": 40
     }
   ],
   "hotelOnlyResults": [],
