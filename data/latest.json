@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-07T21:02:46.658Z",
+  "lastRun": "2026-09-08T02:49:13.522Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -44,8 +44,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1326,
-      "discountPercent": 42,
+      "historyMedian": 1258.5,
+      "discountPercent": 39,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -65,35 +65,14 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1444,
-      "discountPercent": 25,
-      "historyPoints": 49,
+      "historyMedian": 1402,
+      "discountPercent": 23,
+      "historyPoints": 50,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
-      }
-    },
-    {
-      "code": "GVA",
-      "name": "ג'נבה",
-      "country": "שוויץ",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1177,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+GVA+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1446.5,
-      "discountPercent": 19,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%92%27%D7%A0%D7%91%D7%94&checkin=2026-09-15&checkout=2026-09-23&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -130,7 +109,7 @@
       "transfers": null,
       "historyMedian": 929,
       "discountPercent": 18,
-      "historyPoints": 47,
+      "historyPoints": 48,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -151,7 +130,28 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 17,
-      "historyPoints": 36
+      "historyPoints": 37,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A0%D7%90%D7%A4%D7%95%D7%9C%D7%99&checkin=2026-09-15&checkout=2026-09-21&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "GVA",
+      "name": "ג'נבה",
+      "country": "שוויץ",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1177,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+GVA+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1379,
+      "discountPercent": 15,
+      "historyPoints": 60
     },
     {
       "code": "BRU",
@@ -166,7 +166,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 33
+      "historyPoints": 34
     },
     {
       "code": "LON",
@@ -194,8 +194,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1238,
-      "discountPercent": 2,
+      "historyMedian": 1229.5,
+      "discountPercent": 1,
       "historyPoints": 60
     },
     {
@@ -224,7 +224,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 984,
+      "historyMedian": 983.5,
       "discountPercent": 1,
       "historyPoints": 60
     },
@@ -271,7 +271,7 @@
       "transfers": null,
       "historyMedian": 1884,
       "discountPercent": 0,
-      "historyPoints": 43
+      "historyPoints": 44
     },
     {
       "code": "IST",
@@ -346,7 +346,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 24
+      "historyPoints": 25
     },
     {
       "code": "BUD",
@@ -359,7 +359,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 790.5,
+      "historyMedian": 791,
       "discountPercent": -4,
       "historyPoints": 60
     },
@@ -376,7 +376,7 @@
       "transfers": null,
       "historyMedian": 962,
       "discountPercent": -5,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "LCA",
@@ -421,7 +421,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": -11,
-      "historyPoints": 52
+      "historyPoints": 53
     },
     {
       "code": "BCN",
@@ -451,7 +451,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 27
+      "historyPoints": 28
     },
     {
       "code": "AMS",
@@ -464,8 +464,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1401,
-      "discountPercent": -23,
+      "historyMedian": 1409.5,
+      "discountPercent": -22,
       "historyPoints": 60
     },
     {
@@ -524,8 +524,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 697,
-      "discountPercent": -35,
+      "historyMedian": 704.5,
+      "discountPercent": -34,
       "historyPoints": 60
     }
   ],
