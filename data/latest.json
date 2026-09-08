@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-08T02:49:13.522Z",
+  "lastRun": "2026-09-08T10:29:28.532Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -44,8 +44,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1258.5,
-      "discountPercent": 39,
+      "historyMedian": 1130.5,
+      "discountPercent": 32,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -65,14 +65,35 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1402,
-      "discountPercent": 23,
-      "historyPoints": 50,
+      "historyMedian": 1360,
+      "discountPercent": 21,
+      "historyPoints": 51,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "SKG",
+      "name": "סלוניקי",
+      "country": "יוון",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-16",
+      "returnDate": "2026-09-24",
+      "approxPrice": 750,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SKG+on+2026-09-16+through+2026-09-24&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 929,
+      "discountPercent": 19,
+      "historyPoints": 49,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A1%D7%9C%D7%95%D7%A0%D7%99%D7%A7%D7%99&checkin=2026-09-16&checkout=2026-09-24&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -86,8 +107,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MAD+on+2026-09-12+through+2026-09-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1285,
-      "discountPercent": 18,
+      "historyMedian": 1274.5,
+      "discountPercent": 17,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -97,40 +118,19 @@
       }
     },
     {
-      "code": "SKG",
-      "name": "סלוניקי",
-      "country": "יוון",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-16",
-      "returnDate": "2026-09-24",
-      "approxPrice": 762,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SKG+on+2026-09-16+through+2026-09-24&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 929,
-      "discountPercent": 18,
-      "historyPoints": 48,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A1%D7%9C%D7%95%D7%A0%D7%99%D7%A7%D7%99&checkin=2026-09-16&checkout=2026-09-24&group_adults=2&no_rooms=1"
-      }
-    },
-    {
       "code": "NAP",
       "name": "נאפולי",
       "country": "איטליה",
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 775,
+      "approxPrice": 779,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NAP+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 17,
-      "historyPoints": 37,
+      "historyPoints": 38,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -166,7 +166,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 34
+      "historyPoints": 35
     },
     {
       "code": "LON",
@@ -184,6 +184,21 @@
       "historyPoints": 60
     },
     {
+      "code": "BCN",
+      "name": "ברצלונה",
+      "country": "ספרד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1030,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1057,
+      "discountPercent": 3,
+      "historyPoints": 60
+    },
+    {
       "code": "MUC",
       "name": "מינכן",
       "country": "גרמניה",
@@ -194,7 +209,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1229.5,
+      "historyMedian": 1221,
       "discountPercent": 1,
       "historyPoints": 60
     },
@@ -214,21 +229,6 @@
       "historyPoints": 60
     },
     {
-      "code": "WAW",
-      "name": "ורשה",
-      "country": "פולין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-14",
-      "returnDate": "2026-09-22",
-      "approxPrice": 975,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 983.5,
-      "discountPercent": 1,
-      "historyPoints": 60
-    },
-    {
       "code": "BER",
       "name": "ברלין",
       "country": "גרמניה",
@@ -244,13 +244,28 @@
       "historyPoints": 60
     },
     {
+      "code": "WAW",
+      "name": "ורשה",
+      "country": "פולין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-14",
+      "returnDate": "2026-09-22",
+      "approxPrice": 980,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 982.5,
+      "discountPercent": 0,
+      "historyPoints": 60
+    },
+    {
       "code": "KRK",
       "name": "קרקוב",
       "country": "פולין",
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 1031,
+      "approxPrice": 1036,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -271,7 +286,7 @@
       "transfers": null,
       "historyMedian": 1884,
       "discountPercent": 0,
-      "historyPoints": 44
+      "historyPoints": 45
     },
     {
       "code": "IST",
@@ -295,27 +310,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-21",
-      "approxPrice": 759,
+      "approxPrice": 763,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-13+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 760,
       "discountPercent": 0,
-      "historyPoints": 60
-    },
-    {
-      "code": "ROM",
-      "name": "רומא",
-      "country": "איטליה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1027,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1004,
-      "discountPercent": -2,
       "historyPoints": 60
     },
     {
@@ -329,7 +329,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1194,
+      "historyMedian": 1202,
       "discountPercent": -2,
       "historyPoints": 60
     },
@@ -346,7 +346,37 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 25
+      "historyPoints": 26
+    },
+    {
+      "code": "ARN",
+      "name": "שטוקהולם",
+      "country": "שוודיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1011,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 986.5,
+      "discountPercent": -2,
+      "historyPoints": 60
+    },
+    {
+      "code": "ROM",
+      "name": "רומא",
+      "country": "איטליה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1032,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1004,
+      "discountPercent": -3,
+      "historyPoints": 60
     },
     {
       "code": "BUD",
@@ -364,33 +394,18 @@
       "historyPoints": 60
     },
     {
-      "code": "ARN",
-      "name": "שטוקהולם",
-      "country": "שוודיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1011,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 962,
-      "discountPercent": -5,
-      "historyPoints": 60
-    },
-    {
       "code": "LCA",
       "name": "לרנקה",
       "country": "קפריסין",
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 523,
+      "approxPrice": 526,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 497,
-      "discountPercent": -5,
+      "discountPercent": -6,
       "historyPoints": 60
     },
     {
@@ -421,22 +436,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": -11,
-      "historyPoints": 53
-    },
-    {
-      "code": "BCN",
-      "name": "ברצלונה",
-      "country": "ספרד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1186,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1057,
-      "discountPercent": -12,
-      "historyPoints": 60
+      "historyPoints": 54
     },
     {
       "code": "VLC",
@@ -451,7 +451,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 28
+      "historyPoints": 29
     },
     {
       "code": "AMS",
@@ -464,7 +464,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1409.5,
+      "historyMedian": 1411,
       "discountPercent": -22,
       "historyPoints": 60
     },
@@ -499,6 +499,21 @@
       "historyPoints": 60
     },
     {
+      "code": "ATH",
+      "name": "אתונה",
+      "country": "יוון",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-21",
+      "approxPrice": 943,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 713,
+      "discountPercent": -32,
+      "historyPoints": 60
+    },
+    {
       "code": "BEG",
       "name": "בלגרד",
       "country": "סרביה",
@@ -512,21 +527,6 @@
       "historyMedian": 1141,
       "discountPercent": -32,
       "historyPoints": 60
-    },
-    {
-      "code": "ATH",
-      "name": "אתונה",
-      "country": "יוון",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 943,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 704.5,
-      "discountPercent": -34,
-      "historyPoints": 60
     }
   ],
   "hotelOnlyResults": [],
@@ -536,7 +536,7 @@
       "note": "ברצלונה - לדוגמה, מחקו או ערכו",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-22",
-      "price": 1186,
+      "price": 1030,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
