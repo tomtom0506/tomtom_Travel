@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-08T20:38:11.636Z",
+  "lastRun": "2026-09-09T02:48:43.236Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -88,7 +88,7 @@
       "transfers": null,
       "historyMedian": 1360,
       "discountPercent": 21,
-      "historyPoints": 53,
+      "historyPoints": 54,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -166,7 +166,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 37
+      "historyPoints": 38
     },
     {
       "code": "LON",
@@ -194,7 +194,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1057,
+      "historyMedian": 1056.5,
       "discountPercent": 3,
       "historyPoints": 60
     },
@@ -209,9 +209,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SKG+on+2026-09-16+through+2026-09-24&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 768,
+      "historyMedian": 767.5,
       "discountPercent": 3,
-      "historyPoints": 51
+      "historyPoints": 52
     },
     {
       "code": "NAP",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 40
+      "historyPoints": 41
     },
     {
       "code": "MUC",
@@ -269,7 +269,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 977.5,
+      "historyMedian": 975.5,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -286,7 +286,7 @@
       "transfers": null,
       "historyMedian": 1884,
       "discountPercent": 0,
-      "historyPoints": 47
+      "historyPoints": 48
     },
     {
       "code": "ROM",
@@ -316,7 +316,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 28
+      "historyPoints": 29
     },
     {
       "code": "GVA",
@@ -389,8 +389,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+IST+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1072.5,
-      "discountPercent": -9,
+      "historyMedian": 1084,
+      "discountPercent": -8,
       "historyPoints": 60
     },
     {
@@ -406,7 +406,7 @@
       "transfers": null,
       "historyMedian": 1124,
       "discountPercent": -11,
-      "historyPoints": 56
+      "historyPoints": 57
     },
     {
       "code": "SOF",
@@ -421,6 +421,21 @@
       "transfers": null,
       "historyMedian": 760,
       "discountPercent": -14,
+      "historyPoints": 60
+    },
+    {
+      "code": "NCE",
+      "name": "ניס",
+      "country": "צרפת",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-16",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1504,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-09-16+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1284.5,
+      "discountPercent": -17,
       "historyPoints": 60
     },
     {
@@ -451,7 +466,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 31
+      "historyPoints": 32
     },
     {
       "code": "AMS",
@@ -466,21 +481,6 @@
       "transfers": null,
       "historyMedian": 1411,
       "discountPercent": -22,
-      "historyPoints": 60
-    },
-    {
-      "code": "NCE",
-      "name": "ניס",
-      "country": "צרפת",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-16",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1504,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-09-16+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1224,
-      "discountPercent": -23,
       "historyPoints": 60
     },
     {
@@ -509,7 +509,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 714.5,
+      "historyMedian": 716,
       "discountPercent": -32,
       "historyPoints": 60
     },
