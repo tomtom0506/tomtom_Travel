@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-09T20:20:03.351Z",
+  "lastRun": "2026-09-10T02:50:19.996Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -109,7 +109,7 @@
       "transfers": null,
       "historyMedian": 1360,
       "discountPercent": 21,
-      "historyPoints": 57,
+      "historyPoints": 58,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -181,22 +181,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 41
-    },
-    {
-      "code": "BCN",
-      "name": "ברצלונה",
-      "country": "ספרד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1025,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1055.5,
-      "discountPercent": 3,
-      "historyPoints": 60
+      "historyPoints": 42
     },
     {
       "code": "SKG",
@@ -211,7 +196,22 @@
       "transfers": null,
       "historyMedian": 766,
       "discountPercent": 3,
-      "historyPoints": 55
+      "historyPoints": 56
+    },
+    {
+      "code": "BCN",
+      "name": "ברצלונה",
+      "country": "ספרד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 1025,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1051,
+      "discountPercent": 2,
+      "historyPoints": 60
     },
     {
       "code": "NAP",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 44
+      "historyPoints": 45
     },
     {
       "code": "MUC",
@@ -304,6 +304,21 @@
       "historyPoints": 60
     },
     {
+      "code": "PMI",
+      "name": "פלמה דה מיורקה",
+      "country": "ספרד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-16",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1197,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PMI+on+2026-09-16+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1197,
+      "discountPercent": 0,
+      "historyPoints": 1
+    },
+    {
       "code": "DUB",
       "name": "דבלין",
       "country": "אירלנד",
@@ -316,7 +331,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 32
+      "historyPoints": 33
     },
     {
       "code": "ROM",
@@ -359,7 +374,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 721,
+      "historyMedian": 721.5,
       "discountPercent": -4,
       "historyPoints": 60
     },
@@ -466,7 +481,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 35
+      "historyPoints": 36
     },
     {
       "code": "AMS",
@@ -494,7 +509,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 918.5,
+      "historyMedian": 920,
       "discountPercent": -31,
       "historyPoints": 60
     },
@@ -512,21 +527,6 @@
       "historyMedian": 1141,
       "discountPercent": -32,
       "historyPoints": 60
-    },
-    {
-      "code": "PMI",
-      "name": "פלמה דה מיורקה",
-      "country": "ספרד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-16",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1197,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PMI+on+2026-09-16+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": null,
-      "discountPercent": null,
-      "historyPoints": 0
     }
   ],
   "hotelOnlyResults": [],
