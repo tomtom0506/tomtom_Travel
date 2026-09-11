@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-11T15:46:25.094Z",
+  "lastRun": "2026-09-11T20:22:26.945Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -40,7 +40,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-13",
       "returnDate": "2026-09-21",
-      "approxPrice": 576,
+      "approxPrice": 575,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-09-13+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -65,8 +65,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1003,
-      "discountPercent": 23,
+      "historyMedian": 989.5,
+      "discountPercent": 22,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -94,27 +94,6 @@
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
-      }
-    },
-    {
-      "code": "NCE",
-      "name": "ניס",
-      "country": "צרפת",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1017,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1227.5,
-      "discountPercent": 17,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A0%D7%99%D7%A1&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -151,7 +130,13 @@
       "transfers": null,
       "historyMedian": 1050,
       "discountPercent": 15,
-      "historyPoints": 60
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%91%D7%A8%D7%9C%D7%99%D7%9F&checkin=2026-09-12&checkout=2026-09-19&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "PRG",
@@ -160,12 +145,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
-      "approxPrice": 1082,
+      "approxPrice": 1081,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1222,
-      "discountPercent": 11,
+      "discountPercent": 12,
       "historyPoints": 60
     },
     {
@@ -181,7 +166,22 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 48
+      "historyPoints": 49
+    },
+    {
+      "code": "NCE",
+      "name": "ניס",
+      "country": "צרפת",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-13",
+      "returnDate": "2026-09-19",
+      "approxPrice": 1017,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1110,
+      "discountPercent": 8,
+      "historyPoints": 60
     },
     {
       "code": "BCN",
@@ -189,9 +189,9 @@
       "country": "ספרד",
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 1025,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1021,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1047,
@@ -211,7 +211,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 51
+      "historyPoints": 52
     },
     {
       "code": "LIS",
@@ -301,7 +301,7 @@
       "transfers": null,
       "historyMedian": 1197,
       "discountPercent": 0,
-      "historyPoints": 7
+      "historyPoints": 8
     },
     {
       "code": "LON",
@@ -331,7 +331,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 39
+      "historyPoints": 40
     },
     {
       "code": "ROM",
@@ -385,13 +385,13 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-17",
       "returnDate": "2026-09-24",
-      "approxPrice": 1291,
+      "approxPrice": 1290,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZRH+on+2026-09-17+through+2026-09-24&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1216,
       "discountPercent": -6,
-      "historyPoints": 50
+      "historyPoints": 51
     },
     {
       "code": "SKG",
@@ -496,7 +496,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 42
+      "historyPoints": 43
     },
     {
       "code": "SOF",
@@ -509,7 +509,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 829,
+      "historyMedian": 829.5,
       "discountPercent": -20,
       "historyPoints": 60
     },
@@ -550,9 +550,9 @@
       "code": "BCN",
       "note": "ברצלונה - לדוגמה, מחקו או ערכו",
       "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "price": 1025,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "returnDate": "2026-09-23",
+      "price": 1021,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
     }
