@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-10T20:22:09.844Z",
+  "lastRun": "2026-09-11T02:43:53.772Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -181,7 +181,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 45
+      "historyPoints": 46
     },
     {
       "code": "SKG",
@@ -196,7 +196,7 @@
       "transfers": null,
       "historyMedian": 766,
       "discountPercent": 3,
-      "historyPoints": 59
+      "historyPoints": 60
     },
     {
       "code": "BCN",
@@ -214,21 +214,6 @@
       "historyPoints": 60
     },
     {
-      "code": "WAW",
-      "name": "ורשה",
-      "country": "פולין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-14",
-      "returnDate": "2026-09-22",
-      "approxPrice": 952,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 974.5,
-      "discountPercent": 2,
-      "historyPoints": 60
-    },
-    {
       "code": "NAP",
       "name": "נאפולי",
       "country": "איטליה",
@@ -241,7 +226,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 48
+      "historyPoints": 49
     },
     {
       "code": "MUC",
@@ -274,18 +259,18 @@
       "historyPoints": 60
     },
     {
-      "code": "LON",
-      "name": "לונדון",
-      "country": "בריטניה",
+      "code": "WAW",
+      "name": "ורשה",
+      "country": "פולין",
       "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
+      "departureDate": "2026-09-14",
       "returnDate": "2026-09-22",
-      "approxPrice": 928,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "approxPrice": 952,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-14+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 928,
-      "discountPercent": 0,
+      "historyMedian": 963,
+      "discountPercent": 1,
       "historyPoints": 60
     },
     {
@@ -299,7 +284,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-13+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 746.5,
+      "historyMedian": 747,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -346,7 +331,37 @@
       "transfers": null,
       "historyMedian": 1197,
       "discountPercent": 0,
-      "historyPoints": 4
+      "historyPoints": 5
+    },
+    {
+      "code": "LON",
+      "name": "לונדון",
+      "country": "בריטניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 941,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 928,
+      "discountPercent": -1,
+      "historyPoints": 60
+    },
+    {
+      "code": "MIL",
+      "name": "מילאנו",
+      "country": "איטליה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 979,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 974,
+      "discountPercent": -1,
+      "historyPoints": 60
     },
     {
       "code": "DUB",
@@ -361,7 +376,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 36
+      "historyPoints": 37
     },
     {
       "code": "ROM",
@@ -375,21 +390,6 @@
       "airline": null,
       "transfers": null,
       "historyMedian": 1004,
-      "discountPercent": -3,
-      "historyPoints": 60
-    },
-    {
-      "code": "MIL",
-      "name": "מילאנו",
-      "country": "איטליה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 979,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 946,
       "discountPercent": -3,
       "historyPoints": 60
     },
@@ -481,7 +481,22 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 39
+      "historyPoints": 40
+    },
+    {
+      "code": "BEG",
+      "name": "בלגרד",
+      "country": "סרביה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-23",
+      "approxPrice": 1502,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1247,
+      "discountPercent": -20,
+      "historyPoints": 60
     },
     {
       "code": "AMS",
@@ -509,23 +524,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 760,
+      "historyMedian": 761.5,
       "discountPercent": -31,
-      "historyPoints": 60
-    },
-    {
-      "code": "BEG",
-      "name": "בלגרד",
-      "country": "סרביה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-23",
-      "approxPrice": 1502,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1141,
-      "discountPercent": -32,
       "historyPoints": 60
     }
   ],
