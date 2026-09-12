@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-11T20:22:26.945Z",
+  "lastRun": "2026-09-12T02:53:04.758Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -65,35 +65,14 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 989.5,
-      "discountPercent": 22,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%95%D7%99%D7%A0%D7%94&checkin=2026-09-15&checkout=2026-09-22&group_adults=2&no_rooms=1"
-      }
-    },
-    {
-      "code": "ZAG",
-      "name": "זאגרב",
-      "country": "קרואטיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1079,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1360,
+      "historyMedian": 976,
       "discountPercent": 21,
       "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-09-13&checkout=2026-09-19&group_adults=2&no_rooms=1"
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%95%D7%99%D7%A0%D7%94&checkin=2026-09-15&checkout=2026-09-22&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -151,7 +130,13 @@
       "transfers": null,
       "historyMedian": 1222,
       "discountPercent": 12,
-      "historyPoints": 60
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A4%D7%A8%D7%90%D7%92&checkin=2026-09-15&checkout=2026-09-23&group_adults=2&no_rooms=1"
+      }
     },
     {
       "code": "BRU",
@@ -166,7 +151,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 49
+      "historyPoints": 50
     },
     {
       "code": "NCE",
@@ -211,7 +196,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 52
+      "historyPoints": 53
     },
     {
       "code": "LIS",
@@ -301,7 +286,7 @@
       "transfers": null,
       "historyMedian": 1197,
       "discountPercent": 0,
-      "historyPoints": 8
+      "historyPoints": 9
     },
     {
       "code": "LON",
@@ -331,7 +316,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": -2,
-      "historyPoints": 40
+      "historyPoints": 41
     },
     {
       "code": "ROM",
@@ -391,7 +376,7 @@
       "transfers": null,
       "historyMedian": 1216,
       "discountPercent": -6,
-      "historyPoints": 51
+      "historyPoints": 52
     },
     {
       "code": "SKG",
@@ -496,7 +481,7 @@
       "transfers": null,
       "historyMedian": 1341,
       "discountPercent": -18,
-      "historyPoints": 43
+      "historyPoints": 44
     },
     {
       "code": "SOF",
@@ -509,7 +494,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 829.5,
+      "historyMedian": 830,
       "discountPercent": -20,
       "historyPoints": 60
     },
