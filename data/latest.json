@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-12T20:06:34.466Z",
+  "lastRun": "2026-09-13T02:52:00.990Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -130,7 +130,7 @@
       "transfers": null,
       "historyMedian": 988,
       "discountPercent": 9,
-      "historyPoints": 53,
+      "historyPoints": 54,
       "hotel": {
         "price": null,
         "currency": "ILS",
@@ -226,7 +226,7 @@
       "transfers": null,
       "historyMedian": 938,
       "discountPercent": 2,
-      "historyPoints": 56
+      "historyPoints": 57
     },
     {
       "code": "LIS",
@@ -254,7 +254,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-09-19+through+2026-09-25&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 747.5,
+      "historyMedian": 748,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -301,7 +301,7 @@
       "transfers": null,
       "historyMedian": 1578,
       "discountPercent": 0,
-      "historyPoints": 47
+      "historyPoints": 48
     },
     {
       "code": "PMI",
@@ -316,7 +316,7 @@
       "transfers": null,
       "historyMedian": 1197,
       "discountPercent": 0,
-      "historyPoints": 12
+      "historyPoints": 13
     },
     {
       "code": "LON",
@@ -334,21 +334,6 @@
       "historyPoints": 60
     },
     {
-      "code": "DUB",
-      "name": "דבלין",
-      "country": "אירלנד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-13",
-      "returnDate": "2026-09-19",
-      "approxPrice": 1087,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+DUB+on+2026-09-13+through+2026-09-19&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1067,
-      "discountPercent": -2,
-      "historyPoints": 44
-    },
-    {
       "code": "ROM",
       "name": "רומא",
       "country": "איטליה",
@@ -359,9 +344,24 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1004,
+      "historyMedian": 1004.5,
       "discountPercent": -3,
       "historyPoints": 60
+    },
+    {
+      "code": "ZRH",
+      "name": "ציריך",
+      "country": "שוויץ",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-17",
+      "returnDate": "2026-09-24",
+      "approxPrice": 1290,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZRH+on+2026-09-17+through+2026-09-24&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1253,
+      "discountPercent": -3,
+      "historyPoints": 56
     },
     {
       "code": "PAR",
@@ -389,24 +389,9 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 791,
+      "historyMedian": 792,
       "discountPercent": -4,
       "historyPoints": 60
-    },
-    {
-      "code": "ZRH",
-      "name": "ציריך",
-      "country": "שוויץ",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-17",
-      "returnDate": "2026-09-24",
-      "approxPrice": 1290,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZRH+on+2026-09-17+through+2026-09-24&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1216,
-      "discountPercent": -6,
-      "historyPoints": 55
     },
     {
       "code": "MUC",
@@ -436,6 +421,21 @@
       "transfers": null,
       "historyMedian": 1050,
       "discountPercent": -12,
+      "historyPoints": 60
+    },
+    {
+      "code": "AMS",
+      "name": "אמסטרדם",
+      "country": "הולנד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-21",
+      "approxPrice": 1723,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1448.5,
+      "discountPercent": -19,
       "historyPoints": 60
     },
     {
@@ -469,21 +469,6 @@
       "historyPoints": 60
     },
     {
-      "code": "AMS",
-      "name": "אמסטרדם",
-      "country": "הולנד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-21",
-      "approxPrice": 1723,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1411,
-      "discountPercent": -22,
-      "historyPoints": 60
-    },
-    {
       "code": "MAD",
       "name": "מדריד",
       "country": "ספרד",
@@ -509,8 +494,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+OSL+on+2026-09-18+through+2026-09-25&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1124,
-      "discountPercent": -40,
+      "historyMedian": 1187,
+      "discountPercent": -33,
       "historyPoints": 60
     }
   ],
