@@ -27,6 +27,12 @@
       "departureDate": "2027-04-20",
       "returnDate": "2027-04-30",
       "note": "ATH"
+    },
+    {
+      "destination": "LIS",
+      "departureDate": "2027-04-20",
+      "returnDate": "2027-04-30",
+      "note": "טיול לפסח"
     }
   ]
 }
