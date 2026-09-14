@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-09-14T03:05:49.648Z",
+  "lastRun": "2026-09-14T11:37:55.156Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -67,12 +67,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-23",
-      "approxPrice": 1045,
+      "approxPrice": 1079,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-09-15+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1222,
-      "discountPercent": 14,
+      "discountPercent": 12,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -88,12 +88,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-14",
       "returnDate": "2026-09-20",
-      "approxPrice": 1365,
+      "approxPrice": 1377,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-09-14+through+2026-09-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1486,
-      "discountPercent": 8,
+      "discountPercent": 7,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -220,6 +220,21 @@
       "historyPoints": 60
     },
     {
+      "code": "HEL",
+      "name": "הלסינקי",
+      "country": "פינלנד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-19",
+      "returnDate": "2026-09-26",
+      "approxPrice": 1891,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+HEL+on+2026-09-19+through+2026-09-26&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1884,
+      "discountPercent": 0,
+      "historyPoints": 49
+    },
+    {
       "code": "ZRH",
       "name": "ציריך",
       "country": "שוויץ",
@@ -262,7 +277,7 @@
       "transfers": null,
       "historyMedian": 1197,
       "discountPercent": 0,
-      "historyPoints": 18
+      "historyPoints": 19
     },
     {
       "code": "LON",
@@ -290,7 +305,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1027,
+      "historyMedian": 1027.5,
       "discountPercent": -1,
       "historyPoints": 60
     },
@@ -316,12 +331,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-15",
       "returnDate": "2026-09-21",
-      "approxPrice": 1071,
+      "approxPrice": 1080,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-09-15+through+2026-09-21&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1032,
-      "discountPercent": -4,
+      "discountPercent": -5,
       "historyPoints": 60
     },
     {
@@ -352,7 +367,7 @@
       "transfers": null,
       "historyMedian": 1578,
       "discountPercent": -14,
-      "historyPoints": 53
+      "historyPoints": 54
     },
     {
       "code": "NAP",
@@ -385,21 +400,6 @@
       "historyPoints": 60
     },
     {
-      "code": "SOF",
-      "name": "סופיה",
-      "country": "בולגריה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "approxPrice": 995,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 830.5,
-      "discountPercent": -20,
-      "historyPoints": 60
-    },
-    {
       "code": "WAW",
       "name": "ורשה",
       "country": "פולין",
@@ -410,8 +410,23 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-09-16+through+2026-09-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 952.5,
-      "discountPercent": -21,
+      "historyMedian": 963.5,
+      "discountPercent": -20,
+      "historyPoints": 60
+    },
+    {
+      "code": "SOF",
+      "name": "סופיה",
+      "country": "בולגריה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-09-15",
+      "returnDate": "2026-09-22",
+      "approxPrice": 995,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-09-15+through+2026-09-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 831.5,
+      "discountPercent": -20,
       "historyPoints": 60
     },
     {
@@ -421,12 +436,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-09-17",
       "returnDate": "2026-09-23",
-      "approxPrice": 1551,
+      "approxPrice": 1564,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MAD+on+2026-09-17+through+2026-09-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1259,
-      "discountPercent": -23,
+      "discountPercent": -24,
       "historyPoints": 60
     },
     {
