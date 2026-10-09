@@ -32,6 +32,7 @@ function isValidDate(str) {
 }
 
 // ---- settings.json ----
+const warnings = [];
 const settings = readJson("config/settings.json");
 if (settings) {
   if (typeof settings.origin !== "string" || settings.origin.length < 2) {
@@ -40,21 +41,34 @@ if (settings) {
   if (typeof settings.currency !== "string" || settings.currency.length !== 3) {
     fail('settings.json: "currency" חייב להיות קוד בן 3 אותיות (למשל "ILS")');
   }
-  if (!isValidDate(settings.departureDate)) {
-    fail('settings.json: "departureDate" חייב להיות בפורמט YYYY-MM-DD (למשל "2026-09-15")');
-  }
-  if (!isValidDate(settings.returnDate)) {
-    fail('settings.json: "returnDate" חייב להיות בפורמט YYYY-MM-DD (למשל "2026-09-22")');
-  }
-  if (isValidDate(settings.departureDate) && isValidDate(settings.returnDate)) {
-    const dep = new Date(settings.departureDate + "T00:00:00Z");
-    const ret = new Date(settings.returnDate + "T00:00:00Z");
-    if (ret <= dep) {
-      fail('settings.json: "returnDate" חייב להיות אחרי "departureDate" (עכשיו החזרה יוצאת לפני/באותו יום כמו היציאה)');
+
+  // Rolling dates (the normal, recommended setup) - computed fresh every run,
+  // so there is no "past date" failure mode here by design.
+  if (settings.departureDate === undefined && settings.returnDate === undefined) {
+    if (typeof settings.daysFromNow !== "number" || settings.daysFromNow < 0 || settings.daysFromNow > 365) {
+      fail('settings.json: "daysFromNow" חייב להיות מספר בין 0 ל-365');
     }
-    const today = new Date();
-    if (dep < today) {
-      fail('settings.json: "departureDate" הוא תאריך שכבר עבר — עדכנו לתאריך עתידי');
+    if (typeof settings.tripLengthDays !== "number" || settings.tripLengthDays < 1 || settings.tripLengthDays > 60) {
+      fail('settings.json: "tripLengthDays" חייב להיות מספר בין 1 ל-60');
+    }
+  } else {
+    // Legacy fixed-date setup - still supported, but a past date is now just a
+    // warning (not a hard failure) so one forgotten field doesn't block every run.
+    if (!isValidDate(settings.departureDate)) {
+      fail('settings.json: "departureDate" חייב להיות בפורמט YYYY-MM-DD (למשל "2026-09-15")');
+    }
+    if (!isValidDate(settings.returnDate)) {
+      fail('settings.json: "returnDate" חייב להיות בפורמט YYYY-MM-DD (למשל "2026-09-22")');
+    }
+    if (isValidDate(settings.departureDate) && isValidDate(settings.returnDate)) {
+      const dep = new Date(settings.departureDate + "T00:00:00Z");
+      const ret = new Date(settings.returnDate + "T00:00:00Z");
+      if (ret <= dep) {
+        fail('settings.json: "returnDate" חייב להיות אחרי "departureDate" (עכשיו החזרה יוצאת לפני/באותו יום כמו היציאה)');
+      }
+      if (dep < new Date()) {
+        warnings.push('settings.json: "departureDate" הוא תאריך שכבר עבר - הסריקה תמשיך לרוץ, אבל כדאי לעדכן או לעבור ל-daysFromNow/tripLengthDays');
+      }
     }
   }
   if (typeof settings.flexible !== "boolean") {
@@ -91,6 +105,8 @@ if (settings) {
           const ret = new Date(item.returnDate + "T00:00:00Z");
           if (ret <= dep) {
             fail(`settings.json: watchlist #${i + 1} - "returnDate" חייב להיות אחרי "departureDate"`);
+          } else if (dep < new Date()) {
+            warnings.push(`settings.json: watchlist #${i + 1} (${item.note || item.destination}) - התאריך כבר עבר, אפשר למחוק מהרשימה`);
           }
         }
       });
@@ -128,6 +144,12 @@ if (errors.length > 0) {
   errors.forEach((e) => console.error("  • " + e));
   console.error("\nתקנו את זה בקבצי config/ ונסו שוב.\n");
   process.exit(1);
+}
+
+if (warnings.length > 0) {
+  console.log("\n⚠️  אזהרות (לא חוסמות את הריצה):\n");
+  warnings.forEach((w) => console.log("  • " + w));
+  console.log("");
 }
 
 console.log("✅ בדיקת QA עברה - כל קבצי הקונפיגורציה תקינים.");

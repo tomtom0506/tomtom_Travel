@@ -11,6 +11,21 @@ const history = JSON.parse(fs.readFileSync(historyPath, "utf8"));
 
 const HISTORY_LIMIT = 60; // keep last N data points per destination
 
+function addDays(dateStr, days) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+const today = new Date().toISOString().slice(0, 10);
+
+// ---- rolling default dates: the scheduled scan always looks daysFromNow days
+// out for a tripLengthDays-long trip, computed fresh every run, so it never
+// goes stale the way a fixed departureDate/returnDate would. ----
+if (!settings.departureDate) {
+  settings.departureDate = addDays(today, settings.daysFromNow ?? 30);
+  settings.returnDate = addDays(settings.departureDate, settings.tripLengthDays ?? 7);
+}
+
 // ---- one-off search overrides (set when the dashboard triggers a live search) ----
 // These only affect this run's in-memory settings - config/settings.json on disk is never touched.
 const isOneOffSearch = !!(process.env.OVERRIDE_DEPARTURE_DATE || process.env.OVERRIDE_DESTINATION);
@@ -132,7 +147,6 @@ function watchKey(item) {
 
 async function main() {
   console.log(`Mode: ${searchMode}, tripType: ${tripType}. Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
-  const today = new Date().toISOString().slice(0, 10);
 
   // ---- hotels-only mode: skip flights entirely ----
   if (searchMode === "hotels") {
