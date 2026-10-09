@@ -1,9 +1,9 @@
 {
   "origin": "TLV",
   "currency": "ILS",
-  "_comment_dates": "ערכו תאריכים אלו ידנית בכל פעם שרוצים לבדוק טווח אחר. פורמט YYYY-MM-DD",
-  "departureDate": "2026-09-15",
-  "returnDate": "2026-09-22",
+  "_comment_dates": "הסריקה הקבועה מחשבת תאריכים אוטומטית: יוצאים בעוד daysFromNow ימים מהיום, לטיול שאורכו tripLengthDays ימים. זה מתגלגל קדימה לבד בכל ריצה ולא דורש עדכון ידני. לחיפוש בתאריך מדויק קבוע, השתמשו בטופס החיפוש בדשבורד או ברשימת המעקב.",
+  "daysFromNow": 30,
+  "tripLengthDays": 7,
   "_comment_flexible": "flexible=false -> בודק רק את התאריכים המדויקים למעלה. flexible=true -> בודק גם ±flexDays ימים סביב כל תאריך ובוחר את הזול ביותר",
   "flexible": false,
   "flexDays": 3,
@@ -16,12 +16,6 @@
   "hotelAdults": 2,
   "_comment_watchlist": "חיפושים ספציפיים שתמיד מדווחים אליכם בטלגרם כשהמחיר משתנה, גם אם לא חוצה את סף ההנחה הכללי. destination = קוד יעד (למשל BCN), note = תיאור חופשי",
   "watchlist": [
-    {
-      "destination": "BCN",
-      "departureDate": "2026-09-15",
-      "returnDate": "2026-09-22",
-      "note": "ברצלונה - לדוגמה, מחקו או ערכו"
-    },
     {
       "destination": "ATH",
       "departureDate": "2027-04-20",
