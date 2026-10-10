@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-10T11:48:52.750Z",
+  "lastRun": "2026-10-10T16:51:58.511Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -40,10 +40,10 @@
       "name": "רומא",
       "country": "איטליה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-11",
-      "returnDate": "2026-11-18",
-      "approxPrice": 363,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-11+through+2026-11-18&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-11-08",
+      "returnDate": "2026-11-15",
+      "approxPrice": 361,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-08+through+2026-11-15&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1028,
@@ -53,7 +53,7 @@
         "price": null,
         "currency": "ILS",
         "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-11&checkout=2026-11-18&group_adults=2&no_rooms=1"
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-08&checkout=2026-11-15&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -99,27 +99,6 @@
       }
     },
     {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-09",
-      "returnDate": "2026-11-15",
-      "approxPrice": 184,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-09+through+2026-11-15&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 495,
-      "discountPercent": 63,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-11-09&checkout=2026-11-15&group_adults=2&no_rooms=1"
-      }
-    },
-    {
       "code": "VLC",
       "name": "ולנסיה",
       "country": "ספרד",
@@ -132,12 +111,33 @@
       "transfers": null,
       "historyMedian": 1578,
       "discountPercent": 62,
-      "historyPoints": 59,
+      "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%95%D7%9C%D7%A0%D7%A1%D7%99%D7%94&checkin=2026-11-12&checkout=2026-11-19&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "LCA",
+      "name": "לרנקה",
+      "country": "קפריסין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-09",
+      "returnDate": "2026-11-16",
+      "approxPrice": 201,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-09+through+2026-11-16&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 495,
+      "discountPercent": 59,
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-11-09&checkout=2026-11-16&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -201,21 +201,6 @@
       "historyPoints": 60
     },
     {
-      "code": "PAR",
-      "name": "פריז",
-      "country": "צרפת",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-09",
-      "returnDate": "2026-11-15",
-      "approxPrice": 623,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-11-09+through+2026-11-15&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1229,
-      "discountPercent": 49,
-      "historyPoints": 60
-    },
-    {
       "code": "BCN",
       "name": "ברצלונה",
       "country": "ספרד",
@@ -226,7 +211,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-11-11+through+2026-11-18&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1038.5,
+      "historyMedian": 1027.5,
       "discountPercent": 48,
       "historyPoints": 60
     },
@@ -261,18 +246,18 @@
       "historyPoints": 60
     },
     {
-      "code": "PRG",
-      "name": "פראג",
-      "country": "צ'כיה",
+      "code": "PAR",
+      "name": "פריז",
+      "country": "צרפת",
       "tripType": "roundtrip",
       "departureDate": "2026-11-09",
       "returnDate": "2026-11-15",
-      "approxPrice": 731,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-11-09+through+2026-11-15&hl=he&gl=IL&curr=ILS",
+      "approxPrice": 721,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-11-09+through+2026-11-15&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1222,
-      "discountPercent": 40,
+      "historyMedian": 1229,
+      "discountPercent": 41,
       "historyPoints": 60
     },
     {
@@ -303,6 +288,21 @@
       "transfers": null,
       "historyMedian": 1190,
       "discountPercent": 37,
+      "historyPoints": 60
+    },
+    {
+      "code": "PRG",
+      "name": "פראג",
+      "country": "צ'כיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-09",
+      "returnDate": "2026-11-16",
+      "approxPrice": 737,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-11-09+through+2026-11-16&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1159,
+      "discountPercent": 36,
       "historyPoints": 60
     },
     {
@@ -376,7 +376,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-09+through+2026-11-17&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1217.5,
+      "historyMedian": 1213.5,
       "discountPercent": 21,
       "historyPoints": 60
     },
@@ -393,7 +393,7 @@
       "transfers": null,
       "historyMedian": 902,
       "discountPercent": 8,
-      "historyPoints": 58
+      "historyPoints": 59
     },
     {
       "code": "VIE",
