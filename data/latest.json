@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-11T12:00:42.783Z",
+  "lastRun": "2026-10-11T21:24:58.347Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -67,7 +67,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1031,
+      "historyMedian": 1030.5,
       "discountPercent": 63,
       "historyPoints": 60,
       "hotel": {
@@ -171,36 +171,6 @@
       "historyPoints": 60
     },
     {
-      "code": "LIS",
-      "name": "ליסבון",
-      "country": "פורטוגל",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-10",
-      "returnDate": "2026-11-17",
-      "approxPrice": 673,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2026-11-10+through+2026-11-17&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1403,
-      "discountPercent": 52,
-      "historyPoints": 60
-    },
-    {
-      "code": "BUD",
-      "name": "בודפשט",
-      "country": "הונגריה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-10",
-      "returnDate": "2026-11-16",
-      "approxPrice": 405,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-10+through+2026-11-16&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 826,
-      "discountPercent": 51,
-      "historyPoints": 60
-    },
-    {
       "code": "PAR",
       "name": "פריז",
       "country": "צרפת",
@@ -213,6 +183,21 @@
       "transfers": null,
       "historyMedian": 1229,
       "discountPercent": 48,
+      "historyPoints": 60
+    },
+    {
+      "code": "BUD",
+      "name": "בודפשט",
+      "country": "הונגריה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-12",
+      "returnDate": "2026-11-18",
+      "approxPrice": 437,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 826,
+      "discountPercent": 47,
       "historyPoints": 60
     },
     {
@@ -276,18 +261,18 @@
       "historyPoints": 60
     },
     {
-      "code": "ARN",
-      "name": "שטוקהולם",
-      "country": "שוודיה",
+      "code": "LIS",
+      "name": "ליסבון",
+      "country": "פורטוגל",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-13",
-      "returnDate": "2026-11-20",
-      "approxPrice": 755,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-11-13+through+2026-11-20&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-11-10",
+      "returnDate": "2026-11-16",
+      "approxPrice": 853,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2026-11-10+through+2026-11-16&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1190,
-      "discountPercent": 37,
+      "historyMedian": 1403,
+      "discountPercent": 39,
       "historyPoints": 60
     },
     {
@@ -316,7 +301,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-11-10+through+2026-11-17&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1089.5,
+      "historyMedian": 1084,
       "discountPercent": 35,
       "historyPoints": 60
     },
@@ -348,6 +333,21 @@
       "transfers": null,
       "historyMedian": 1213,
       "discountPercent": 33,
+      "historyPoints": 60
+    },
+    {
+      "code": "ARN",
+      "name": "שטוקהולם",
+      "country": "שוודיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-13",
+      "returnDate": "2026-11-20",
+      "approxPrice": 807,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-11-13+through+2026-11-20&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1190,
+      "discountPercent": 32,
       "historyPoints": 60
     },
     {
