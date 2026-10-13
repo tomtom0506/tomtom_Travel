@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-13T00:04:50.528Z",
+  "lastRun": "2026-10-13T13:26:21.320Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -78,27 +78,6 @@
       }
     },
     {
-      "code": "KRK",
-      "name": "קרקוב",
-      "country": "פולין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-12",
-      "returnDate": "2026-11-18",
-      "approxPrice": 377,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1015,
-      "discountPercent": 63,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A7%D7%A8%D7%A7%D7%95%D7%91&checkin=2026-11-12&checkout=2026-11-18&group_adults=2&no_rooms=1"
-      }
-    },
-    {
       "code": "VLC",
       "name": "ולנסיה",
       "country": "ספרד",
@@ -151,8 +130,29 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-11+through+2026-11-18&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 494.5,
+      "historyMedian": 494,
       "discountPercent": 59,
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-11-11&checkout=2026-11-18&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "KRK",
+      "name": "קרקוב",
+      "country": "פולין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-12",
+      "returnDate": "2026-11-18",
+      "approxPrice": 377,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 838,
+      "discountPercent": 55,
       "historyPoints": 60
     },
     {
@@ -243,7 +243,7 @@
       "transfers": null,
       "historyMedian": 1884,
       "discountPercent": 45,
-      "historyPoints": 52
+      "historyPoints": 53
     },
     {
       "code": "OSL",
@@ -258,21 +258,6 @@
       "transfers": null,
       "historyMedian": 1250,
       "discountPercent": 42,
-      "historyPoints": 60
-    },
-    {
-      "code": "LON",
-      "name": "לונדון",
-      "country": "בריטניה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-12",
-      "returnDate": "2026-11-20",
-      "approxPrice": 553,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-11-12+through+2026-11-20&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 928,
-      "discountPercent": 40,
       "historyPoints": 60
     },
     {
@@ -318,6 +303,21 @@
       "transfers": null,
       "historyMedian": 1025,
       "discountPercent": 34,
+      "historyPoints": 60
+    },
+    {
+      "code": "LON",
+      "name": "לונדון",
+      "country": "בריטניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-12",
+      "returnDate": "2026-11-18",
+      "approxPrice": 630,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 928,
+      "discountPercent": 32,
       "historyPoints": 60
     },
     {
@@ -378,7 +378,7 @@
       "transfers": null,
       "historyMedian": 1105,
       "discountPercent": 19,
-      "historyPoints": 27
+      "historyPoints": 28
     },
     {
       "code": "BRU",
