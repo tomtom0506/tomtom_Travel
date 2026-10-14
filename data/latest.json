@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-14T16:24:06.973Z",
+  "lastRun": "2026-10-14T21:14:31.029Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -46,7 +46,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-11-10+through+2026-11-17&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 979,
+      "historyMedian": 977.5,
       "discountPercent": 64,
       "historyPoints": 60,
       "hotel": {
@@ -63,7 +63,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-12",
       "returnDate": "2026-11-18",
-      "approxPrice": 377,
+      "approxPrice": 378,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -126,12 +126,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-16",
       "returnDate": "2026-11-24",
-      "approxPrice": 381,
+      "approxPrice": 393,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-16+through+2026-11-24&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 826,
-      "discountPercent": 54,
+      "discountPercent": 52,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -243,7 +243,7 @@
       "transfers": null,
       "historyMedian": 1884,
       "discountPercent": 45,
-      "historyPoints": 57
+      "historyPoints": 58
     },
     {
       "code": "KRK",
@@ -256,8 +256,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-12+through+2026-11-18&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 637,
-      "discountPercent": 43,
+      "historyMedian": 615,
+      "discountPercent": 41,
       "historyPoints": 60
     },
     {
@@ -271,7 +271,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-11-14+through+2026-11-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1078,
+      "historyMedian": 1077,
       "discountPercent": 40,
       "historyPoints": 60
     },
@@ -282,7 +282,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-16",
       "returnDate": "2026-11-22",
-      "approxPrice": 645,
+      "approxPrice": 646,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BCN+on+2026-11-16+through+2026-11-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -351,6 +351,21 @@
       "historyPoints": 60
     },
     {
+      "code": "IST",
+      "name": "איסטנבול",
+      "country": "טורקיה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-16",
+      "returnDate": "2026-11-22",
+      "approxPrice": 838,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+IST+on+2026-11-16+through+2026-11-22&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1070,
+      "discountPercent": 22,
+      "historyPoints": 60
+    },
+    {
       "code": "CPH",
       "name": "קופנהגן",
       "country": "דנמרק",
@@ -363,21 +378,21 @@
       "transfers": null,
       "historyMedian": 1105,
       "discountPercent": 19,
-      "historyPoints": 32
+      "historyPoints": 33
     },
     {
       "code": "MUC",
       "name": "מינכן",
       "country": "גרמניה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-13",
+      "departureDate": "2026-11-12",
       "returnDate": "2026-11-19",
-      "approxPrice": 991,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-13+through+2026-11-19&hl=he&gl=IL&curr=ILS",
+      "approxPrice": 1133,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-12+through+2026-11-19&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 1213,
-      "discountPercent": 18,
+      "discountPercent": 7,
       "historyPoints": 60
     },
     {
@@ -387,12 +402,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-13",
       "returnDate": "2026-11-20",
-      "approxPrice": 936,
+      "approxPrice": 938,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-11-13+through+2026-11-20&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 873,
-      "discountPercent": -7,
+      "historyMedian": 854,
+      "discountPercent": -10,
       "historyPoints": 60
     }
   ],
