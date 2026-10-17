@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-17T14:52:05.300Z",
+  "lastRun": "2026-10-17T20:00:48.150Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -40,20 +40,20 @@
       "name": "רומא",
       "country": "איטליה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-16",
-      "returnDate": "2026-11-22",
-      "approxPrice": 380,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-16+through+2026-11-22&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-11-19",
+      "returnDate": "2026-11-25",
+      "approxPrice": 366,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-19+through+2026-11-25&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1027,
-      "discountPercent": 63,
+      "historyMedian": 1026.5,
+      "discountPercent": 64,
       "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-16&checkout=2026-11-22&group_adults=2&no_rooms=1"
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-19&checkout=2026-11-25&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -88,7 +88,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-11-20+through+2026-11-26&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 952,
+      "historyMedian": 950.5,
       "discountPercent": 57,
       "historyPoints": 60,
       "hotel": {
@@ -130,7 +130,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-16+through+2026-11-23&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 744.5,
+      "historyMedian": 739,
       "discountPercent": 48,
       "historyPoints": 60,
       "hotel": {
@@ -301,7 +301,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-16+through+2026-11-22&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 573,
+      "historyMedian": 571,
       "discountPercent": 29,
       "historyPoints": 60
     },
@@ -348,7 +348,7 @@
       "transfers": null,
       "historyMedian": 1105,
       "discountPercent": 19,
-      "historyPoints": 44
+      "historyPoints": 45
     },
     {
       "code": "DUB",
@@ -363,7 +363,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": 16,
-      "historyPoints": 49
+      "historyPoints": 50
     },
     {
       "code": "SKG",
