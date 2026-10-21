@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-21T11:03:53.646Z",
+  "lastRun": "2026-10-21T16:30:55.738Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -84,7 +84,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-18",
       "returnDate": "2026-11-25",
-      "approxPrice": 755,
+      "approxPrice": 754,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+AMS+on+2026-11-18+through+2026-11-25&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -120,6 +120,27 @@
       }
     },
     {
+      "code": "BER",
+      "name": "ברלין",
+      "country": "גרמניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-21",
+      "returnDate": "2026-11-28",
+      "approxPrice": 753,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BER+on+2026-11-21+through+2026-11-28&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 888,
+      "discountPercent": 15,
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%91%D7%A8%D7%9C%D7%99%D7%9F&checkin=2026-11-21&checkout=2026-11-28&group_adults=2&no_rooms=1"
+      }
+    },
+    {
       "code": "DUB",
       "name": "דבלין",
       "country": "אירלנד",
@@ -132,13 +153,7 @@
       "transfers": null,
       "historyMedian": 1067,
       "discountPercent": 12,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%93%D7%91%D7%9C%D7%99%D7%9F&checkin=2026-11-20&checkout=2026-11-27&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
       "code": "MUC",
@@ -181,8 +196,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-11-22+through+2026-11-28&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 721,
-      "discountPercent": 6,
+      "historyMedian": 706.5,
+      "discountPercent": 4,
       "historyPoints": 60
     },
     {
@@ -211,23 +226,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+WAW+on+2026-11-20+through+2026-11-26&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 416,
-      "discountPercent": 4,
-      "historyPoints": 60
-    },
-    {
-      "code": "ROM",
-      "name": "רומא",
-      "country": "איטליה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-19",
-      "returnDate": "2026-11-26",
-      "approxPrice": 372,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-19+through+2026-11-26&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 376,
-      "discountPercent": 1,
+      "historyMedian": 412.5,
+      "discountPercent": 3,
       "historyPoints": 60
     },
     {
@@ -243,6 +243,21 @@
       "transfers": null,
       "historyMedian": 837,
       "discountPercent": 1,
+      "historyPoints": 60
+    },
+    {
+      "code": "ROM",
+      "name": "רומא",
+      "country": "איטליה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-19",
+      "returnDate": "2026-11-26",
+      "approxPrice": 375,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-19+through+2026-11-26&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 374,
+      "discountPercent": 0,
       "historyPoints": 60
     },
     {
@@ -297,7 +312,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-20",
       "returnDate": "2026-11-27",
-      "approxPrice": 877,
+      "approxPrice": 876,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-11-20+through+2026-11-27&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -358,7 +373,7 @@
       "note": "טיול לפסח",
       "departureDate": "2027-04-18",
       "returnDate": "2027-04-27",
-      "price": 1495,
+      "price": 1493,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2027-04-18+through+2027-04-27&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
