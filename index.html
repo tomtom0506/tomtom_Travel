@@ -201,6 +201,33 @@
     color: var(--teal);
   }
 
+  .budget-box {
+    border: 1px solid var(--amber);
+    border-radius: 10px;
+    background: var(--panel);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .budget-box h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    margin: 0 0 10px;
+    color: var(--amber);
+  }
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--panel-border);
+    font-size: 13px;
+    gap: 8px;
+  }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-row .bname { font-weight: 600; }
+  .budget-row .bdates { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 11px; direction: ltr; }
+  .budget-row .bprice { font-family: 'IBM Plex Mono', monospace; font-weight: 700; direction: ltr; color: var(--amber); }
+
   .search-panel {
     border: 1px solid var(--panel-border);
     border-radius: 14px;
@@ -619,6 +646,11 @@
     <a class="edit-link" href="javascript:void(0)" onclick="openWatchlistModal()">+ הוספת חיפוש למעקב</a>
   </div>
 
+  <div class="budget-box" id="budgetBox" style="display:none;">
+    <h3>🔥 דילי תקציב</h3>
+    <div id="budgetRows"></div>
+  </div>
+
   <div class="filter-bar">
     <select id="destFilter" onchange="applyFilter()">
       <option value="">כל היעדים</option>
@@ -703,7 +735,7 @@
 </div>
 
 <script>
-const APP_VERSION = "1.13.2";
+const APP_VERSION = "1.14.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -1217,6 +1249,22 @@ function render(latest, history) {
     )).join('');
   } else {
     watchBox.style.display = 'none';
+  }
+
+  const budgetResults = (latest && latest.budgetResults) || [];
+  const budgetBox = document.getElementById('budgetBox');
+  if (budgetResults.length > 0) {
+    budgetBox.style.display = 'block';
+    document.getElementById('budgetRows').innerHTML = budgetResults.map((b) => {
+      const tripLabel = b.tripType === 'oneway' ? 'הלוך בלבד' : 'הלוך-חזור';
+      const dates = b.returnDate ? (b.departureDate + ' → ' + b.returnDate) : b.departureDate;
+      return '<div class="budget-row">' +
+        '<div><div class="bname">' + b.name + ' (' + tripLabel + ')</div><div class="bdates">' + dates + '</div></div>' +
+        '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + (b.bookingLink ? '<a href="' + b.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
+      '</div>';
+    }).join('');
+  } else {
+    budgetBox.style.display = 'none';
   }
 
   // Hotel-only search result: show a dedicated simple list instead of the flight board
