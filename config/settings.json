@@ -14,6 +14,14 @@
   "_comment_hotels": "בודק מלונות רק ליעדים שנמצאה בהם עסקת טיסה טובה (top N), כדי לחסוך בקריאות API",
   "checkHotelsForTopDeals": 5,
   "hotelAdults": 2,
+  "_comment_budgetAlerts": "ציד דילים: בודק את כל היעדים בכמה חודשים קדימה (לא תאריך ספציפי) ומתריע מיד כשנמצא מחיר מתחת לתקרה שהגדרתם. monthsAhead קובע לכמה חודשים קדימה לחפש - מספר גבוה יותר = יותר קריאות API בכל ריצה.",
+  "budgetAlerts": {
+    "enabled": true,
+    "maxRoundTripUSD": 120,
+    "maxOneWayUSD": 60,
+    "monthsAhead": 2,
+    "maxTripNights": 14
+  },
   "_comment_watchlist": "חיפושים ספציפיים שתמיד מדווחים אליכם בטלגרם כשהמחיר משתנה, גם אם לא חוצה את סף ההנחה הכללי. destination = קוד יעד (למשל BCN), note = תיאור חופשי",
   "watchlist": [
     {
