@@ -628,14 +628,6 @@
         <input type="checkbox" id="searchAlertMe">
         <label for="searchAlertMe">🔔 התראה בטלגרם כשהמחיר יורד</label>
       </div>
-      <div class="field full budget-threshold-field">
-        <label id="budgetThresholdLabel">🔥 תקרת מחיר לדילים אוטומטיים - הלוך-חזור ($)</label>
-        <div style="display:flex; gap:8px;">
-          <input type="number" id="budgetThreshold" min="1" placeholder="לדוגמה: 120" style="flex:1;">
-          <button type="button" class="icon-btn" style="width:auto; padding:0 14px;" onclick="saveBudgetThreshold()">💾 שמור</button>
-        </div>
-        <div class="search-status" id="budgetThresholdStatus"></div>
-      </div>
     </div>
 
     <div class="search-buttons">
@@ -654,9 +646,22 @@
     <a class="edit-link" href="javascript:void(0)" onclick="openWatchlistModal()">+ הוספת חיפוש למעקב</a>
   </div>
 
-  <div class="budget-box" id="budgetBox" style="display:none;">
-    <h3>🔥 דילי תקציב</h3>
-    <div id="budgetRows"></div>
+  <div class="budget-box" id="budgetBox">
+    <h3>🔥 דילי תקציב אוטומטיים</h3>
+    <div class="search-note" style="margin-bottom:10px;">סריקה נפרדת ברקע, בכל 34 היעדים, לא קשורה לחיפוש למעלה. מתריעה בטלגרם ברגע שנמצא מחיר מתחת לתקרה.</div>
+    <div class="trip-type-row" style="margin-bottom:10px;">
+      <button type="button" class="trip-type-btn active" id="budgetTripRoundtrip" onclick="setBudgetTripType('roundtrip')">הלוך-חזור</button>
+      <button type="button" class="trip-type-btn" id="budgetTripOneway" onclick="setBudgetTripType('oneway')">הלוך בלבד</button>
+    </div>
+    <div class="field full" style="margin-bottom:12px;">
+      <label id="budgetThresholdLabel">תקרת מחיר - הלוך-חזור ($)</label>
+      <div style="display:flex; gap:8px;">
+        <input type="number" id="budgetThreshold" min="1" placeholder="לדוגמה: 120" style="flex:1;">
+        <button type="button" class="icon-btn" style="width:auto; padding:0 14px;" onclick="saveBudgetThreshold()">💾 שמור</button>
+      </div>
+      <div class="search-status" id="budgetThresholdStatus"></div>
+    </div>
+    <div id="budgetRows"><div class="search-note">אין עדיין דילים שנמצאו מתחת לתקרה.</div></div>
   </div>
 
   <div class="filter-bar">
@@ -751,7 +756,7 @@
 </div>
 
 <script>
-const APP_VERSION = "1.15.0";
+const APP_VERSION = "1.15.1";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -776,9 +781,8 @@ function saveToken() {
   setTimeout(closeTokenModal, 900);
 }
 
-// ---- trip type toggle ----
+// ---- trip type toggle (one-off search panel only) ----
 let currentTripType = "roundtrip";
-let budgetThresholds = { roundtrip: null, oneway: null };
 
 function setTripType(type) {
   currentTripType = type;
@@ -786,15 +790,25 @@ function setTripType(type) {
   document.getElementById("tripOneway").classList.toggle("active", type === "oneway");
   document.getElementById("returnField").style.display = type === "oneway" ? "none" : "block";
   document.getElementById("searchHotelsBtn").style.display = type === "oneway" ? "none" : "block";
+}
+
+// ---- budget alert threshold (fully independent of the search panel above) ----
+let budgetTripType = "roundtrip";
+let budgetThresholds = { roundtrip: null, oneway: null };
+
+function setBudgetTripType(type) {
+  budgetTripType = type;
+  document.getElementById("budgetTripRoundtrip").classList.toggle("active", type === "roundtrip");
+  document.getElementById("budgetTripOneway").classList.toggle("active", type === "oneway");
   updateBudgetThresholdField();
 }
 
 function updateBudgetThresholdField() {
   const label = document.getElementById("budgetThresholdLabel");
   const input = document.getElementById("budgetThreshold");
-  const tripLabel = currentTripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
-  label.textContent = "🔥 תקרת מחיר לדילים אוטומטיים - " + tripLabel + " ($)";
-  const current = currentTripType === "oneway" ? budgetThresholds.oneway : budgetThresholds.roundtrip;
+  const tripLabel = budgetTripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
+  label.textContent = "תקרת מחיר - " + tripLabel + " ($)";
+  const current = budgetTripType === "oneway" ? budgetThresholds.oneway : budgetThresholds.roundtrip;
   input.value = current || "";
   document.getElementById("budgetThresholdStatus").textContent = "";
 }
@@ -823,7 +837,7 @@ async function saveBudgetThreshold() {
       content.budgetAlerts = { enabled: true, monthsAhead: 2, maxTripNights: 14 };
     }
     content.budgetAlerts.enabled = true;
-    if (currentTripType === "oneway") {
+    if (budgetTripType === "oneway") {
       content.budgetAlerts.maxOneWayUSD = val;
     } else {
       content.budgetAlerts.maxRoundTripUSD = val;
@@ -833,14 +847,14 @@ async function saveBudgetThreshold() {
     const putRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
       method: "PUT",
       headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "Update budget threshold (" + currentTripType + "): $" + val, content: updatedContent, sha: fileData.sha }),
+      body: JSON.stringify({ message: "Update budget threshold (" + budgetTripType + "): $" + val, content: updatedContent, sha: fileData.sha }),
     });
     if (!putRes.ok) {
       const body = await putRes.json().catch(() => ({}));
       throw new Error(body.message || ("שגיאה " + putRes.status));
     }
 
-    if (currentTripType === "oneway") budgetThresholds.oneway = val; else budgetThresholds.roundtrip = val;
+    if (budgetTripType === "oneway") budgetThresholds.oneway = val; else budgetThresholds.roundtrip = val;
     statusEl.textContent = "✓ נשמר - הסריקה הבאה תשתמש בתקרה הזו";
     statusEl.className = "search-status success";
   } catch (e) {
@@ -872,7 +886,10 @@ async function triggerSearch(mode) {
     return;
   }
   const depart = document.getElementById("searchDepart").value;
-  const ret = document.getElementById("searchReturn").value;
+  // the return-date field is only hidden (not cleared) in one-way mode, so its
+  // DOM value can be a stale leftover from an earlier round-trip search - ignore it entirely here
+  const isOneWayFlightSearch = currentTripType === "oneway" && mode !== "hotels";
+  const ret = isOneWayFlightSearch ? "" : document.getElementById("searchReturn").value;
   const flexible = document.getElementById("searchFlexible").checked;
   const flexDays = document.getElementById("searchFlexDays").value;
 
@@ -1073,12 +1090,43 @@ const HEBREW_DEST_MAP = {
   "סינגפור": "Singapore", "בלי": "Bali", "פוקט": "Phuket", "קייפטאון": "Cape Town",
 };
 
+function levenshtein(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+  return dp[a.length][b.length];
+}
+
 function translateDestQuery(term) {
   const trimmed = term.trim();
+  if (!trimmed) return term;
   if (HEBREW_DEST_MAP[trimmed]) return HEBREW_DEST_MAP[trimmed];
-  // partial typing (e.g. "אתונ") - match by prefix against the dictionary keys
-  const match = Object.keys(HEBREW_DEST_MAP).find((k) => k.startsWith(trimmed) || trimmed.startsWith(k));
-  return match ? HEBREW_DEST_MAP[match] : term;
+
+  // exact prefix typing in progress (spelled correctly so far)
+  let bestKey = Object.keys(HEBREW_DEST_MAP).find((k) => k.startsWith(trimmed) || trimmed.startsWith(k));
+
+  // fuzzy fallback: tolerate a 1-letter difference (dropped/extra/swapped letter -
+  // common with Hebrew transliteration variants like בנקוק vs בנגקוק). Checks two
+  // cases: still mid-typing a correct prefix (compare vs a same-length slice), or
+  // a complete-but-slightly-misspelled word close to the target's full length
+  // (compare vs the whole key) - a truncated slice alone misses that second case.
+  if (!bestKey && trimmed.length >= 3) {
+    let bestDist = Infinity;
+    for (const k of Object.keys(HEBREW_DEST_MAP)) {
+      const distSliced = levenshtein(trimmed, k.slice(0, trimmed.length));
+      const distFull = trimmed.length >= k.length - 2 ? levenshtein(trimmed, k) : Infinity;
+      const dist = Math.min(distSliced, distFull);
+      if (dist < bestDist) { bestDist = dist; bestKey = k; }
+    }
+    if (bestDist > 1) bestKey = null;
+  }
+
+  return bestKey ? HEBREW_DEST_MAP[bestKey] : term;
 }
 
 function onDestInput(value) {
@@ -1370,9 +1418,7 @@ function render(latest, history) {
   }
 
   const budgetResults = (latest && latest.budgetResults) || [];
-  const budgetBox = document.getElementById('budgetBox');
   if (budgetResults.length > 0) {
-    budgetBox.style.display = 'block';
     document.getElementById('budgetRows').innerHTML = budgetResults.map((b) => {
       const tripLabel = b.tripType === 'oneway' ? 'הלוך בלבד' : 'הלוך-חזור';
       const dates = b.returnDate ? (b.departureDate + ' → ' + b.returnDate) : b.departureDate;
@@ -1382,7 +1428,7 @@ function render(latest, history) {
       '</div>';
     }).join('');
   } else {
-    budgetBox.style.display = 'none';
+    document.getElementById('budgetRows').innerHTML = '<div class="search-note">אין עדיין דילים שנמצאו מתחת לתקרה.</div>';
   }
   checkForNewBudgetDeals(budgetResults);
 
