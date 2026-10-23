@@ -9,6 +9,16 @@ const destinations = JSON.parse(fs.readFileSync(path.join(ROOT, "config/destinat
 const historyPath = path.join(ROOT, "data/history.json");
 const history = JSON.parse(fs.readFileSync(historyPath, "utf8"));
 
+// A one-off dashboard search only computes ONE section (e.g. just flights for
+// one destination), and must not wipe the other sections (watchlist, budget
+// deals, the full results board) that a real scan last populated.
+let previousLatest = {};
+try {
+  previousLatest = JSON.parse(fs.readFileSync(path.join(ROOT, "data/latest.json"), "utf8"));
+} catch {
+  previousLatest = {};
+}
+
 const HISTORY_LIMIT = 60; // keep last N data points per destination
 
 function addDays(dateStr, days) {
@@ -224,9 +234,10 @@ async function main() {
     const latest = {
       lastRun: new Date().toISOString(),
       settings,
-      results: [],
+      results: previousLatest.results || [],
       hotelOnlyResults: hotelResults,
-      watchlistResults: [],
+      watchlistResults: previousLatest.watchlistResults || [],
+      budgetResults: previousLatest.budgetResults || [],
     };
     fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));
     console.log(`Done. ${hotelResults.length} hotel-only results.`);
@@ -388,9 +399,9 @@ async function main() {
     lastRun: new Date().toISOString(),
     settings,
     results,
-    hotelOnlyResults: [],
-    watchlistResults,
-    budgetResults,
+    hotelOnlyResults: isOneOffSearch ? (previousLatest.hotelOnlyResults || []) : [],
+    watchlistResults: isOneOffSearch ? (previousLatest.watchlistResults || []) : watchlistResults,
+    budgetResults: isOneOffSearch ? (previousLatest.budgetResults || []) : budgetResults,
   };
   fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));
 
