@@ -173,6 +173,80 @@ async function cheapestOneWay({ origin, destination, departureDate, flexible, fl
   }
 }
 
+// ---- budget alerts: scan a whole month for the single cheapest fare, with no
+// specific trip in mind - used to hunt for "anything under $X" deals. ----
+
+async function cheapestOneWayInMonth({ origin, destination, yearMonth, currency }) {
+  try {
+    const data = await tpGet("/aviasales/v3/prices_for_dates", {
+      origin,
+      destination,
+      departure_at: yearMonth,
+      one_way: true,
+      direct: false,
+      sorting: "price",
+      limit: 1,
+      currency,
+    });
+    const best = (data.data || [])[0];
+    if (!best) return null;
+    return {
+      departDate: best.departure_at.slice(0, 10),
+      returnDate: null,
+      price: best.price,
+      airline: best.airline || null,
+      transfers: typeof best.transfers === "number" ? best.transfers : null,
+      bookingLink: googleFlightsLink({ origin, destination, departDate: best.departure_at.slice(0, 10), returnDate: null }),
+    };
+  } catch (err) {
+    console.log(`  cheapestOneWayInMonth ${origin}->${destination} ${yearMonth}: ${err.message}`);
+    return null;
+  }
+}
+
+async function cheapestRoundTripInMonth({ origin, destination, yearMonth, currency, maxTripNights }) {
+  try {
+    const data = await tpGet("/aviasales/v3/prices_for_dates", {
+      origin,
+      destination,
+      departure_at: yearMonth,
+      one_way: false,
+      direct: false,
+      sorting: "price",
+      limit: 30,
+      currency,
+    });
+    const entries = data.data || [];
+    const sane = entries.filter((e) => {
+      if (!e.departure_at || !e.return_at) return false;
+      const nights = Math.round((new Date(e.return_at) - new Date(e.departure_at)) / 86400000);
+      return nights > 0 && nights <= (maxTripNights || 21);
+    });
+    const pool = sane.length > 0 ? sane : entries.filter((e) => e.return_at);
+    let best = null;
+    for (const e of pool) {
+      if (!best || e.price < best.price) best = e;
+    }
+    if (!best) return null;
+    return {
+      departDate: best.departure_at.slice(0, 10),
+      returnDate: best.return_at.slice(0, 10),
+      price: best.price,
+      airline: best.airline || null,
+      transfers: typeof best.transfers === "number" ? best.transfers : null,
+      bookingLink: googleFlightsLink({
+        origin,
+        destination,
+        departDate: best.departure_at.slice(0, 10),
+        returnDate: best.return_at.slice(0, 10),
+      }),
+    };
+  } catch (err) {
+    console.log(`  cheapestRoundTripInMonth ${origin}->${destination} ${yearMonth}: ${err.message}`);
+    return null;
+  }
+}
+
 // Hotellook shut down completely in October 2025 (confirmed: the whole
 // engine.hotellook.com API now returns 404). There is no equivalent free
 // hotel-price API to replace it with, so instead of a price we generate a
@@ -213,4 +287,11 @@ async function getAirlineName(code) {
   return airlinesCache[code] || code;
 }
 
-module.exports = { cheapestRoundTrip, cheapestOneWay, cheapestHotel, getAirlineName };
+module.exports = {
+  cheapestRoundTrip,
+  cheapestOneWay,
+  cheapestOneWayInMonth,
+  cheapestRoundTripInMonth,
+  cheapestHotel,
+  getAirlineName,
+};

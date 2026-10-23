@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { cheapestRoundTrip, cheapestOneWay, cheapestHotel, getAirlineName } = require("./travelpayouts");
+const { cheapestRoundTrip, cheapestOneWay, cheapestOneWayInMonth, cheapestRoundTripInMonth, cheapestHotel, getAirlineName } = require("./travelpayouts");
 const { sendTelegramMessage } = require("./telegram");
 
 const ROOT = path.join(__dirname, "..");
@@ -145,6 +145,64 @@ function watchKey(item) {
   return `watch:${item.destination}:${item.departureDate}:${item.returnDate}`;
 }
 
+function monthsAheadList(n) {
+  const months = [];
+  const base = new Date();
+  for (let i = 0; i < n; i++) {
+    const d = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth() + i, 1));
+    months.push(d.toISOString().slice(0, 7)); // YYYY-MM
+  }
+  return months;
+}
+
+// Budget hunt: for one destination, find the single cheapest fare (any date,
+// within the configured month window) for both trip types, and flag whichever
+// ones beat the configured USD ceiling.
+async function scanBudgetDestination(dest, cfg) {
+  const months = monthsAheadList(cfg.monthsAhead || 2);
+  const found = [];
+
+  if (cfg.maxRoundTripUSD) {
+    let bestRT = null;
+    for (const ym of months) {
+      const r = await cheapestRoundTripInMonth({ origin: settings.origin, destination: dest.code, yearMonth: ym, currency: "USD", maxTripNights: cfg.maxTripNights });
+      if (r && (!bestRT || r.price < bestRT.price)) bestRT = r;
+    }
+    if (bestRT && bestRT.price <= cfg.maxRoundTripUSD) {
+      found.push({ ...bestRT, tripType: "roundtrip" });
+    }
+  }
+
+  if (cfg.maxOneWayUSD) {
+    let bestOW = null;
+    for (const ym of months) {
+      const r = await cheapestOneWayInMonth({ origin: settings.origin, destination: dest.code, yearMonth: ym, currency: "USD" });
+      if (r && (!bestOW || r.price < bestOW.price)) bestOW = r;
+    }
+    if (bestOW && bestOW.price <= cfg.maxOneWayUSD) {
+      found.push({ ...bestOW, tripType: "oneway" });
+    }
+  }
+
+  return found.map((f) => ({
+    code: dest.code,
+    name: dest.name,
+    country: dest.country,
+    tripType: f.tripType,
+    departureDate: f.departDate,
+    returnDate: f.returnDate,
+    price: Math.round(f.price * 100) / 100,
+    currency: "USD",
+    airline: f.airline,
+    transfers: f.transfers,
+    bookingLink: f.bookingLink,
+  }));
+}
+
+function budgetKey(r) {
+  return `budget:${r.code}:${r.tripType}`;
+}
+
 async function main() {
   console.log(`Mode: ${searchMode}, tripType: ${tripType}. Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
 
@@ -287,16 +345,54 @@ async function main() {
     fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
   }
 
+  // ---- budget alerts: hunt every destination for a fare under the configured USD ceiling ----
+  const budgetResults = [];
+  const budgetCfg = settings.budgetAlerts;
+  if (!isOneOffSearch && budgetCfg && budgetCfg.enabled) {
+    for (const dest of destinations) {
+      try {
+        const matches = await scanBudgetDestination(dest, budgetCfg);
+        for (const m of matches) {
+          budgetResults.push(m);
+
+          const key = budgetKey(m);
+          const prevPoints = history[key] || [];
+          const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
+
+          if (lastPrice === null || lastPrice !== m.price) {
+            const tripLabel = m.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
+            const airlineName = await getAirlineName(m.airline);
+            const stopsText = m.transfers === 0 ? "ישירה ✅" : m.transfers === 1 ? "קפיצה אחת" : m.transfers > 1 ? `${m.transfers} קפיצות` : null;
+            const bLines = [
+              `🔥 <b>דיל תקציב: ${m.name} ב-$${m.price}</b> (${tripLabel}) 🔥`,
+              `📅 ${m.departureDate}${m.returnDate ? " → " + m.returnDate : ""}`,
+            ];
+            if (airlineName) bLines.push(`✈️ חברת תעופה: ${airlineName}`);
+            if (stopsText) bLines.push(`🔁 טיסה: ${stopsText}`);
+            if (m.bookingLink) bLines.push(`🔗 לפרטים והזמנה: ${m.bookingLink}`);
+            await sendTelegramMessage(bLines.join("\n"));
+          }
+
+          history[key] = [...prevPoints, { date: today, price: m.price }].slice(-HISTORY_LIMIT);
+        }
+      } catch (err) {
+        console.log(`Failed budget scan ${dest.code}: ${err.message}`);
+      }
+    }
+    fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+  }
+
   const latest = {
     lastRun: new Date().toISOString(),
     settings,
     results,
     hotelOnlyResults: [],
     watchlistResults,
+    budgetResults,
   };
   fs.writeFileSync(path.join(ROOT, "data/latest.json"), JSON.stringify(latest, null, 2));
 
-  console.log(`Done. ${results.length} destinations scanned, ${alerts.length} alerts sent, ${watchlistResults.length} watchlist items checked.`);
+  console.log(`Done. ${results.length} destinations scanned, ${alerts.length} alerts sent, ${watchlistResults.length} watchlist items checked, ${budgetResults.length} budget deals found.`);
 }
 
 main().catch((err) => {

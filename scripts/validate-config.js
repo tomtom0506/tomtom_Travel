@@ -86,6 +86,31 @@ if (settings) {
   if (typeof settings.checkHotelsForTopDeals !== "number" || settings.checkHotelsForTopDeals < 0) {
     fail('settings.json: "checkHotelsForTopDeals" חייב להיות מספר 0 ומעלה');
   }
+  if (settings.budgetAlerts !== undefined) {
+    const b = settings.budgetAlerts;
+    if (typeof b !== "object" || b === null) {
+      fail('settings.json: "budgetAlerts" חייב להיות אובייקט');
+    } else {
+      if (typeof b.enabled !== "boolean") {
+        fail('settings.json: budgetAlerts."enabled" חייב להיות true או false');
+      }
+      if (b.maxRoundTripUSD !== undefined && b.maxRoundTripUSD !== null && (typeof b.maxRoundTripUSD !== "number" || b.maxRoundTripUSD <= 0)) {
+        fail('settings.json: budgetAlerts."maxRoundTripUSD" חייב להיות מספר חיובי (או null לביטול)');
+      }
+      if (b.maxOneWayUSD !== undefined && b.maxOneWayUSD !== null && (typeof b.maxOneWayUSD !== "number" || b.maxOneWayUSD <= 0)) {
+        fail('settings.json: budgetAlerts."maxOneWayUSD" חייב להיות מספר חיובי (או null לביטול)');
+      }
+      if (!b.maxRoundTripUSD && !b.maxOneWayUSD && b.enabled) {
+        fail('settings.json: budgetAlerts מופעל אבל אין לא maxRoundTripUSD ולא maxOneWayUSD - אין מה לבדוק');
+      }
+      if (typeof b.monthsAhead !== "number" || b.monthsAhead < 1 || b.monthsAhead > 12) {
+        fail('settings.json: budgetAlerts."monthsAhead" חייב להיות מספר בין 1 ל-12');
+      }
+      if (b.maxTripNights !== undefined && (typeof b.maxTripNights !== "number" || b.maxTripNights < 1 || b.maxTripNights > 90)) {
+        fail('settings.json: budgetAlerts."maxTripNights" חייב להיות מספר בין 1 ל-90');
+      }
+    }
+  }
   if (settings.watchlist !== undefined) {
     if (!Array.isArray(settings.watchlist)) {
       fail('settings.json: "watchlist" חייב להיות מערך (אפשר ריק: [])');
