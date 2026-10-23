@@ -628,6 +628,14 @@
         <input type="checkbox" id="searchAlertMe">
         <label for="searchAlertMe">🔔 התראה בטלגרם כשהמחיר יורד</label>
       </div>
+      <div class="field full budget-threshold-field">
+        <label id="budgetThresholdLabel">🔥 תקרת מחיר לדילים אוטומטיים - הלוך-חזור ($)</label>
+        <div style="display:flex; gap:8px;">
+          <input type="number" id="budgetThreshold" min="1" placeholder="לדוגמה: 120" style="flex:1;">
+          <button type="button" class="icon-btn" style="width:auto; padding:0 14px;" onclick="saveBudgetThreshold()">💾 שמור</button>
+        </div>
+        <div class="search-status" id="budgetThresholdStatus"></div>
+      </div>
     </div>
 
     <div class="search-buttons">
@@ -734,8 +742,16 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="budgetPopupModal" onclick="if(event.target===this) closeBudgetPopup()">
+  <div class="modal" style="border-color: var(--amber);">
+    <h2>🔥 דיל תקציב חדש! <button class="close-x" onclick="closeBudgetPopup()">✕</button></h2>
+    <div id="budgetPopupRows"></div>
+    <button class="search-btn" style="margin-top:14px; background: var(--amber); color:#241800;" onclick="closeBudgetPopup()">סגור</button>
+  </div>
+</div>
+
 <script>
-const APP_VERSION = "1.14.0";
+const APP_VERSION = "1.15.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -762,12 +778,75 @@ function saveToken() {
 
 // ---- trip type toggle ----
 let currentTripType = "roundtrip";
+let budgetThresholds = { roundtrip: null, oneway: null };
+
 function setTripType(type) {
   currentTripType = type;
   document.getElementById("tripRoundtrip").classList.toggle("active", type === "roundtrip");
   document.getElementById("tripOneway").classList.toggle("active", type === "oneway");
   document.getElementById("returnField").style.display = type === "oneway" ? "none" : "block";
   document.getElementById("searchHotelsBtn").style.display = type === "oneway" ? "none" : "block";
+  updateBudgetThresholdField();
+}
+
+function updateBudgetThresholdField() {
+  const label = document.getElementById("budgetThresholdLabel");
+  const input = document.getElementById("budgetThreshold");
+  const tripLabel = currentTripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
+  label.textContent = "🔥 תקרת מחיר לדילים אוטומטיים - " + tripLabel + " ($)";
+  const current = currentTripType === "oneway" ? budgetThresholds.oneway : budgetThresholds.roundtrip;
+  input.value = current || "";
+  document.getElementById("budgetThresholdStatus").textContent = "";
+}
+
+async function saveBudgetThreshold() {
+  const token = getToken();
+  if (!token) { openTokenModal(); return; }
+
+  const val = parseFloat(document.getElementById("budgetThreshold").value);
+  const statusEl = document.getElementById("budgetThresholdStatus");
+  if (!val || val <= 0) { statusEl.textContent = "הזינו מספר חיובי"; statusEl.className = "search-status error"; return; }
+
+  statusEl.textContent = "שומר...";
+  statusEl.className = "search-status";
+
+  try {
+    const path = "config/settings.json";
+    const getRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" },
+    });
+    if (!getRes.ok) throw new Error("לא ניתן לקרוא את settings.json");
+    const fileData = await getRes.json();
+    const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+
+    if (!content.budgetAlerts || typeof content.budgetAlerts !== "object") {
+      content.budgetAlerts = { enabled: true, monthsAhead: 2, maxTripNights: 14 };
+    }
+    content.budgetAlerts.enabled = true;
+    if (currentTripType === "oneway") {
+      content.budgetAlerts.maxOneWayUSD = val;
+    } else {
+      content.budgetAlerts.maxRoundTripUSD = val;
+    }
+
+    const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2) + "\n")));
+    const putRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "Update budget threshold (" + currentTripType + "): $" + val, content: updatedContent, sha: fileData.sha }),
+    });
+    if (!putRes.ok) {
+      const body = await putRes.json().catch(() => ({}));
+      throw new Error(body.message || ("שגיאה " + putRes.status));
+    }
+
+    if (currentTripType === "oneway") budgetThresholds.oneway = val; else budgetThresholds.roundtrip = val;
+    statusEl.textContent = "✓ נשמר - הסריקה הבאה תשתמש בתקרה הזו";
+    statusEl.className = "search-status success";
+  } catch (e) {
+    statusEl.textContent = "שגיאה: " + e.message;
+    statusEl.className = "search-status error";
+  }
 }
 
 // ---- live search: trigger the GitHub Action with chosen dates/destination ----
@@ -902,6 +981,39 @@ function pollForResult(since, token, btns, opts) {
     }
   };
   setTimeout(poll, 5000); // give GitHub a moment to register the run
+}
+
+// ---- in-app popup for budget deals not yet seen on this device ----
+function budgetDealId(b) {
+  return b.code + ":" + b.tripType + ":" + b.price;
+}
+
+function checkForNewBudgetDeals(budgetResults) {
+  if (!budgetResults || budgetResults.length === 0) return;
+  let seen = {};
+  try { seen = JSON.parse(localStorage.getItem("seenBudgetDeals") || "{}"); } catch (e) { seen = {}; }
+
+  const newOnes = budgetResults.filter((b) => !seen[budgetDealId(b)]);
+  if (newOnes.length === 0) return;
+
+  document.getElementById("budgetPopupRows").innerHTML = newOnes.map((b) => {
+    const tripLabel = b.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
+    const dates = b.returnDate ? (b.departureDate + " → " + b.returnDate) : b.departureDate;
+    return '<div class="budget-row">' +
+      '<div><div class="bname">' + b.name + ' (' + tripLabel + ')</div><div class="bdates">' + dates + '</div></div>' +
+      '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + (b.bookingLink ? '<a href="' + b.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById("budgetPopupModal").classList.add("open");
+
+  // mark as seen once shown, so it won't pop up again on the next visit
+  newOnes.forEach((b) => { seen[budgetDealId(b)] = true; });
+  localStorage.setItem("seenBudgetDeals", JSON.stringify(seen));
+}
+
+function closeBudgetPopup() {
+  document.getElementById("budgetPopupModal").classList.remove("open");
 }
 
 async function loadDestinationsIntoWatchlistSelect() {
@@ -1233,6 +1345,12 @@ function render(latest, history) {
     document.getElementById('searchFlexDays').value = s.flexDays || 3;
   }
 
+  if (s.budgetAlerts) {
+    budgetThresholds.roundtrip = s.budgetAlerts.maxRoundTripUSD || null;
+    budgetThresholds.oneway = s.budgetAlerts.maxOneWayUSD || null;
+    updateBudgetThresholdField();
+  }
+
   allResults = (latest && latest.results) || [];
   allHistory = history || {};
   const hotelOnly = (latest && latest.hotelOnlyResults) || [];
@@ -1266,6 +1384,7 @@ function render(latest, history) {
   } else {
     budgetBox.style.display = 'none';
   }
+  checkForNewBudgetDeals(budgetResults);
 
   // Hotel-only search result: show a dedicated simple list instead of the flight board
   if (hotelOnly.length > 0) {
