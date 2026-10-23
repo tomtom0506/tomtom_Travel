@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-23T16:22:02.679Z",
+  "lastRun": "2026-10-23T17:03:35.769Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -16,6 +16,14 @@
     "_comment_hotels": "בודק מלונות רק ליעדים שנמצאה בהם עסקת טיסה טובה (top N), כדי לחסוך בקריאות API",
     "checkHotelsForTopDeals": 5,
     "hotelAdults": 2,
+    "_comment_budgetAlerts": "ציד דילים: בודק את כל היעדים בכמה חודשים קדימה (לא תאריך ספציפי) ומתריע מיד כשנמצא מחיר מתחת לתקרה שהגדרתם. monthsAhead קובע לכמה חודשים קדימה לחפש - מספר גבוה יותר = יותר קריאות API בכל ריצה.",
+    "budgetAlerts": {
+      "enabled": true,
+      "maxRoundTripUSD": 120,
+      "maxOneWayUSD": 60,
+      "monthsAhead": 2,
+      "maxTripNights": 14
+    },
     "_comment_watchlist": "חיפושים ספציפיים שתמיד מדווחים אליכם בטלגרם כשהמחיר משתנה, גם אם לא חוצה את סף ההנחה הכללי. destination = קוד יעד (למשל BCN), note = תיאור חופשי",
     "watchlist": [
       {
@@ -67,8 +75,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NAP+on+2026-11-26+through+2026-12-03&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 928.5,
-      "discountPercent": 41,
+      "historyMedian": 919,
+      "discountPercent": 40,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -109,8 +117,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-25+through+2026-12-01&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 344,
-      "discountPercent": 17,
+      "historyMedian": 342.5,
+      "discountPercent": 16,
       "historyPoints": 60,
       "hotel": {
         "price": null,
