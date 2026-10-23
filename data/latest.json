@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-23T17:03:35.769Z",
+  "lastRun": "2026-10-23T17:08:10.532Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -56,13 +56,7 @@
       "transfers": null,
       "historyMedian": 1250,
       "discountPercent": 44,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%90%D7%95%D7%A1%D7%9C%D7%95&checkin=2026-11-20&checkout=2026-11-27&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
       "code": "NAP",
@@ -77,13 +71,7 @@
       "transfers": null,
       "historyMedian": 919,
       "discountPercent": 40,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A0%D7%90%D7%A4%D7%95%D7%9C%D7%99&checkin=2026-11-26&checkout=2026-12-03&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
       "code": "NCE",
@@ -98,34 +86,7 @@
       "transfers": null,
       "historyMedian": 1110,
       "discountPercent": 35,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A0%D7%99%D7%A1&checkin=2026-11-26&checkout=2026-12-03&group_adults=2&no_rooms=1"
-      }
-    },
-    {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-25",
-      "returnDate": "2026-12-01",
-      "approxPrice": 287,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-25+through+2026-12-01&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 342.5,
-      "discountPercent": 16,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-11-25&checkout=2026-12-01&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
       "code": "SKG",
@@ -140,27 +101,21 @@
       "transfers": null,
       "historyMedian": 746,
       "discountPercent": 10,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A1%D7%9C%D7%95%D7%A0%D7%99%D7%A7%D7%99&checkin=2026-11-19&checkout=2026-11-26&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
-      "code": "MUC",
-      "name": "מינכן",
-      "country": "גרמניה",
+      "code": "LCA",
+      "name": "לרנקה",
+      "country": "קפריסין",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-20",
-      "returnDate": "2026-11-26",
-      "approxPrice": 1024,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-20+through+2026-11-26&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-11-25",
+      "returnDate": "2026-12-01",
+      "approxPrice": 287,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-25+through+2026-12-01&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1110,
-      "discountPercent": 8,
+      "historyMedian": 314.5,
+      "discountPercent": 9,
       "historyPoints": 60
     },
     {
@@ -176,6 +131,21 @@
       "transfers": null,
       "historyMedian": 937,
       "discountPercent": 8,
+      "historyPoints": 60
+    },
+    {
+      "code": "MUC",
+      "name": "מינכן",
+      "country": "גרמניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-20",
+      "returnDate": "2026-11-26",
+      "approxPrice": 1024,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-20+through+2026-11-26&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1095.5,
+      "discountPercent": 7,
       "historyPoints": 60
     },
     {
@@ -405,16 +375,6 @@
     }
   ],
   "hotelOnlyResults": [],
-  "watchlistResults": [
-    {
-      "code": "LIS",
-      "note": "טיול לפסח",
-      "departureDate": "2027-04-18",
-      "returnDate": "2027-04-27",
-      "price": 1493,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2027-04-18+through+2027-04-27&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null
-    }
-  ]
+  "watchlistResults": [],
+  "budgetResults": []
 }
