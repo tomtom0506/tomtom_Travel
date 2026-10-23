@@ -134,6 +134,8 @@ async function scanWatchlistItem(item) {
     note: item.note || item.destination,
     departureDate: best.departDate,
     returnDate: best.returnDate,
+    requestedDepartureDate: item.departureDate,
+    requestedReturnDate: item.returnDate,
     price: Math.round(best.price),
     bookingLink: best.bookingLink || null,
     airline: best.airline || null,
