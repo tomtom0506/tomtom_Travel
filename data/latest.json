@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-24T15:18:13.751Z",
+  "lastRun": "2026-10-24T20:07:29.617Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -138,7 +138,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LON+on+2026-11-26+through+2026-12-02&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 596,
+      "historyMedian": 595,
       "discountPercent": 6,
       "historyPoints": 60,
       "hotel": {
@@ -159,7 +159,7 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MUC+on+2026-11-24+through+2026-11-30&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1078,
+      "historyMedian": 1077.5,
       "discountPercent": 1,
       "historyPoints": 60
     },
@@ -419,6 +419,19 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-30+through+2026-12-07&hl=he&gl=IL&curr=ILS"
     },
     {
+      "code": "ROM",
+      "name": "רומא",
+      "country": "איטליה",
+      "tripType": "oneway",
+      "departureDate": "2026-11-13",
+      "returnDate": null,
+      "price": 59,
+      "currency": "USD",
+      "airline": "W4",
+      "transfers": 0,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-13&hl=he&gl=IL&curr=ILS"
+    },
+    {
       "code": "MIL",
       "name": "מילאנו",
       "country": "איטליה",
@@ -501,13 +514,13 @@
       "name": "לרנקה",
       "country": "קפריסין",
       "tripType": "oneway",
-      "departureDate": "2026-11-16",
+      "departureDate": "2026-11-20",
       "returnDate": null,
-      "price": 40,
+      "price": 41,
       "currency": "USD",
       "airline": "W6",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-16&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-11-20&hl=he&gl=IL&curr=ILS"
     }
   ]
 }
