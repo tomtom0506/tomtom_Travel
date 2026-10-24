@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-24T03:03:47.411Z",
+  "lastRun": "2026-10-24T10:12:27.595Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -128,27 +128,6 @@
       }
     },
     {
-      "code": "VIE",
-      "name": "וינה",
-      "country": "אוסטריה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-23",
-      "returnDate": "2026-12-01",
-      "approxPrice": 860,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-11-23+through+2026-12-01&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 937,
-      "discountPercent": 8,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%95%D7%99%D7%A0%D7%94&checkin=2026-11-23&checkout=2026-12-01&group_adults=2&no_rooms=1"
-      }
-    },
-    {
       "code": "LON",
       "name": "לונדון",
       "country": "בריטניה",
@@ -161,6 +140,27 @@
       "transfers": null,
       "historyMedian": 597,
       "discountPercent": 6,
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%95%D7%A0%D7%93%D7%95%D7%9F&checkin=2026-11-26&checkout=2026-12-02&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "VIE",
+      "name": "וינה",
+      "country": "אוסטריה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-23",
+      "returnDate": "2026-12-01",
+      "approxPrice": 860,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+VIE+on+2026-11-23+through+2026-12-01&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 903,
+      "discountPercent": 5,
       "historyPoints": 60
     },
     {
@@ -389,21 +389,6 @@
       "historyPoints": 60
     },
     {
-      "code": "SKG",
-      "name": "סלוניקי",
-      "country": "יוון",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-20",
-      "returnDate": "2026-11-27",
-      "approxPrice": 919,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SKG+on+2026-11-20+through+2026-11-27&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 746,
-      "discountPercent": -23,
-      "historyPoints": 60
-    },
-    {
       "code": "WAW",
       "name": "ורשה",
       "country": "פולין",
@@ -442,7 +427,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-16",
       "returnDate": "2026-11-23",
-      "price": 109,
+      "price": 111,
       "currency": "USD",
       "airline": "W4",
       "transfers": 0,
@@ -453,13 +438,13 @@
       "name": "מילאנו",
       "country": "איטליה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-27",
-      "returnDate": "2026-12-02",
+      "departureDate": "2026-11-16",
+      "returnDate": "2026-11-27",
       "price": 111,
       "currency": "USD",
       "airline": "W4",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-11-27+through+2026-12-02&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MIL+on+2026-11-16+through+2026-11-27&hl=he&gl=IL&curr=ILS"
     },
     {
       "code": "ATH",
@@ -475,17 +460,30 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-10-24+through+2026-10-30&hl=he&gl=IL&curr=ILS"
     },
     {
+      "code": "ATH",
+      "name": "אתונה",
+      "country": "יוון",
+      "tripType": "oneway",
+      "departureDate": "2026-11-06",
+      "returnDate": null,
+      "price": 53,
+      "currency": "USD",
+      "airline": "GQ",
+      "transfers": 0,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-06&hl=he&gl=IL&curr=ILS"
+    },
+    {
       "code": "BUD",
       "name": "בודפשט",
       "country": "הונגריה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-09",
-      "returnDate": "2026-11-11",
-      "price": 113,
+      "departureDate": "2026-11-05",
+      "returnDate": "2026-11-12",
+      "price": 116,
       "currency": "USD",
       "airline": "W6",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-09+through+2026-11-11&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-05+through+2026-11-12&hl=he&gl=IL&curr=ILS"
     },
     {
       "code": "LCA",
