@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-25T10:36:32.996Z",
+  "lastRun": "2026-10-25T15:27:56.723Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -75,8 +75,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+NCE+on+2026-11-26+through+2026-12-03&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1063.5,
-      "discountPercent": 33,
+      "historyMedian": 1017,
+      "discountPercent": 29,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -107,27 +107,6 @@
       }
     },
     {
-      "code": "CPH",
-      "name": "קופנהגן",
-      "country": "דנמרק",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-24",
-      "returnDate": "2026-11-30",
-      "approxPrice": 949,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+CPH+on+2026-11-24+through+2026-11-30&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 1105,
-      "discountPercent": 14,
-      "historyPoints": 49,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A7%D7%95%D7%A4%D7%A0%D7%94%D7%92%D7%9F&checkin=2026-11-24&checkout=2026-11-30&group_adults=2&no_rooms=1"
-      }
-    },
-    {
       "code": "HEL",
       "name": "הלסינקי",
       "country": "פינלנד",
@@ -149,6 +128,27 @@
       }
     },
     {
+      "code": "CPH",
+      "name": "קופנהגן",
+      "country": "דנמרק",
+      "tripType": "roundtrip",
+      "departureDate": "2026-11-24",
+      "returnDate": "2026-11-30",
+      "approxPrice": 949,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+CPH+on+2026-11-24+through+2026-11-30&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1027,
+      "discountPercent": 8,
+      "historyPoints": 50,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A7%D7%95%D7%A4%D7%A0%D7%94%D7%92%D7%9F&checkin=2026-11-24&checkout=2026-11-30&group_adults=2&no_rooms=1"
+      }
+    },
+    {
       "code": "BEG",
       "name": "בלגרד",
       "country": "סרביה",
@@ -159,8 +159,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-11-24+through+2026-11-30&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 726,
-      "discountPercent": 9,
+      "historyMedian": 717.5,
+      "discountPercent": 8,
       "historyPoints": 60
     },
     {
@@ -189,8 +189,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PAR+on+2026-11-21+through+2026-11-28&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 685,
-      "discountPercent": 3,
+      "historyMedian": 678,
+      "discountPercent": 2,
       "historyPoints": 60
     },
     {
@@ -438,24 +438,24 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-12",
       "returnDate": "2026-11-17",
-      "price": 109,
+      "price": 113,
       "currency": "USD",
       "airline": "GQ",
       "transfers": 0,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-12+through+2026-11-17&hl=he&gl=IL&curr=ILS"
     },
     {
-      "code": "KRK",
-      "name": "קרקוב",
-      "country": "פולין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-11-19",
-      "returnDate": "2026-11-23",
-      "price": 119,
+      "code": "ATH",
+      "name": "אתונה",
+      "country": "יוון",
+      "tripType": "oneway",
+      "departureDate": "2026-11-16",
+      "returnDate": null,
+      "price": 54,
       "currency": "USD",
-      "airline": "W6",
+      "airline": "GQ",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+KRK+on+2026-11-19+through+2026-11-23&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-16&hl=he&gl=IL&curr=ILS"
     },
     {
       "code": "KRK",
