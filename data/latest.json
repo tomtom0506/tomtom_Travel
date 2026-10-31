@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-31T16:44:05.170Z",
+  "lastRun": "2026-10-31T20:55:36.033Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -113,12 +113,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-28",
       "returnDate": "2026-12-05",
-      "approxPrice": 373,
+      "approxPrice": 385,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-28+through+2026-12-05&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 397,
-      "discountPercent": 6,
+      "discountPercent": 3,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -133,19 +133,19 @@
       "country": "איטליה",
       "tripType": "roundtrip",
       "departureDate": "2026-11-30",
-      "returnDate": "2026-12-06",
+      "returnDate": "2026-12-07",
       "approxPrice": 369,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-30+through+2026-12-06&hl=he&gl=IL&curr=ILS",
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-30+through+2026-12-07&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 373.5,
+      "historyMedian": 372,
       "discountPercent": 1,
       "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-30&checkout=2026-12-06&group_adults=2&no_rooms=1"
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A8%D7%95%D7%9E%D7%90&checkin=2026-11-30&checkout=2026-12-07&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -175,6 +175,21 @@
       "airline": null,
       "transfers": null,
       "historyMedian": 1053,
+      "discountPercent": 0,
+      "historyPoints": 60
+    },
+    {
+      "code": "GVA",
+      "name": "ג'נבה",
+      "country": "שוויץ",
+      "tripType": "roundtrip",
+      "departureDate": "2026-12-04",
+      "returnDate": "2026-12-11",
+      "approxPrice": 1375,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+GVA+on+2026-12-04+through+2026-12-11&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 1379,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -399,8 +414,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-30+through+2026-12-07&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 551,
-      "discountPercent": -44,
+      "historyMedian": 554.5,
+      "discountPercent": -43,
       "historyPoints": 60
     },
     {
@@ -439,12 +454,12 @@
     {
       "code": "LIS",
       "note": "טיול לפסח",
-      "departureDate": "2027-04-23",
-      "returnDate": "2027-05-02",
+      "departureDate": "2027-04-20",
+      "returnDate": "2027-04-30",
       "requestedDepartureDate": "2027-04-20",
       "requestedReturnDate": "2027-04-30",
-      "price": 1679,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2027-04-23+through+2027-05-02&hl=he&gl=IL&curr=ILS",
+      "price": 1474,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LIS+on+2027-04-20+through+2027-04-30&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null
     }
