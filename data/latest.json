@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-10-31T11:37:38.538Z",
+  "lastRun": "2026-10-31T16:44:05.170Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -134,12 +134,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-30",
       "returnDate": "2026-12-06",
-      "approxPrice": 366,
+      "approxPrice": 369,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ROM+on+2026-11-30+through+2026-12-06&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
       "historyMedian": 373.5,
-      "discountPercent": 2,
+      "discountPercent": 1,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -149,18 +149,18 @@
       }
     },
     {
-      "code": "ZAG",
-      "name": "זאגרב",
-      "country": "קרואטיה",
+      "code": "HEL",
+      "name": "הלסינקי",
+      "country": "פינלנד",
       "tripType": "roundtrip",
-      "departureDate": "2026-12-03",
-      "returnDate": "2026-12-11",
-      "approxPrice": 1301,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-12-03+through+2026-12-11&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-11-29",
+      "returnDate": "2026-12-06",
+      "approxPrice": 1131,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+HEL+on+2026-11-29+through+2026-12-06&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1330.5,
-      "discountPercent": 2,
+      "historyMedian": 1131,
+      "discountPercent": 0,
       "historyPoints": 60
     },
     {
@@ -179,18 +179,18 @@
       "historyPoints": 60
     },
     {
-      "code": "HEL",
-      "name": "הלסינקי",
-      "country": "פינלנד",
+      "code": "ZAG",
+      "name": "זאגרב",
+      "country": "קרואטיה",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-29",
-      "returnDate": "2026-12-06",
-      "approxPrice": 1131,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+HEL+on+2026-11-29+through+2026-12-06&hl=he&gl=IL&curr=ILS",
+      "departureDate": "2026-12-03",
+      "returnDate": "2026-12-11",
+      "approxPrice": 1301,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ZAG+on+2026-12-03+through+2026-12-11&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 1124,
-      "discountPercent": -1,
+      "historyMedian": 1301,
+      "discountPercent": 0,
       "historyPoints": 60
     },
     {
@@ -399,23 +399,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-11-30+through+2026-12-07&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 550.5,
+      "historyMedian": 551,
       "discountPercent": -44,
-      "historyPoints": 60
-    },
-    {
-      "code": "ARN",
-      "name": "שטוקהולם",
-      "country": "שוודיה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-12-03",
-      "returnDate": "2026-12-11",
-      "approxPrice": 1370,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ARN+on+2026-12-03+through+2026-12-11&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 872,
-      "discountPercent": -57,
       "historyPoints": 60
     },
     {
@@ -496,26 +481,26 @@
       "name": "אתונה",
       "country": "יוון",
       "tripType": "roundtrip",
-      "departureDate": "2026-11-26",
-      "returnDate": "2026-12-01",
-      "price": 106,
+      "departureDate": "2026-11-17",
+      "returnDate": "2026-11-24",
+      "price": 110,
       "currency": "USD",
       "airline": "GQ",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-26+through+2026-12-01&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-17+through+2026-11-24&hl=he&gl=IL&curr=ILS"
     },
     {
       "code": "ATH",
       "name": "אתונה",
       "country": "יוון",
       "tripType": "oneway",
-      "departureDate": "2026-11-16",
+      "departureDate": "2026-11-09",
       "returnDate": null,
-      "price": 57,
+      "price": 58,
       "currency": "USD",
       "airline": "GQ",
       "transfers": 0,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-16&hl=he&gl=IL&curr=ILS"
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-11-09&hl=he&gl=IL&curr=ILS"
     },
     {
       "code": "LCA",
