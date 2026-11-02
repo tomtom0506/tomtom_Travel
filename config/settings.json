@@ -18,7 +18,7 @@
   "budgetAlerts": {
     "enabled": true,
     "maxRoundTripUSD": 120,
-    "maxOneWayUSD": 60,
+    "maxOneWayUSD": 20,
     "monthsAhead": 2,
     "maxTripNights": 14
   },
