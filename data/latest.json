@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-11-04T13:42:20.370Z",
+  "lastRun": "2026-11-04T23:08:35.405Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -96,14 +96,35 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+SOF+on+2026-12-04+through+2026-12-10&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 856.5,
-      "discountPercent": -2,
+      "historyMedian": 864,
+      "discountPercent": -1,
       "historyPoints": 60,
       "hotel": {
         "price": null,
         "currency": "ILS",
         "hotelName": null,
         "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%A1%D7%95%D7%A4%D7%99%D7%94&checkin=2026-12-04&checkout=2026-12-10&group_adults=2&no_rooms=1"
+      }
+    },
+    {
+      "code": "LCA",
+      "name": "לרנקה",
+      "country": "קפריסין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-12-01",
+      "returnDate": "2026-12-09",
+      "approxPrice": 322,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-12-01+through+2026-12-09&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 306,
+      "discountPercent": -5,
+      "historyPoints": 60,
+      "hotel": {
+        "price": null,
+        "currency": "ILS",
+        "hotelName": null,
+        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%9C%D7%A8%D7%A0%D7%A7%D7%94&checkin=2026-12-01&checkout=2026-12-09&group_adults=2&no_rooms=1"
       }
     },
     {
@@ -140,13 +161,7 @@
       "transfers": null,
       "historyMedian": 1301,
       "discountPercent": -18,
-      "historyPoints": 60,
-      "hotel": {
-        "price": null,
-        "currency": "ILS",
-        "hotelName": null,
-        "bookingUrl": "https://www.booking.com/searchresults.html?ss=%D7%96%D7%90%D7%92%D7%A8%D7%91&checkin=2026-12-04&checkout=2026-12-11&group_adults=2&no_rooms=1"
-      }
+      "historyPoints": 60
     },
     {
       "code": "ZRH",
@@ -179,6 +194,21 @@
       "historyPoints": 60
     },
     {
+      "code": "BER",
+      "name": "ברלין",
+      "country": "גרמניה",
+      "tripType": "roundtrip",
+      "departureDate": "2026-12-04",
+      "returnDate": "2026-12-12",
+      "approxPrice": 1085,
+      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BER+on+2026-12-04+through+2026-12-12&hl=he&gl=IL&curr=ILS",
+      "airline": null,
+      "transfers": null,
+      "historyMedian": 794.5,
+      "discountPercent": -37,
+      "historyPoints": 60
+    },
+    {
       "code": "BEG",
       "name": "בלגרד",
       "country": "סרביה",
@@ -189,8 +219,8 @@
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BEG+on+2026-12-04+through+2026-12-12&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 753,
-      "discountPercent": -38,
+      "historyMedian": 755.5,
+      "discountPercent": -37,
       "historyPoints": 60
     },
     {
@@ -206,21 +236,6 @@
       "transfers": null,
       "historyMedian": 630,
       "discountPercent": -39,
-      "historyPoints": 60
-    },
-    {
-      "code": "BER",
-      "name": "ברלין",
-      "country": "גרמניה",
-      "tripType": "roundtrip",
-      "departureDate": "2026-12-04",
-      "returnDate": "2026-12-12",
-      "approxPrice": 1085,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BER+on+2026-12-04+through+2026-12-12&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 773.5,
-      "discountPercent": -40,
       "historyPoints": 60
     },
     {
@@ -260,12 +275,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-12-04",
       "returnDate": "2026-12-12",
-      "approxPrice": 1319,
+      "approxPrice": 1318,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+PRG+on+2026-12-04+through+2026-12-12&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 777,
-      "discountPercent": -70,
+      "historyMedian": 807,
+      "discountPercent": -63,
       "historyPoints": 60
     },
     {
@@ -311,21 +326,6 @@
       "transfers": null,
       "historyMedian": 1131,
       "discountPercent": -71,
-      "historyPoints": 60
-    },
-    {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-12-04",
-      "returnDate": "2026-12-10",
-      "approxPrice": 526,
-      "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+LCA+on+2026-12-04+through+2026-12-10&hl=he&gl=IL&curr=ILS",
-      "airline": null,
-      "transfers": null,
-      "historyMedian": 304.5,
-      "discountPercent": -73,
       "historyPoints": 60
     },
     {
@@ -395,7 +395,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-12-04",
       "returnDate": "2026-12-12",
-      "approxPrice": 1201,
+      "approxPrice": 1200,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+MAD+on+2026-12-04+through+2026-12-12&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -425,7 +425,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-12-04",
       "returnDate": "2026-12-10",
-      "approxPrice": 885,
+      "approxPrice": 884,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+ATH+on+2026-12-04+through+2026-12-10&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
@@ -440,12 +440,12 @@
       "tripType": "roundtrip",
       "departureDate": "2026-12-04",
       "returnDate": "2026-12-10",
-      "approxPrice": 1337,
+      "approxPrice": 1336,
       "bookingLink": "https://www.google.com/travel/flights?q=Flights+from+TLV+to+BUD+on+2026-12-04+through+2026-12-10&hl=he&gl=IL&curr=ILS",
       "airline": null,
       "transfers": null,
-      "historyMedian": 583.5,
-      "discountPercent": -129,
+      "historyMedian": 602,
+      "discountPercent": -122,
       "historyPoints": 60
     },
     {
@@ -514,7 +514,7 @@
       "tripType": "roundtrip",
       "departureDate": "2026-11-17",
       "returnDate": "2026-11-28",
-      "price": 111,
+      "price": 110,
       "currency": "USD",
       "airline": "W4",
       "transfers": 0,
