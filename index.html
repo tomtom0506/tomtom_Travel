@@ -520,6 +520,123 @@
   .discount.none { color: var(--panel-border); }
 
   .sparkline { margin-top: 3px; }
+  .row.clickable { cursor: pointer; }
+  .row.clickable:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
+  .chart-hint { color: var(--muted); font-size: 11px; font-family: 'IBM Plex Mono', monospace; margin: 0 0 8px; }
+
+  /* ---- deal map (all destinations vs. their historical median) ---- */
+  .dealmap-box {
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    background: var(--panel);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .dealmap-box h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    margin: 0 0 4px;
+    color: var(--text);
+  }
+  .db-legend {
+    display: grid;
+    grid-template-columns: 96px 1fr 52px;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin: 8px 0 4px;
+  }
+  .db-legend .sides { display: flex; justify-content: space-between; }
+  .db-legend .cheap { color: var(--teal); }
+  .db-legend .pricey { color: var(--danger); }
+  .db-row {
+    display: grid;
+    grid-template-columns: 96px 1fr 52px;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 0;
+    color: var(--text);
+    font: inherit;
+    text-align: right;
+    cursor: pointer;
+  }
+  .db-row:hover, .db-row:focus-visible { background: rgba(127,127,127,0.08); outline: none; }
+  .db-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .db-row.is-deal .db-name { font-weight: 700; color: var(--amber); }
+  .db-track { position: relative; height: 14px; }
+  .db-zero { position: absolute; top: -2px; bottom: -2px; left: 50%; width: 1px; background: var(--muted); opacity: 0.6; }
+  .db-bar { position: absolute; top: 2px; height: 10px; }
+  .db-bar.cheap { right: 50%; background: var(--teal); border-radius: 4px 0 0 4px; }
+  .db-bar.pricey { left: 50%; background: var(--danger); border-radius: 0 4px 4px 0; }
+  .db-pct { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; direction: ltr; text-align: left; }
+  .db-pct.cheap { color: var(--text); }
+  .db-pct.pricey { color: var(--muted); }
+  .db-more {
+    margin-top: 8px;
+    background: none;
+    border: 1px solid var(--panel-border);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  /* ---- price history chart (modal) ---- */
+  .pc-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .pc-stat { background: var(--bg); border: 1px solid var(--panel-border); border-radius: 8px; padding: 8px; }
+  .pc-stat .k { font-size: 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+  .pc-stat .v { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 15px; direction: ltr; text-align: right; margin-top: 2px; }
+  .pc-stat .v.good { color: var(--teal); }
+  .pc-wrap { position: relative; }
+  .pc-svg { display: block; overflow: visible; }
+  .pc-grid { stroke: var(--panel-border); stroke-width: 1; }
+  .pc-axis { fill: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+  .pc-median { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .pc-median-label { fill: var(--muted); font-family: 'Inter', sans-serif; font-size: 10px; }
+  .pc-area { fill: var(--teal); opacity: 0.12; }
+  .pc-line { fill: none; stroke: var(--teal); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .pc-low { fill: var(--teal); stroke: var(--panel); stroke-width: 2; }
+  .pc-last { fill: var(--amber); stroke: var(--panel); stroke-width: 2; }
+  .pc-cross { stroke: var(--muted); stroke-width: 1; }
+  .pc-hover-dot { fill: var(--panel); stroke: var(--teal); stroke-width: 2; pointer-events: none; }
+  .pc-hit { fill: transparent; cursor: crosshair; }
+  .pc-tip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    display: none;
+    transform: translate(-50%, -110%);
+  }
+  .pc-tip .tv { font-family: 'IBM Plex Mono', monospace; font-weight: 700; direction: ltr; }
+  .pc-tip .td { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+  .pc-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .pc-legend i { display: inline-block; vertical-align: middle; margin-left: 5px; }
+  .pc-legend .l-line { width: 14px; height: 2px; background: var(--teal); }
+  .pc-legend .l-med { width: 14px; border-top: 2px dashed var(--muted); }
+  .pc-legend .l-last { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+  .pc-legend .l-low { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .pc-note { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+  .pc-table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Mono', monospace; font-size: 12px; margin-top: 8px; }
+  .pc-table td { padding: 4px 6px; border-bottom: 1px solid var(--panel-border); }
+  .pc-table td:last-child { direction: ltr; text-align: left; }
+  .pc-details summary { cursor: pointer; font-size: 12px; color: var(--muted); margin-top: 10px; }
+  @media (max-width: 640px) {
+    .pc-stats { grid-template-columns: repeat(2, 1fr); }
+    .db-legend, .db-row { grid-template-columns: 78px 1fr 48px; }
+  }
 
   footer {
     margin-top: 28px;
@@ -664,6 +781,14 @@
     <div id="budgetRows"><div class="search-note">אין עדיין דילים שנמצאו מתחת לתקרה.</div></div>
   </div>
 
+  <div class="dealmap-box" id="dealMapBox" style="display:none;">
+    <h3>📊 מפת דילים — המחיר עכשיו מול החציון של כל יעד</h3>
+    <p class="chart-hint">לחיצה על יעד פותחת גרף היסטוריית מחיר</p>
+    <div class="db-legend"><span></span><span class="sides"><span class="pricey">יקר מהרגיל →</span><span class="cheap">← זול מהרגיל</span></span><span></span></div>
+    <div id="dealMapRows"></div>
+    <button type="button" class="db-more" id="dealMapMore" onclick="toggleDealMap()" style="display:none;"></button>
+  </div>
+
   <div class="filter-bar">
     <select id="destFilter" onchange="applyFilter()">
       <option value="">כל היעדים</option>
@@ -755,8 +880,16 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="priceChartModal" onclick="if(event.target===this) closePriceChart()">
+  <div class="modal" style="max-width:640px;">
+    <h2><span id="priceChartTitle">היסטוריית מחיר</span> <button class="close-x" onclick="closePriceChart()">✕</button></h2>
+    <div id="priceChartBody"></div>
+  </div>
+</div>
+
+<script src="charts.js"></script>
 <script>
-const APP_VERSION = "1.15.2";
+const APP_VERSION = "1.16.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -1358,7 +1491,7 @@ function renderRows(results) {
       ? '<a href="' + r.hotel.bookingUrl + '" target="_blank" class="booking-link">Booking.com ↗</a>'
       : '<div class="price empty-val">—</div>';
 
-    return '<div class="row ' + (isDeal ? 'deal' : '') + '">' +
+    return '<div class="row clickable ' + (isDeal ? 'deal' : '') + '" tabindex="0" role="button" data-chart-key="' + r.code + '" title="לחצו לגרף היסטוריית מחיר">' +
       '<div class="code">' + r.code + '</div>' +
       '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div></div>' +
       '<div class="dates">' + (r.returnDate ? (r.departureDate + ' → ' + r.returnDate) : (r.departureDate + ' (הלוך בלבד)')) + '</div>' +
@@ -1368,6 +1501,135 @@ function renderRows(results) {
     '</div>';
   }).join('');
 }
+
+// ---- charts: deal map + price history modal ----
+// History keys must match scripts/scan.js (watchKey uses the REQUESTED dates, not the found ones).
+function watchHistoryKey(w) {
+  return 'watch:' + w.code + ':' + (w.requestedDepartureDate || w.departureDate) + ':' + (w.requestedReturnDate || w.returnDate);
+}
+
+let dealMapExpanded = false;
+const DEAL_MAP_COLLAPSED = 8;
+
+function renderDealMap() {
+  const box = document.getElementById('dealMapBox');
+  const bars = TravelCharts.dealBars(allResults);
+  if (bars.length < 2) { box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  document.getElementById('dealMapRows').innerHTML = TravelCharts.dealBarsHTML(bars, {
+    limit: dealMapExpanded ? bars.length : DEAL_MAP_COLLAPSED,
+    threshold: allSettings.discountThresholdPercent,
+    currency: allSettings.currency || 'ILS',
+  });
+  const more = document.getElementById('dealMapMore');
+  if (bars.length > DEAL_MAP_COLLAPSED) {
+    more.style.display = 'inline-block';
+    more.textContent = dealMapExpanded ? 'הצג פחות' : 'הצג את כל ' + bars.length + ' היעדים';
+  } else {
+    more.style.display = 'none';
+  }
+}
+
+function toggleDealMap() {
+  dealMapExpanded = !dealMapExpanded;
+  renderDealMap();
+}
+
+function openPriceChart(key, title, currency) {
+  const C = TravelCharts;
+  currency = currency || allSettings.currency || 'ILS';
+  const result = allResults.find((r) => r.code === key);
+  if (!title) title = result ? result.name + ' (' + result.code + ')' : key;
+  document.getElementById('priceChartTitle').textContent = '📈 ' + title;
+  const series = C.dailySeries(allHistory[key] || []);
+  const stats = C.priceStats(allHistory[key] || []);
+  const body = document.getElementById('priceChartBody');
+
+  if (!stats || series.length < 2) {
+    body.innerHTML = '<div class="empty" style="padding:30px 10px;">אין עדיין מספיק היסטוריה ליעד הזה. הגרף יופיע אחרי כמה ימי סריקה.</div>';
+  } else {
+    const current = result ? (result.confirmedPrice || result.approxPrice) : series[series.length - 1].price;
+    const below = current <= stats.median;
+    body.innerHTML =
+      '<div class="pc-stats">' +
+        '<div class="pc-stat"><div class="k">עכשיו</div><div class="v' + (below ? ' good' : '') + '">' + C.fmtPrice(current, currency) + '</div></div>' +
+        '<div class="pc-stat"><div class="k">חציון</div><div class="v">' + C.fmtPrice(stats.median, currency) + '</div></div>' +
+        '<div class="pc-stat"><div class="k">הכי זול שנראה</div><div class="v">' + C.fmtPrice(stats.min, currency) + '</div></div>' +
+        '<div class="pc-stat"><div class="k">הכי יקר שנראה</div><div class="v">' + C.fmtPrice(stats.max, currency) + '</div></div>' +
+      '</div>' +
+      '<div class="pc-wrap" id="pcWrap">' +
+        C.lineChartSVG(series, { median: stats.median, label: 'היסטוריית מחיר ' + title }) +
+        '<div class="pc-tip" id="pcTip"></div>' +
+      '</div>' +
+      '<div class="pc-legend">' +
+        '<span><i class="l-line"></i>המחיר הזול ביותר בכל יום</span>' +
+        '<span><i class="l-med"></i>חציון</span>' +
+        '<span><i class="l-low"></i>השפל</span>' +
+        '<span><i class="l-last"></i>סריקה אחרונה</span>' +
+      '</div>' +
+      '<div class="pc-note">' + stats.count + ' סריקות ב-' + series.length + ' ימים (' + C.fmtDay(series[0].date) + '–' + C.fmtDay(series[series.length - 1].date) + '). ' +
+        'הסריקה הקבועה בודקת חלון תאריכים מתגלגל, כך שכל נקודה היא מחיר לתאריכי טיסה מעט שונים.</div>' +
+      '<details class="pc-details"><summary>הצג כטבלה</summary><table class="pc-table">' +
+        series.slice().reverse().map((p) => '<tr><td>' + C.fmtDay(p.date) + '</td><td>' + C.fmtPrice(p.price, currency) + '</td></tr>').join('') +
+      '</table></details>';
+    attachChartHover(currency);
+  }
+  document.getElementById('priceChartModal').classList.add('open');
+}
+
+function attachChartHover(currency) {
+  const wrap = document.getElementById('pcWrap');
+  const svg = wrap.querySelector('svg');
+  const tip = document.getElementById('pcTip');
+  const cross = svg.querySelector('.pc-cross');
+  const dot = svg.querySelector('.pc-hover-dot');
+  function show(hit) {
+    const vb = svg.viewBox.baseVal;
+    const scale = svg.getBoundingClientRect().width / vb.width;
+    const px = Number(hit.dataset.x), py = Number(hit.dataset.y);
+    cross.setAttribute('x1', px); cross.setAttribute('x2', px); cross.style.display = '';
+    dot.setAttribute('cx', px); dot.setAttribute('cy', py); dot.style.display = '';
+    tip.innerHTML = '<div class="tv">' + TravelCharts.fmtPrice(Number(hit.dataset.price), currency) + '</div>' +
+      '<div class="td">' + TravelCharts.fmtDay(hit.dataset.date) + ' · ' + hit.dataset.n + ' סריקות</div>';
+    tip.style.display = 'block';
+    const w = wrap.clientWidth;
+    const left = Math.min(Math.max(px * scale, 60), w - 60);
+    tip.style.left = left + 'px';
+    tip.style.top = (py * scale) + 'px';
+  }
+  function hide() { cross.style.display = 'none'; dot.style.display = 'none'; tip.style.display = 'none'; }
+  svg.querySelectorAll('.pc-hit').forEach((hit) => {
+    hit.addEventListener('pointerenter', () => show(hit));
+    hit.addEventListener('pointerdown', () => show(hit));
+  });
+  svg.addEventListener('pointerleave', hide);
+}
+
+function closePriceChart() {
+  document.getElementById('priceChartModal').classList.remove('open');
+}
+
+// One delegated handler for every clickable chart trigger (board rows, deal map, watchlist, budget).
+function chartTriggerFromEvent(e) {
+  if (e.target.closest('a, input, select, textarea')) return null; // booking links etc. keep their own behavior
+  const dm = e.target.closest('.db-row');
+  if (dm) return { key: dm.dataset.code };
+  const el = e.target.closest('[data-chart-key]');
+  if (!el) return null;
+  return { key: el.dataset.chartKey, title: el.dataset.chartTitle, currency: el.dataset.chartCurrency };
+}
+document.addEventListener('click', (e) => {
+  const t = chartTriggerFromEvent(e);
+  if (t) openPriceChart(t.key, t.title, t.currency);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { closePriceChart(); return; }
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  if (!e.target.matches || !e.target.matches('[data-chart-key]')) return;
+  e.preventDefault();
+  const t = chartTriggerFromEvent(e);
+  if (t) openPriceChart(t.key, t.title, t.currency);
+});
 
 function render(latest, history) {
   document.getElementById('updated').innerHTML = latest && latest.lastRun
@@ -1408,7 +1670,7 @@ function render(latest, history) {
   if (watchlistResults.length > 0) {
     watchBox.style.display = 'block';
     document.getElementById('watchlistRows').innerHTML = watchlistResults.map((w) => (
-      '<div class="watch-row">' +
+      '<div class="watch-row row-chart" style="cursor:pointer;" tabindex="0" role="button" data-chart-key="' + TravelCharts.esc(watchHistoryKey(w)) + '" data-chart-title="' + TravelCharts.esc(w.note || w.code) + '" title="לחצו לגרף היסטוריית מחיר">' +
         '<div><div class="wname">' + (w.note || w.code) + '</div><div class="wdates">' + w.departureDate + ' → ' + w.returnDate + '</div></div>' +
         '<div style="text-align:left;"><div class="wprice">' + Math.round(w.price) + ' ' + (s.currency || 'ILS') + '</div>' + (w.bookingLink ? '<a href="' + w.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
       '</div>'
@@ -1422,7 +1684,7 @@ function render(latest, history) {
     document.getElementById('budgetRows').innerHTML = budgetResults.map((b) => {
       const tripLabel = b.tripType === 'oneway' ? 'הלוך בלבד' : 'הלוך-חזור';
       const dates = b.returnDate ? (b.departureDate + ' → ' + b.returnDate) : b.departureDate;
-      return '<div class="budget-row">' +
+      return '<div class="budget-row" style="cursor:pointer;" tabindex="0" role="button" data-chart-key="budget:' + b.code + ':' + (b.tripType === 'oneway' ? 'oneway' : 'roundtrip') + '" data-chart-title="' + TravelCharts.esc(b.name + ' (' + tripLabel + ')') + '" data-chart-currency="USD" title="לחצו לגרף היסטוריית מחיר">' +
         '<div><div class="bname">' + b.name + ' (' + tripLabel + ')</div><div class="bdates">' + dates + '</div></div>' +
         '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + (b.bookingLink ? '<a href="' + b.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
       '</div>';
@@ -1462,6 +1724,7 @@ function render(latest, history) {
 
   populateFilter(allResults);
   renderRows(allResults);
+  renderDealMap();
 }
 
 loadData();
