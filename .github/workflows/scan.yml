@@ -54,6 +54,11 @@ jobs:
       - name: QA - validate config files
         run: node scripts/validate-config.js
 
+      # Unit tests (no dependencies, no secrets, no network). A failure stops the scan
+      # so broken code never writes data/ or sends Telegram alerts.
+      - name: QA - run tests
+        run: npm test
+
       - name: Run scan
         env:
           TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}
