@@ -150,3 +150,13 @@ test('index.html: balanced tags and inline script parses', () => {
   scripts.forEach((s) => new Function(s)); // throws on syntax error
   assert.match(html, /<script src="charts\.js"><\/script>[\s\S]*<script>/, 'charts.js must load before the inline script');
 });
+
+test('scripts: every local require() resolves, and there is no stale root copy of travelpayouts.js', () => {
+  for (const f of fs.readdirSync(path.join(ROOT, 'scripts')).filter((n) => n.endsWith('.js'))) {
+    const src = read('scripts/' + f);
+    for (const m of src.matchAll(/require\("(\.[^"]+)"\)/g)) {
+      assert.doesNotThrow(() => require.resolve(path.join(ROOT, 'scripts', m[1])), f + ' requires missing ' + m[1]);
+    }
+  }
+  assert.ok(!fs.existsSync(path.join(ROOT, 'travelpayouts.js')), 'stale root travelpayouts.js is back');
+});
