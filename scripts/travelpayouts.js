@@ -3,6 +3,8 @@
 // Token: https://app.travelpayouts.com/profile/api-token
 // Docs: https://travelpayouts.github.io/slate/#about-api
 
+const { airlineInfo } = require("../flight-info");
+
 const BASE_URL = "https://api.travelpayouts.com";
 
 function getToken() {
@@ -72,52 +74,138 @@ function daysBetween(a, b) {
   return Math.round((d2 - d1) / 86400000);
 }
 
-// The week-matrix cache sometimes pairs a depart_date from one cached search
-// with a return_date from an unrelated one, producing nonsensical "trips"
-// (e.g. returning before departing, or a 90-day trip when 7 was requested).
-// We only trust entries whose actual trip length is close to what was asked for.
-function pickBest(entries, { exactDepartDate, exactReturnDate, flexible, flexDays }) {
-  if (!entries || entries.length === 0) return null;
+// ---- normalizing API entries ----
+// The two endpoints return different shapes:
+//   /v2/prices/week-matrix          -> value, depart_date, return_date, number_of_changes, found_at (no airline)
+//   /aviasales/v3/prices_for_dates  -> price, departure_at, return_at, airline, flight_number, transfers
+// toOffer() maps both to one shape so selection/enrichment logic doesn't care where a price came from.
+function num(v) {
+  return typeof v === "number" && isFinite(v) ? v : null;
+}
+
+function toOffer(e, source) {
+  if (!e) return null;
+  const dep = e.departure_at || e.depart_date || null;
+  const ret = e.return_at || e.return_date || null;
+  const price = num(e.price) != null ? e.price : num(e.value);
+  if (!dep || price == null || price <= 0) return null;
+  const depStr = String(dep);
+  return {
+    departDate: depStr.slice(0, 10),
+    returnDate: ret ? String(ret).slice(0, 10) : null,
+    // departure_at is local airport time with offset ("2026-12-20T06:20:00+02:00") - keep the clock time as shown on the ticket
+    departTime: depStr.length >= 16 && depStr[10] === "T" ? depStr.slice(11, 16) : null,
+    price,
+    airline: e.airline || null,
+    flightNumber: e.flight_number != null && e.flight_number !== "" ? String(e.flight_number) : null,
+    transfers: num(e.transfers) != null ? e.transfers : num(e.number_of_changes),
+    returnTransfers: num(e.return_transfers),
+    foundAt: e.found_at || null,
+    source,
+  };
+}
+
+// Fill missing details (airline, flight number, found_at...) of the chosen offer from an
+// offer for the SAME dates at (almost) the same price from the other endpoint.
+const ENRICH_FIELDS = ["airline", "flightNumber", "departTime", "transfers", "returnTransfers", "foundAt"];
+function enrichOffer(best, offers) {
+  if (!best) return best;
+  const out = { ...best };
+  for (const o of offers) {
+    if (!o || o === best) continue;
+    if (o.departDate !== best.departDate || o.returnDate !== best.returnDate) continue;
+    if (Math.abs(o.price - best.price) > best.price * 0.03) continue;
+    for (const f of ENRICH_FIELDS) if (out[f] == null && o[f] != null) out[f] = o[f];
+  }
+  return out;
+}
+
+// Log which fields each endpoint actually returns, once per run, so a real run's
+// Actions log shows whether airline / found_at are available (no secrets in it).
+const loggedFields = new Set();
+function logFieldsOnce(label, entry) {
+  if (!entry || loggedFields.has(label)) return;
+  loggedFields.add(label);
+  console.log(`[api-fields] ${label}: ${Object.keys(entry).sort().join(",")}`);
+}
+
+function daysBetween(a, b) {
+  const d1 = new Date(a + "T00:00:00Z");
+  const d2 = new Date(b + "T00:00:00Z");
+  return Math.round((d2 - d1) / 86400000);
+}
+
+// The cache sometimes pairs a depart date from one cached search with a return
+// date from an unrelated one, producing nonsensical "trips" (e.g. returning before
+// departing, or a 90-day trip when 7 was requested). We only trust offers whose
+// actual trip length is close to what was asked for.
+function pickBest(offers, { exactDepartDate, exactReturnDate, flexible, flexDays }) {
+  if (!offers || offers.length === 0) return null;
 
   const intendedDuration = daysBetween(exactDepartDate, exactReturnDate);
   const tolerance = flexible ? flexDays + 1 : 1;
 
-  const sane = entries.filter((e) => {
-    if (!e.depart_date || !e.return_date) return false;
-    const duration = daysBetween(e.depart_date, e.return_date);
-    return duration > 0 && Math.abs(duration - intendedDuration) <= tolerance;
+  const sane = offers.filter((o) => {
+    if (!o || !o.departDate || !o.returnDate) return false;
+    const duration = daysBetween(o.departDate, o.returnDate);
+    if (!(duration > 0 && Math.abs(duration - intendedDuration) <= tolerance)) return false;
+    // flexible mode: departure must stay within ±flexDays of the requested date
+    if (flexible && Math.abs(daysBetween(exactDepartDate, o.departDate)) > flexDays) return false;
+    return true;
   });
   if (sane.length === 0) return null; // cache had nothing trustworthy for this route
 
-  const candidates = flexible ? sane : sane.filter((e) => e.depart_date === exactDepartDate);
+  const candidates = flexible ? sane : sane.filter((o) => o.departDate === exactDepartDate);
   const pool = candidates.length > 0 ? candidates : sane; // fallback within the sane set only
 
   let best = null;
-  for (const e of pool) {
-    if (!best || e.value < best.value) best = e;
+  for (const o of pool) {
+    if (!best || o.price < best.price) best = o;
   }
-  if (!best) return null;
+  return best;
+}
+
+// Round-trip prices with flight details (airline, flight number, departure time).
+async function roundTripForDates({ origin, destination, departDate, returnDate, flexible, currency }) {
+  try {
+    const data = await tpGet("/aviasales/v3/prices_for_dates", {
+      origin,
+      destination,
+      departure_at: flexible ? departDate.slice(0, 7) : departDate,
+      return_at: flexible ? undefined : returnDate,
+      one_way: false,
+      direct: false,
+      sorting: "price",
+      limit: 30,
+      currency,
+    });
+    return data.data || [];
+  } catch (err) {
+    console.log(`  roundTripForDates ${origin}->${destination}: ${err.message}`);
+    return [];
+  }
+}
+
+// Booking-side extras added to every offer the scanner returns.
+function withLinks(offer, { origin, destination }) {
   return {
-    departDate: best.depart_date,
-    returnDate: best.return_date,
-    price: best.value,
-    airline: best.airline || null,
-    transfers: typeof best.transfers === "number" ? best.transfers : null,
-    bookingLink: best.link ? `https://www.aviasales.com${best.link}` : null,
+    ...offer,
+    bookingLink: googleFlightsLink({ origin, destination, departDate: offer.departDate, returnDate: offer.returnDate }),
+    airlineLink: (airlineInfo(offer.airline) || {}).url || null,
   };
 }
 
 async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency, adults }) {
-  const entries = await weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency });
-  const best = pickBest(entries, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
+  const [wm, v3] = await Promise.all([
+    weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency }),
+    roundTripForDates({ origin, destination, departDate: departureDate, returnDate, flexible, currency }),
+  ]);
+  logFieldsOnce("week-matrix", wm[0]);
+  logFieldsOnce("prices_for_dates (round-trip)", v3[0]);
+  const offers = [...wm.map((e) => toOffer(e, "week-matrix")), ...v3.map((e) => toOffer(e, "prices_for_dates"))].filter(Boolean);
+  const best = pickBest(offers, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
   if (!best) return null;
-  best.bookingLink = googleFlightsLink({
-    origin,
-    destination,
-    departDate: best.departDate,
-    returnDate: best.returnDate,
-  });
-  return best;
+  return withLinks(enrichOffer(best, offers), { origin, destination });
 }
 
 // One-way fare for a single date (or nearby, when flexible) using the
@@ -153,20 +241,9 @@ async function cheapestOneWay({ origin, destination, departureDate, flexible, fl
     for (const e of pool) {
       if (!best || e.price < best.price) best = e;
     }
-    if (!best) return null;
-    return {
-      departDate: best.departure_at.slice(0, 10),
-      returnDate: null,
-      price: best.price,
-      airline: best.airline || null,
-      transfers: typeof best.transfers === "number" ? best.transfers : null,
-      bookingLink: googleFlightsLink({
-        origin,
-        destination,
-        departDate: best.departure_at.slice(0, 10),
-        returnDate: null,
-      }),
-    };
+    logFieldsOnce("prices_for_dates (one-way)", best);
+    const offer = toOffer({ ...best, return_at: null }, "prices_for_dates");
+    return offer ? withLinks(offer, { origin, destination }) : null;
   } catch (err) {
     console.log(`  cheapestOneWay ${origin}->${destination}: ${err.message}`);
     return null;
@@ -190,14 +267,8 @@ async function cheapestOneWayInMonth({ origin, destination, yearMonth, currency 
     });
     const best = (data.data || [])[0];
     if (!best) return null;
-    return {
-      departDate: best.departure_at.slice(0, 10),
-      returnDate: null,
-      price: best.price,
-      airline: best.airline || null,
-      transfers: typeof best.transfers === "number" ? best.transfers : null,
-      bookingLink: googleFlightsLink({ origin, destination, departDate: best.departure_at.slice(0, 10), returnDate: null }),
-    };
+    const offer = toOffer({ ...best, return_at: null }, "prices_for_dates");
+    return offer ? withLinks(offer, { origin, destination }) : null;
   } catch (err) {
     console.log(`  cheapestOneWayInMonth ${origin}->${destination} ${yearMonth}: ${err.message}`);
     return null;
@@ -228,19 +299,8 @@ async function cheapestRoundTripInMonth({ origin, destination, yearMonth, curren
       if (!best || e.price < best.price) best = e;
     }
     if (!best) return null;
-    return {
-      departDate: best.departure_at.slice(0, 10),
-      returnDate: best.return_at.slice(0, 10),
-      price: best.price,
-      airline: best.airline || null,
-      transfers: typeof best.transfers === "number" ? best.transfers : null,
-      bookingLink: googleFlightsLink({
-        origin,
-        destination,
-        departDate: best.departure_at.slice(0, 10),
-        returnDate: best.return_at.slice(0, 10),
-      }),
-    };
+    const offer = toOffer(best, "prices_for_dates");
+    return offer ? withLinks(offer, { origin, destination }) : null;
   } catch (err) {
     console.log(`  cheapestRoundTripInMonth ${origin}->${destination} ${yearMonth}: ${err.message}`);
     return null;
@@ -288,6 +348,8 @@ async function getAirlineName(code) {
 }
 
 module.exports = {
+  // exported for tests
+  _internal: { toOffer, enrichOffer, pickBest },
   cheapestRoundTrip,
   cheapestOneWay,
   cheapestOneWayInMonth,
