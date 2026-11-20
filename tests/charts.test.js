@@ -96,20 +96,37 @@ test('dealBarsHTML: limit, deal marker, direction classes, escaping', () => {
   assert.match(both, /db-bar pricey/);
 });
 
-test('real data: every history key the dashboard asks for exists in history.json', () => {
-  const latest = JSON.parse(read('data/latest.json'));
-  const history = JSON.parse(read('data/history.json'));
+// Code-only check (must NOT depend on data/*.json: this suite runs before every scheduled scan,
+// and data legitimately has results without history, e.g. after a one-off search to a new city).
+test('history keys: dashboard builds the same keys as scripts/scan.js', () => {
+  const scan = read('scripts/scan.js');
   const html = read('index.html');
-  // the dashboard's watchlist key must use the requested dates like scan.js watchKey()
-  assert.match(html, /function watchHistoryKey\(w\)[\s\S]*requestedDepartureDate[\s\S]*requestedReturnDate/);
-  for (const w of latest.watchlistResults || []) {
-    const key = 'watch:' + w.code + ':' + (w.requestedDepartureDate || w.departureDate) + ':' + (w.requestedReturnDate || w.returnDate);
-    assert.ok(history[key], 'missing history for ' + key);
+  const fn = (src, name) => {
+    const m = src.match(new RegExp('function ' + name + '\\([^)]*\\) \\{[\\s\\S]*?\\n\\}'));
+    assert.ok(m, name + '() not found');
+    return new Function(m[0] + '; return ' + name + ';')();
+  };
+  const watchKey = fn(scan, 'watchKey');
+  const budgetKey = fn(scan, 'budgetKey');
+  const watchHistoryKey = fn(html, 'watchHistoryKey');
+
+  // scan.js keys watchlist history by the REQUESTED dates; the result carries the dates actually found.
+  const item = { destination: 'LIS', departureDate: '2027-04-20', returnDate: '2027-04-30' };
+  const result = { code: 'LIS', departureDate: '2027-04-22', returnDate: '2027-05-02', requestedDepartureDate: '2027-04-20', requestedReturnDate: '2027-04-30' };
+  assert.strictEqual(watchHistoryKey(result), watchKey(item));
+
+  for (const tripType of ['roundtrip', 'oneway']) {
+    const b = { code: 'ROM', tripType };
+    const dashboardKey = 'budget:' + b.code + ':' + (b.tripType === 'oneway' ? 'oneway' : 'roundtrip');
+    assert.strictEqual(dashboardKey, budgetKey(b));
   }
-  for (const b of latest.budgetResults || []) {
-    assert.ok(history['budget:' + b.code + ':' + b.tripType], 'missing history for budget ' + b.code);
-  }
-  for (const r of latest.results || []) assert.ok(history[r.code], 'missing history for ' + r.code);
+  assert.ok(html.includes("data-chart-key=\"budget:' + b.code + ':' + (b.tripType === 'oneway' ? 'oneway' : 'roundtrip')"),
+    'dashboard budget key expression changed - update this test');
+});
+
+test('test suite does not read live data files (would block scheduled scans)', () => {
+  const self = fs.readFileSync(__filename, 'utf8').replace(/test\('test suite does not read[\s\S]*$/, '');
+  assert.doesNotMatch(self, /read\('data\//);
 });
 
 test('version: APP_VERSION matches the newest changelog entry', () => {
