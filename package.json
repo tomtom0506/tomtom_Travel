@@ -4,7 +4,8 @@
   "description": "Scans flight/hotel prices from TLV to Europe and alerts via Telegram on good deals",
   "main": "scripts/scan.js",
   "scripts": {
-    "scan": "node scripts/scan.js"
+    "scan": "node scripts/scan.js",
+    "test": "node --test tests/*.test.js"
   },
   "engines": {
     "node": ">=20"
