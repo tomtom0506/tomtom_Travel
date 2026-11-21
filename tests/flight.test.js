@@ -64,8 +64,8 @@ test('cheapestRoundTrip: merges endpoints - week-matrix price gets airline from 
   assert.strictEqual(r.flightNumber, '2327');
   assert.strictEqual(r.departTime, '06:20');
   assert.strictEqual(r.foundAt, '2026-11-18T07:43:43');
-  assert.strictEqual(r.airlineLink, 'https://wizzair.com/');
-  assert.match(r.bookingLink, /^https:\/\/www\.google\.com\/travel\/flights\?/);
+  assert.strictEqual(r.airlineLink, 'https://wizzair.com/he-il/booking/select-flight/TLV/BCN/2026-12-20/2026-12-27/1/0/0/null');
+  assert.strictEqual(r.bookingLink, 'https://www.aviasales.com/search/TLV2012BCN27121');
 });
 
 test('cheapestRoundTrip: does NOT borrow airline from a different-priced or different-date offer', async () => {
@@ -122,7 +122,8 @@ test('cheapestRoundTrip: one endpoint failing still returns a price from the oth
   const r = await tp.cheapestRoundTrip(base);
   restore();
   assert.deepStrictEqual([r.price, r.airline, r.foundAt], [700, 'LY', null]);
-  assert.strictEqual(r.airlineLink, 'https://www.elal.com/');
+  assert.strictEqual(r.airlineLink, null, 'El Al has no verified deep-link format -> Aviasales only');
+  assert.strictEqual(r.bookingLink, 'https://www.aviasales.com/search/TLV2012BCN27121');
 });
 
 test('cheapestRoundTrip: requests exact return date from v3 in exact mode, month in flexible mode', async () => {
@@ -146,13 +147,14 @@ test('one-way and month functions carry flight details and links', async () => {
   restore();
   for (const r of [ow, owm]) {
     assert.deepStrictEqual([r.departDate, r.returnDate, r.departTime, r.airline, r.flightNumber, r.airlineLink],
-      ['2026-12-03', null, '05:45', 'W6', '2325', 'https://wizzair.com/']);
+      ['2026-12-03', null, '05:45', 'W6', '2325', 'https://wizzair.com/he-il/booking/select-flight/TLV/BCN/2026-12-03/null/1/0/0/null']);
+    assert.strictEqual(r.bookingLink, 'https://www.aviasales.com/search/TLV0312BCN1');
   }
   mockApi({ [V3]: () => [{ price: 99, departure_at: '2026-12-03T05:45:00+02:00', return_at: '2026-12-10T20:00:00+01:00', airline: 'FR' }] });
   const restore2 = quiet();
   const rt = await tp.cheapestRoundTripInMonth({ origin: 'TLV', destination: 'BCN', yearMonth: '2026-12', currency: 'USD', maxTripNights: 14 });
   restore2();
-  assert.deepStrictEqual([rt.returnDate, rt.airlineLink], ['2026-12-10', 'https://www.ryanair.com/']);
+  assert.deepStrictEqual([rt.returnDate, rt.airlineLink, rt.bookingLink], ['2026-12-10', null, 'https://www.aviasales.com/search/TLV0312BCN10121']);
 });
 
 // ---- flight-info.js ----
@@ -182,14 +184,42 @@ test('stopsText', () => {
   assert.deepStrictEqual([0, 1, 2, null, NaN].map(FI.stopsText), ['ישירה', 'עצירה אחת', '2 עצירות', null, null]);
 });
 
-test('airline map: case-insensitive lookup, every site is https, unknown code -> null', () => {
+test('airline map: case-insensitive lookup, unknown code -> null', () => {
   assert.strictEqual(FI.airlineInfo('w6').name, 'Wizz Air');
   assert.strictEqual(FI.airlineInfo('ZZ'), null);
   assert.strictEqual(FI.airlineInfo(null), null);
-  for (const [code, a] of Object.entries(FI.AIRLINES)) {
-    assert.match(a.url, /^https:\/\/[a-z0-9.-]+\/$/, code);
-    assert.ok(a.name, code);
+  for (const [code, a] of Object.entries(FI.AIRLINES)) assert.ok(a.name, code);
+});
+
+// Formats verified by hand from an Israeli phone (21.11.2026) - see flight-info.js.
+test('aviasalesLink: built URL, one-way, API ticket path, rejects foreign paths', () => {
+  assert.strictEqual(FI.aviasalesLink({ origin: 'TLV', destination: 'SOF', departDate: '2026-12-21', returnDate: '2026-12-28' }), 'https://www.aviasales.com/search/TLV2112SOF28121');
+  assert.strictEqual(FI.aviasalesLink({ origin: 'TLV', destination: 'SOF', departDate: '2026-12-21' }), 'https://www.aviasales.com/search/TLV2112SOF1');
+  assert.strictEqual(FI.aviasalesLink({ path: '/search/TLV2112SOF28121?t=W617661', origin: 'TLV', destination: 'SOF', departDate: '2026-12-21' }), 'https://www.aviasales.com/search/TLV2112SOF28121?t=W617661');
+  assert.strictEqual(FI.aviasalesLink({ path: '//evil.example/x', origin: 'TLV', destination: 'SOF', departDate: '2026-12-21' }), 'https://www.aviasales.com/search/TLV2112SOF1');
+  assert.strictEqual(FI.aviasalesLink({}), null);
+});
+
+test('airlineBookingLink: Wizz Air codes only, airport codes required', () => {
+  const trip = { origin: 'TLV', destination: 'SOF', departDate: '2026-12-21', returnDate: '2026-12-28' };
+  for (const code of ['W6', 'W4', 'w9', '5W']) {
+    assert.strictEqual(FI.airlineBookingLink({ airline: code, ...trip }), 'https://wizzair.com/he-il/booking/select-flight/TLV/SOF/2026-12-21/2026-12-28/1/0/0/null');
   }
+  assert.strictEqual(FI.airlineBookingLink({ airline: 'W6', ...trip, returnDate: null }), 'https://wizzair.com/he-il/booking/select-flight/TLV/SOF/2026-12-21/null/1/0/0/null');
+  assert.strictEqual(FI.airlineBookingLink({ airline: 'LY', ...trip }), null);
+  assert.strictEqual(FI.airlineBookingLink({ airline: 'W6', ...trip, destination: 'X/Y' }), null);
+});
+
+test('cheapestRoundTrip: Wizz deep link uses the API airport code (LON -> LTN) and the API ticket path', async () => {
+  mockApi({
+    [WM]: () => [],
+    [V3]: () => [{ price: 596, departure_at: '2026-12-20T18:55:00+02:00', return_at: '2026-12-27T10:00:00+00:00', airline: 'W6', origin_airport: 'TLV', destination_airport: 'LTN', link: '/search/TLV2012LON27121?t=W6x' }],
+  });
+  const restore = quiet();
+  const r = await tp.cheapestRoundTrip({ ...base, destination: 'LON' });
+  restore();
+  assert.strictEqual(r.airlineLink, 'https://wizzair.com/he-il/booking/select-flight/TLV/LTN/2026-12-20/2026-12-27/1/0/0/null');
+  assert.strictEqual(r.bookingLink, 'https://www.aviasales.com/search/TLV2012LON27121?t=W6x');
 });
 
 test('scan.js: all three Telegram messages come from scripts/messages.js', () => {

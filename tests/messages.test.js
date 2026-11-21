@@ -8,8 +8,8 @@ const M = require('../scripts/messages.js');
 const NOW = Date.parse('2027-01-01T12:00:00Z');
 const naples = {
   code: 'NAP', name: 'נאפולי', departureDate: '2027-01-14', returnDate: '2027-01-21', approxPrice: 305,
-  discountPercent: 40, transfers: 0, airline: 'W6', airlineName: 'Wizz Air', airlineLink: 'https://wizzair.com/',
-  bookingLink: 'https://www.google.com/travel/flights?q=Flights+from+TLV+to+NAP&hl=he&gl=IL&curr=ILS',
+  discountPercent: 40, transfers: 0, airline: 'W6', airlineName: 'Wizz Air', airlineLink: 'https://wizzair.com/he-il/booking/select-flight/TLV/NAP/2027-01-14/2027-01-21/1/0/0/null',
+  bookingLink: 'https://www.aviasales.com/search/TLV1401NAP21011?t=W6abc&x=1',
   foundAt: '2026-12-31T12:00:00', hotel: { bookingUrl: 'https://www.booking.com/searchresults.html?ss=x&checkin=2027-01-14' },
 };
 const ctx = { origin: 'TLV', currency: 'ILS', blurb: 'פיצה נפוליטנית אמיתית, נוף לווזוב.', now: NOW };
@@ -23,8 +23,8 @@ test('deal message matches the requested layout', () => {
   assert.strictEqual(lines[3], '📅 14.1 – 21.1.2027 (שבוע שלם)');
   assert.strictEqual(lines[4], '💰 הלוך-חזור מ-₪305 בלבד (כ-40% מתחת למחיר הרגיל במסלול)');
   assert.strictEqual(lines[6], 'פיצה נפוליטנית אמיתית, נוף לווזוב.');
-  assert.strictEqual(lines[8], '🔗 <a href="https://wizzair.com/">להזמנת הטיסה באתר Wizz Air</a>');
-  assert.match(lines[9], /^🔎 <a href="https:\/\/www\.google\.com\/travel\/flights\?q=Flights\+from\+TLV\+to\+NAP&amp;hl=he&amp;gl=IL&amp;curr=ILS">השוואת מחירים ב-Google Flights<\/a>$/);
+  assert.strictEqual(lines[8], '🔗 <a href="https://wizzair.com/he-il/booking/select-flight/TLV/NAP/2027-01-14/2027-01-21/1/0/0/null">להזמנת הטיסה באתר Wizz Air</a>');
+  assert.strictEqual(lines[9], '🔎 <a href="https://www.aviasales.com/search/TLV1401NAP21011?t=W6abc&amp;x=1">כל המחירים לתאריכים האלה ב-Aviasales</a>');
   assert.match(lines[10], /^🏨 <a href="[^"]+">מלונות בנאפולי לתאריכים האלה<\/a>$/);
   assert.strictEqual(lines[12], '⚠️ המחיר נמצא אתמול בחיפושים אחרונים ועשוי להשתנות.');
 });
@@ -34,8 +34,8 @@ test('deal message: no airline -> Google is the booking link; stops; no blurb; s
   const msg = M.dealMessage(r, { ...ctx, blurb: null });
   assert.match(msg, /^✈️ <b>נאפולי ב-₪305 הלוך-חזור!<\/b>/);
   assert.match(msg, /📍 תל אביב ⇄ נאפולי, עם עצירה אחת\n/);
-  assert.match(msg, /🔗 <a href="https:\/\/www\.google\.com[^"]+">להזמנת הטיסה<\/a>/);
-  assert.doesNotMatch(msg, /השוואת מחירים/);
+  assert.match(msg, /🔗 <a href="https:\/\/www\.aviasales\.com\/search\/[^"]+">להזמנת הטיסה<\/a>/);
+  assert.doesNotMatch(msg, /כל המחירים לתאריכים/);
   assert.doesNotMatch(msg, /\n\n\n/, 'no empty block left where the blurb would be');
   assert.match(msg, /לפני 7 ימים בחיפושים אחרונים וסביר שכבר השתנה/);
 });
@@ -101,9 +101,8 @@ test('HTML safety: API text cannot inject markup; only <b> and <a> tags are prod
 test('toPlainText: anchors become "text: url", entities decoded', () => {
   const plain = M.toPlainText(M.dealMessage(naples, ctx));
   assert.doesNotMatch(plain, /<\/?(a|b)[ >]/);
-  assert.match(plain, /🔗 להזמנת הטיסה באתר Wizz Air: https:\/\/wizzair\.com\/\n/);
-  assert.match(plain, /curr=ILS/);
-  assert.match(plain, /&hl=he/);
+  assert.match(plain, /🔗 להזמנת הטיסה באתר Wizz Air: https:\/\/wizzair\.com\/he-il\/booking\/select-flight\/TLV\/NAP\/[^\n]+\n/);
+  assert.match(plain, /\?t=W6abc&x=1/);
 });
 
 test('telegram.js resends as plain text when Telegram rejects the HTML (400)', async () => {
@@ -122,7 +121,7 @@ test('telegram.js resends as plain text when Telegram rejects the HTML (400)', a
   console.error = err; console.log = log;
   assert.strictEqual(sent.length, 2);
   assert.strictEqual(sent[1].parse_mode, undefined);
-  assert.match(sent[1].text, /להזמנת הטיסה באתר Wizz Air: https:\/\/wizzair\.com\//);
+  assert.match(sent[1].text, /להזמנת הטיסה באתר Wizz Air: https:\/\/wizzair\.com\/he-il\//);
 });
 
 test('every destination has a short Hebrew blurb with no stray characters', () => {

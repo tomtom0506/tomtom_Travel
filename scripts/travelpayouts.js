@@ -3,7 +3,7 @@
 // Token: https://app.travelpayouts.com/profile/api-token
 // Docs: https://travelpayouts.github.io/slate/#about-api
 
-const { airlineInfo } = require("../flight-info");
+const { aviasalesLink, airlineBookingLink } = require("../flight-info");
 
 const BASE_URL = "https://api.travelpayouts.com";
 
@@ -29,22 +29,6 @@ async function tpGet(path, params) {
     throw new Error(`Travelpayouts GET ${path} returned success=false: ${JSON.stringify(data)}`);
   }
   return data;
-}
-
-// Aviasales geo-redirects Israeli IPs to aviasales.ru regardless of URL
-// format or locale params - this is server-side geo-detection we can't
-// override from a link. Google Flights respects browser/account locale
-// properly and needs no API key, so we use that as the booking link instead.
-function googleFlightsLink({ origin, destination, departDate, returnDate }) {
-  const q = returnDate
-    ? `Flights from ${origin} to ${destination} on ${departDate} through ${returnDate}`
-    : `Flights from ${origin} to ${destination} on ${departDate}`;
-  const url = new URL("https://www.google.com/travel/flights");
-  url.searchParams.set("q", q);
-  url.searchParams.set("hl", "he");
-  url.searchParams.set("gl", "IL");
-  url.searchParams.set("curr", "ILS");
-  return url.toString();
 }
 
 // One call returns a week-wide window of cached round-trip prices
@@ -101,13 +85,16 @@ function toOffer(e, source) {
     transfers: num(e.transfers) != null ? e.transfers : num(e.number_of_changes),
     returnTransfers: num(e.return_transfers),
     foundAt: e.found_at || null,
+    link: typeof e.link === "string" ? e.link : null, // Aviasales ticket path (v3 only)
+    originAirport: e.origin_airport || null,
+    destinationAirport: e.destination_airport || null,
     source,
   };
 }
 
 // Fill missing details (airline, flight number, found_at...) of the chosen offer from an
 // offer for the SAME dates at (almost) the same price from the other endpoint.
-const ENRICH_FIELDS = ["airline", "flightNumber", "departTime", "transfers", "returnTransfers", "foundAt"];
+const ENRICH_FIELDS = ["airline", "flightNumber", "departTime", "transfers", "returnTransfers", "foundAt", "link", "originAirport", "destinationAirport"];
 function enrichOffer(best, offers) {
   if (!best) return best;
   const out = { ...best };
@@ -186,12 +173,20 @@ async function roundTripForDates({ origin, destination, departDate, returnDate, 
   }
 }
 
-// Booking-side extras added to every offer the scanner returns.
+// Booking links added to every offer the scanner returns:
+//   bookingLink - Aviasales page for this route/dates (same price source as ours)
+//   airlineLink - the airline's own booking page with the flight preselected (Wizz Air only, verified format)
 function withLinks(offer, { origin, destination }) {
+  const dates = { departDate: offer.departDate, returnDate: offer.returnDate };
   return {
     ...offer,
-    bookingLink: googleFlightsLink({ origin, destination, departDate: offer.departDate, returnDate: offer.returnDate }),
-    airlineLink: (airlineInfo(offer.airline) || {}).url || null,
+    bookingLink: aviasalesLink({ origin, destination, ...dates, path: offer.link }),
+    airlineLink: airlineBookingLink({
+      airline: offer.airline,
+      origin: offer.originAirport || origin,
+      destination: offer.destinationAirport || destination,
+      ...dates,
+    }),
   };
 }
 
