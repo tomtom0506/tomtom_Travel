@@ -897,7 +897,7 @@
 <script src="flight-info.js"></script>
 <script src="charts.js"></script>
 <script>
-const APP_VERSION = "1.17.0";
+const APP_VERSION = "1.18.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -1483,11 +1483,11 @@ function applyFilter() {
 }
 
 // ---- flight details + purchase links (shared by board, watchlist, budget) ----
-// Older data (from before v1.17) has only the airline code - fill name/site from the shared map.
+// Older data may have only the airline code - fill the display name from the shared map.
 function withAirline(r) {
   const info = FlightInfo.airlineInfo(r.airline);
-  if (!info) return r;
-  return Object.assign({}, r, { airlineName: r.airlineName || info.name, airlineLink: r.airlineLink || info.url });
+  if (!info || r.airlineName) return r;
+  return Object.assign({}, r, { airlineName: info.name });
 }
 
 function flightMetaHTML(r) {
@@ -1507,15 +1507,18 @@ function flightMetaHTML(r) {
   return html;
 }
 
+// Primary button opens the flight itself: the airline's booking page with the flight
+// preselected (Wizz Air), otherwise Aviasales for these dates (same source as our prices).
 function buyLinksHTML(r) {
   r = withAirline(r);
   const esc = TravelCharts.esc;
   const links = [];
   if (r.airlineLink) {
-    links.push('<a href="' + esc(r.airlineLink) + '" target="_blank" rel="noopener" class="booking-link" title="קנייה ישירה באתר חברת התעופה">' + esc(r.airlineName || r.airline || 'אתר החברה') + ' ↗</a>');
+    links.push('<a href="' + esc(r.airlineLink) + '" target="_blank" rel="noopener" class="booking-link" title="הזמנה ישירה באתר חברת התעופה">' + esc(r.airlineName || r.airline || 'אתר החברה') + ' ↗</a>');
   }
   if (r.bookingLink) {
-    links.push('<a href="' + esc(r.bookingLink) + '" target="_blank" rel="noopener" class="booking-link' + (r.airlineLink ? ' alt' : '') + '" title="השוואת מחירים חיים ב-Google Flights">Google ↗</a>');
+    const host = /aviasales/.test(r.bookingLink) ? 'Aviasales' : 'Google';
+    links.push('<a href="' + esc(r.bookingLink) + '" target="_blank" rel="noopener" class="booking-link' + (r.airlineLink ? ' alt' : '') + '" title="' + host + ' - מחירים לתאריכים האלה">' + host + ' ↗</a>');
   }
   return links.length ? '<div class="buy-links">' + links.join('') + '</div>' : '';
 }

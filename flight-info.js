@@ -4,63 +4,89 @@
 (function (root) {
   'use strict';
 
-  // Official websites of airlines that commonly fly TLV <-> Europe.
-  // Homepages only: airlines don't offer stable public deep-link formats, and a broken
-  // deep link is worse than one extra search on the airline's own site.
+  // Airline display names (IATA code -> name). Hebrew for Israeli carriers.
   const AIRLINES = {
-    W6: { name: 'Wizz Air', url: 'https://wizzair.com/' },
-    W4: { name: 'Wizz Air Malta', url: 'https://wizzair.com/' },
-    W9: { name: 'Wizz Air UK', url: 'https://wizzair.com/' },
-    '5W': { name: 'Wizz Air Abu Dhabi', url: 'https://wizzair.com/' },
-    FR: { name: 'Ryanair', url: 'https://www.ryanair.com/' },
-    RK: { name: 'Ryanair UK', url: 'https://www.ryanair.com/' },
-    AL: { name: 'Malta Air (Ryanair)', url: 'https://www.ryanair.com/' },
-    U2: { name: 'easyJet', url: 'https://www.easyjet.com/' },
-    EC: { name: 'easyJet Europe', url: 'https://www.easyjet.com/' },
-    DS: { name: 'easyJet Switzerland', url: 'https://www.easyjet.com/' },
-    LY: { name: 'אל על', url: 'https://www.elal.com/' },
-    '6H': { name: 'ישראייר', url: 'https://www.israir.co.il/' },
-    IZ: { name: 'ארקיע', url: 'https://www.arkia.co.il/' },
-    A3: { name: 'Aegean', url: 'https://en.aegeanair.com/' },
-    OA: { name: 'Olympic Air', url: 'https://www.olympicair.com/' },
-    GQ: { name: 'Sky Express', url: 'https://www.skyexpress.gr/' },
-    BZ: { name: 'Blue Bird Airways', url: 'https://www.bluebirdair.com/' },
-    QS: { name: 'Smartwings', url: 'https://www.smartwings.com/' },
-    OK: { name: 'Czech Airlines', url: 'https://www.smartwings.com/' },
-    LH: { name: 'Lufthansa', url: 'https://www.lufthansa.com/' },
-    LX: { name: 'SWISS', url: 'https://www.swiss.com/' },
-    OS: { name: 'Austrian', url: 'https://www.austrian.com/' },
-    SN: { name: 'Brussels Airlines', url: 'https://www.brusselsairlines.com/' },
-    EW: { name: 'Eurowings', url: 'https://www.eurowings.com/' },
-    AZ: { name: 'ITA Airways', url: 'https://www.ita-airways.com/' },
-    AF: { name: 'Air France', url: 'https://wwws.airfrance.co.il/' },
-    KL: { name: 'KLM', url: 'https://www.klm.co.il/' },
-    HV: { name: 'Transavia', url: 'https://www.transavia.com/' },
-    TO: { name: 'Transavia France', url: 'https://www.transavia.com/' },
-    BA: { name: 'British Airways', url: 'https://www.britishairways.com/' },
-    IB: { name: 'Iberia', url: 'https://www.iberia.com/' },
-    VY: { name: 'Vueling', url: 'https://www.vueling.com/' },
-    UX: { name: 'Air Europa', url: 'https://www.aireuropa.com/' },
-    TP: { name: 'TAP Air Portugal', url: 'https://www.flytap.com/' },
-    LO: { name: 'LOT', url: 'https://www.lot.com/' },
-    TK: { name: 'Turkish Airlines', url: 'https://www.turkishairlines.com/' },
-    PC: { name: 'Pegasus', url: 'https://www.flypgs.com/' },
-    AY: { name: 'Finnair', url: 'https://www.finnair.com/' },
-    SK: { name: 'SAS', url: 'https://www.flysas.com/' },
-    DY: { name: 'Norwegian', url: 'https://www.norwegian.com/' },
-    D8: { name: 'Norwegian', url: 'https://www.norwegian.com/' },
-    BT: { name: 'airBaltic', url: 'https://www.airbaltic.com/' },
-    OU: { name: 'Croatia Airlines', url: 'https://www.croatiaairlines.com/' },
-    JU: { name: 'Air Serbia', url: 'https://www.airserbia.com/' },
-    FB: { name: 'Bulgaria Air', url: 'https://www.air.bg/' },
-    RO: { name: 'TAROM', url: 'https://www.tarom.ro/' },
-    CY: { name: 'Cyprus Airways', url: 'https://www.cyprusairways.com/' },
-    V7: { name: 'Volotea', url: 'https://www.volotea.com/' },
-    LS: { name: 'Jet2', url: 'https://www.jet2.com/' },
-    EI: { name: 'Aer Lingus', url: 'https://www.aerlingus.com/' },
-    H4: { name: 'HiSky', url: 'https://hisky.aero/' },
-    '0B': { name: 'Blue Air', url: 'https://www.flyblue.com/' },
+    W6: { name: 'Wizz Air' },
+    W4: { name: 'Wizz Air Malta' },
+    W9: { name: 'Wizz Air UK' },
+    '5W': { name: 'Wizz Air Abu Dhabi' },
+    FR: { name: 'Ryanair' },
+    RK: { name: 'Ryanair UK' },
+    AL: { name: 'Malta Air (Ryanair)' },
+    U2: { name: 'easyJet' },
+    EC: { name: 'easyJet Europe' },
+    DS: { name: 'easyJet Switzerland' },
+    LY: { name: 'אל על' },
+    '6H': { name: 'ישראייר' },
+    IZ: { name: 'ארקיע' },
+    A3: { name: 'Aegean' },
+    OA: { name: 'Olympic Air' },
+    GQ: { name: 'Sky Express' },
+    BZ: { name: 'Blue Bird Airways' },
+    QS: { name: 'Smartwings' },
+    OK: { name: 'Czech Airlines' },
+    LH: { name: 'Lufthansa' },
+    LX: { name: 'SWISS' },
+    OS: { name: 'Austrian' },
+    SN: { name: 'Brussels Airlines' },
+    EW: { name: 'Eurowings' },
+    AZ: { name: 'ITA Airways' },
+    AF: { name: 'Air France' },
+    KL: { name: 'KLM' },
+    HV: { name: 'Transavia' },
+    TO: { name: 'Transavia France' },
+    BA: { name: 'British Airways' },
+    IB: { name: 'Iberia' },
+    VY: { name: 'Vueling' },
+    UX: { name: 'Air Europa' },
+    TP: { name: 'TAP Air Portugal' },
+    LO: { name: 'LOT' },
+    TK: { name: 'Turkish Airlines' },
+    PC: { name: 'Pegasus' },
+    AY: { name: 'Finnair' },
+    SK: { name: 'SAS' },
+    DY: { name: 'Norwegian' },
+    D8: { name: 'Norwegian' },
+    BT: { name: 'airBaltic' },
+    OU: { name: 'Croatia Airlines' },
+    JU: { name: 'Air Serbia' },
+    FB: { name: 'Bulgaria Air' },
+    RO: { name: 'TAROM' },
+    CY: { name: 'Cyprus Airways' },
+    V7: { name: 'Volotea' },
+    LS: { name: 'Jet2' },
+    EI: { name: 'Aer Lingus' },
+    H4: { name: 'HiSky' },
+    '0B': { name: 'Blue Air' },
   };
+
+  const WIZZ = new Set(['W6', 'W4', 'W9', '5W']);
+
+  // ---- booking links ----
+  // Both formats were checked by hand from an Israeli phone (21.11.2026): they open
+  // the exact route + dates, and aviasales.com is NOT redirected to .ru anymore.
+
+  function ddmm(iso) {
+    const [, m, d] = String(iso).split('-');
+    return d + m;
+  }
+
+  // Aviasales search page for the route/dates - the same source our prices come from.
+  // `path` is the ticket link the API returns ("/search/TLV2112SOF28121?t=..."), which
+  // also highlights that exact ticket; otherwise the plain search URL is built.
+  function aviasalesLink({ origin, destination, departDate, returnDate, path }) {
+    if (path && /^\/search\/[A-Z]{3}\d{4}[A-Z]{3}/.test(path)) return 'https://www.aviasales.com' + path;
+    if (!origin || !destination || !departDate) return null;
+    return 'https://www.aviasales.com/search/' + origin + ddmm(departDate) + destination + (returnDate ? ddmm(returnDate) : '') + '1';
+  }
+
+  // Airline's own booking page with the flight already selected (route + dates).
+  // Only airlines whose format was verified: Wizz Air.
+  function airlineBookingLink({ airline, origin, destination, departDate, returnDate }) {
+    if (!airline || !WIZZ.has(String(airline).toUpperCase())) return null;
+    if (!/^[A-Z]{3}$/.test(origin || '') || !/^[A-Z]{3}$/.test(destination || '') || !departDate) return null;
+    return 'https://wizzair.com/he-il/booking/select-flight/' + origin + '/' + destination + '/' + departDate + '/' + (returnDate || 'null') + '/1/0/0/null';
+  }
 
   function airlineInfo(code) {
     if (!code) return null;
@@ -109,7 +135,7 @@
     return transfers + ' עצירות';
   }
 
-  const api = { AIRLINES, airlineInfo, parseFoundAt, ageHours, ageText, isStale, STALE_HOURS, stopsText };
+  const api = { AIRLINES, airlineInfo, aviasalesLink, airlineBookingLink, parseFoundAt, ageHours, ageText, isStale, STALE_HOURS, stopsText };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.FlightInfo = api;
 })(typeof window !== 'undefined' ? window : this);

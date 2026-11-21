@@ -64,11 +64,13 @@ function routeLine(r, origin, destName) {
   return s;
 }
 
+// "להזמנת הטיסה" opens the flight itself: the airline's booking page with the flight
+// preselected when we have one (Wizz Air), otherwise the Aviasales page for these dates.
 function bookingLines(r, destName, hotelUrl) {
   const lines = [];
   if (r.airlineLink) {
     lines.push(`🔗 ${link(r.airlineLink, `להזמנת הטיסה באתר ${r.airlineName || "חברת התעופה"}`)}`);
-    if (r.bookingLink) lines.push(`🔎 ${link(r.bookingLink, "השוואת מחירים ב-Google Flights")}`);
+    if (r.bookingLink) lines.push(`🔎 ${link(r.bookingLink, "כל המחירים לתאריכים האלה ב-Aviasales")}`);
   } else if (r.bookingLink) {
     lines.push(`🔗 ${link(r.bookingLink, "להזמנת הטיסה")}`);
   }
