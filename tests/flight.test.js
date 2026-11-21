@@ -192,11 +192,10 @@ test('airline map: case-insensitive lookup, every site is https, unknown code ->
   }
 });
 
-test('scan.js: every Telegram message uses the shared detail + link lines', () => {
+test('scan.js: all three Telegram messages come from scripts/messages.js', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/scan.js'), 'utf8');
-  assert.strictEqual((src.match(/detailLines\(/g) || []).length, 4, 'definition + 3 messages');
-  assert.strictEqual((src.match(/linkLines\(/g) || []).length, 4, 'definition + 3 messages');
-  assert.doesNotMatch(src, /לפרטים והזמנה/, 'old single-link wording left behind');
+  for (const fn of ['dealMessage', 'watchMessage', 'budgetMessage']) assert.match(src, new RegExp('Messages\\.' + fn + '\\('), fn);
+  assert.doesNotMatch(src, /לפרטים והזמנה/, 'old message wording left behind');
 });
 
 test('dashboard loads flight-info.js before the inline script', () => {

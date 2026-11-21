@@ -3,6 +3,10 @@ const path = require("path");
 const { cheapestRoundTrip, cheapestOneWay, cheapestOneWayInMonth, cheapestRoundTripInMonth, cheapestHotel, getAirlineName } = require("./travelpayouts");
 const { sendTelegramMessage } = require("./telegram");
 const FlightInfo = require("../flight-info");
+const Messages = require("./messages");
+
+const blurbOf = (code) => (destinations.find((d) => d.code === code) || {}).blurb || null;
+const nameOf = (code) => (destinations.find((d) => d.code === code) || {}).name || code;
 
 const ROOT = path.join(__dirname, "..");
 const settings = JSON.parse(fs.readFileSync(path.join(ROOT, "config/settings.json"), "utf8"));
@@ -76,34 +80,6 @@ async function flightDetails(best) {
     transfers: typeof best.transfers === "number" ? best.transfers : null,
     foundAt: best.foundAt || null,
   };
-}
-
-// Telegram lines for airline / stops / price age / direct purchase - same wording everywhere.
-// Telegram messages are sent with parse_mode=HTML - API-provided text must not inject markup.
-function htmlEsc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function detailLines(r) {
-  const lines = [];
-  const flight = [
-    r.airlineName ? htmlEsc(r.airlineName) : null,
-    r.flightNumber && r.airline ? htmlEsc(`${r.airline} ${r.flightNumber}`) : null,
-    r.departTime ? `יציאה ${htmlEsc(r.departTime)}` : null,
-  ].filter(Boolean).join(" · ");
-  if (flight) lines.push(`✈️ ${flight}`);
-  const stops = FlightInfo.stopsText(r.transfers);
-  if (stops) lines.push(`🔁 טיסה: ${stops}${r.transfers === 0 ? " ✅" : ""}`);
-  const age = FlightInfo.ageText(r.foundAt);
-  if (age) lines.push(`🕒 המחיר נמצא ${age}${FlightInfo.isStale(r.foundAt) ? " - ייתכן שכבר השתנה" : ""}`);
-  return lines;
-}
-
-function linkLines(r) {
-  const lines = [];
-  if (r.airlineLink) lines.push(`🛫 קנייה ישירה באתר ${r.airlineName ? htmlEsc(r.airlineName) : "חברת התעופה"}: ${r.airlineLink}`);
-  if (r.bookingLink) lines.push(`🔎 השוואה ב-Google Flights: ${r.bookingLink}`);
-  return lines;
 }
 
 async function scanDestination(dest) {
@@ -338,22 +314,7 @@ async function main() {
   });
 
   for (const r of alerts) {
-    const tripLabel = r.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
-
-    const lines = [
-      `🎉 <b>${r.name} מ-${r.approxPrice} ${settings.currency}</b> 🎉`,
-      `${r.discountPercent}% מתחת לחציון ההיסטורי`,
-      "",
-      `📅 תאריכים: ${r.departureDate}${r.returnDate ? " - " + r.returnDate : ""}`,
-    ];
-    lines.push(...detailLines(r));
-    lines.push(`🧳 כבודה: בדקו בעת ההזמנה (לרוב לא כלולה במחיר הבסיס)`);
-    lines.push(`🌍 מסלול: ${tripLabel}`);
-    lines.push("");
-    lines.push(...linkLines(r));
-    if (r.hotel) lines.push(`🏨 מלונות ב-${r.name}: ${r.hotel.bookingUrl}`);
-
-    await sendTelegramMessage(lines.join("\n"));
+    await sendTelegramMessage(Messages.dealMessage(r, { origin: settings.origin, currency: settings.currency, blurb: blurbOf(r.code) }));
   }
 
   if (alerts.length === 0) {
@@ -375,16 +336,14 @@ async function main() {
         const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
 
         if (lastPrice === null || lastPrice !== w.price) {
-          const changeText = lastPrice === null
-            ? "נבדק לראשונה"
-            : (w.price < lastPrice ? `ירד מ-${lastPrice} ל-${w.price}` : `עלה מ-${lastPrice} ל-${w.price}`);
-          const wLines = [
-            `👀 <b>עדכון לחיפוש שסימנת: ${w.note}</b>`,
-            `📅 ${w.departureDate} → ${w.returnDate}`,
-            `💰 מחיר: <b>${w.price} ${settings.currency}</b> (${changeText})`,
-          ];
-          wLines.push(...detailLines(w), ...linkLines(w));
-          await sendTelegramMessage(wLines.join("\n"));
+          const hotel = await cheapestHotel({ cityCode: w.code, cityName: nameOf(w.code), checkIn: w.departureDate, checkOut: w.returnDate, adults: settings.hotelAdults || 2, currency: settings.currency });
+          await sendTelegramMessage(Messages.watchMessage(w, {
+            origin: settings.origin,
+            currency: settings.currency,
+            destName: nameOf(w.code),
+            lastPrice,
+            hotelUrl: hotel && hotel.bookingUrl,
+          }));
         }
 
         history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
@@ -410,13 +369,15 @@ async function main() {
           const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
 
           if (lastPrice === null || lastPrice !== m.price) {
-            const tripLabel = m.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
-            const bLines = [
-              `🔥 <b>דיל תקציב: ${m.name} ב-$${m.price}</b> (${tripLabel}) 🔥`,
-              `📅 ${m.departureDate}${m.returnDate ? " → " + m.returnDate : ""}`,
-            ];
-            bLines.push(...detailLines(m), ...linkLines(m));
-            await sendTelegramMessage(bLines.join("\n"));
+            const hotel = m.returnDate
+              ? await cheapestHotel({ cityCode: m.code, cityName: m.name, checkIn: m.departureDate, checkOut: m.returnDate, adults: settings.hotelAdults || 2, currency: settings.currency })
+              : null;
+            await sendTelegramMessage(Messages.budgetMessage(m, {
+              origin: settings.origin,
+              ceiling: m.tripType === "oneway" ? budgetCfg.maxOneWayUSD : budgetCfg.maxRoundTripUSD,
+              blurb: blurbOf(m.code),
+              hotelUrl: hotel && hotel.bookingUrl,
+            }));
           }
 
           history[key] = [...prevPoints, { date: today, price: m.price }].slice(-HISTORY_LIMIT);
