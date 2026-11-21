@@ -440,7 +440,7 @@
   }
   .board-header {
     display: grid;
-    grid-template-columns: 70px 1fr 120px 85px 85px 80px;
+    grid-template-columns: 64px 1fr 110px 170px 90px 72px;
     gap: 8px;
     padding: 10px 16px;
     font-family: 'IBM Plex Mono', monospace;
@@ -452,7 +452,7 @@
   }
   .row {
     display: grid;
-    grid-template-columns: 70px 1fr 120px 85px 85px 80px;
+    grid-template-columns: 64px 1fr 110px 170px 90px 72px;
     gap: 8px;
     align-items: center;
     padding: 14px 16px;
@@ -520,6 +520,13 @@
   .discount.none { color: var(--panel-border); }
 
   .sparkline { margin-top: 3px; }
+  .fmeta { font-size: 11px; color: var(--text); margin-top: 3px; line-height: 1.4; }
+  .fage { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .fage.stale { color: var(--danger); }
+  .buy-links { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; justify-content: flex-end; }
+  /* flight cell: details + buttons line up with the price (which is left-aligned, LTR) */
+  .row .fmeta, .row .fage { text-align: left; }
+  .booking-link.alt { background: transparent; color: var(--text); border: 1px solid var(--panel-border); }
   .row.clickable { cursor: pointer; }
   .row.clickable:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
   .chart-hint { color: var(--muted); font-size: 11px; font-family: 'IBM Plex Mono', monospace; margin: 0 0 8px; }
@@ -887,9 +894,10 @@
   </div>
 </div>
 
+<script src="flight-info.js"></script>
 <script src="charts.js"></script>
 <script>
-const APP_VERSION = "1.16.2";
+const APP_VERSION = "1.17.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -1151,7 +1159,7 @@ function checkForNewBudgetDeals(budgetResults) {
     const dates = b.returnDate ? (b.departureDate + " → " + b.returnDate) : b.departureDate;
     return '<div class="budget-row">' +
       '<div><div class="bname">' + b.name + ' (' + tripLabel + ')</div><div class="bdates">' + dates + '</div></div>' +
-      '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + (b.bookingLink ? '<a href="' + b.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
+      '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + flightMetaHTML(b) + buyLinksHTML(b) + '</div>' +
     '</div>';
   }).join('');
 
@@ -1474,6 +1482,44 @@ function applyFilter() {
   renderRows(filtered);
 }
 
+// ---- flight details + purchase links (shared by board, watchlist, budget) ----
+// Older data (from before v1.17) has only the airline code - fill name/site from the shared map.
+function withAirline(r) {
+  const info = FlightInfo.airlineInfo(r.airline);
+  if (!info) return r;
+  return Object.assign({}, r, { airlineName: r.airlineName || info.name, airlineLink: r.airlineLink || info.url });
+}
+
+function flightMetaHTML(r) {
+  r = withAirline(r);
+  const esc = TravelCharts.esc;
+  const parts = [];
+  if (r.airlineName || r.airline) parts.push(esc(r.airlineName || r.airline));
+  const stops = FlightInfo.stopsText(r.transfers);
+  if (stops) parts.push(stops);
+  if (r.departTime) parts.push('<span style="direction:ltr; unicode-bidi:isolate;">' + esc(r.departTime) + '</span>');
+  let html = parts.length ? '<div class="fmeta">' + parts.join(' · ') + '</div>' : '';
+  const age = FlightInfo.ageText(r.foundAt);
+  if (age) {
+    const stale = FlightInfo.isStale(r.foundAt);
+    html += '<div class="fage' + (stale ? ' stale' : '') + '" title="מחיר מהמטמון של Aviasales, לא מחיר חי">🕒 נמצא ' + age + (stale ? ' · ייתכן שהשתנה' : '') + '</div>';
+  }
+  return html;
+}
+
+function buyLinksHTML(r) {
+  r = withAirline(r);
+  const esc = TravelCharts.esc;
+  const links = [];
+  if (r.airlineLink) {
+    links.push('<a href="' + esc(r.airlineLink) + '" target="_blank" rel="noopener" class="booking-link" title="קנייה ישירה באתר חברת התעופה">' + esc(r.airlineName || r.airline || 'אתר החברה') + ' ↗</a>');
+  }
+  if (r.bookingLink) {
+    links.push('<a href="' + esc(r.bookingLink) + '" target="_blank" rel="noopener" class="booking-link' + (r.airlineLink ? ' alt' : '') + '" title="השוואת מחירים חיים ב-Google Flights">Google ↗</a>');
+  }
+  return links.length ? '<div class="buy-links">' + links.join('') + '</div>' : '';
+}
+
 function renderRows(results) {
   const rowsEl = document.getElementById('rows');
   if (results.length === 0) {
@@ -1495,7 +1541,7 @@ function renderRows(results) {
       '<div class="code">' + r.code + '</div>' +
       '<div class="dest"><div class="name">' + r.name + '</div><div class="country">' + r.country + '</div></div>' +
       '<div class="dates">' + (r.returnDate ? (r.departureDate + ' → ' + r.returnDate) : (r.departureDate + ' (הלוך בלבד)')) + '</div>' +
-      '<div><span class="col-label">טיסה</span><div class="price">' + Math.round(flightPrice) + ' ' + (allSettings.currency || 'ILS') + '</div>' + sparkline(points) + (r.bookingLink ? '<a href="' + r.bookingLink + '" target="_blank" class="booking-link" style="margin-top:5px;">קנייה ↗</a>' : '') + '</div>' +
+      '<div><span class="col-label">טיסה</span><div class="price">' + Math.round(flightPrice) + ' ' + (allSettings.currency || 'ILS') + '</div>' + flightMetaHTML(r) + sparkline(points) + buyLinksHTML(r) + '</div>' +
       '<div><span class="col-label">מלונות</span>' + hotelCell + '</div>' +
       '<div><span class="col-label">מהחציון</span><div class="discount ' + discountClass + '">' + discountText + '</div></div>' +
     '</div>';
@@ -1672,7 +1718,7 @@ function render(latest, history) {
     document.getElementById('watchlistRows').innerHTML = watchlistResults.map((w) => (
       '<div class="watch-row row-chart" style="cursor:pointer;" tabindex="0" role="button" data-chart-key="' + TravelCharts.esc(watchHistoryKey(w)) + '" data-chart-title="' + TravelCharts.esc(w.note || w.code) + '" title="לחצו לגרף היסטוריית מחיר">' +
         '<div><div class="wname">' + (w.note || w.code) + '</div><div class="wdates">' + w.departureDate + ' → ' + w.returnDate + '</div></div>' +
-        '<div style="text-align:left;"><div class="wprice">' + Math.round(w.price) + ' ' + (s.currency || 'ILS') + '</div>' + (w.bookingLink ? '<a href="' + w.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
+        '<div style="text-align:left;"><div class="wprice">' + Math.round(w.price) + ' ' + (s.currency || 'ILS') + '</div>' + flightMetaHTML(w) + buyLinksHTML(w) + '</div>' +
       '</div>'
     )).join('');
   } else {
@@ -1686,7 +1732,7 @@ function render(latest, history) {
       const dates = b.returnDate ? (b.departureDate + ' → ' + b.returnDate) : b.departureDate;
       return '<div class="budget-row" style="cursor:pointer;" tabindex="0" role="button" data-chart-key="budget:' + b.code + ':' + (b.tripType === 'oneway' ? 'oneway' : 'roundtrip') + '" data-chart-title="' + TravelCharts.esc(b.name + ' (' + tripLabel + ')') + '" data-chart-currency="USD" title="לחצו לגרף היסטוריית מחיר">' +
         '<div><div class="bname">' + b.name + ' (' + tripLabel + ')</div><div class="bdates">' + dates + '</div></div>' +
-        '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + (b.bookingLink ? '<a href="' + b.bookingLink + '" target="_blank" class="booking-link" style="margin-top:4px;">קנייה ↗</a>' : '') + '</div>' +
+        '<div style="text-align:left;"><div class="bprice">$' + b.price + '</div>' + flightMetaHTML(b) + buyLinksHTML(b) + '</div>' +
       '</div>';
     }).join('');
   } else {

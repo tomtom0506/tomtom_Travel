@@ -2,6 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const { cheapestRoundTrip, cheapestOneWay, cheapestOneWayInMonth, cheapestRoundTripInMonth, cheapestHotel, getAirlineName } = require("./travelpayouts");
 const { sendTelegramMessage } = require("./telegram");
+const FlightInfo = require("../flight-info");
+const Messages = require("./messages");
+
+const blurbOf = (code) => (destinations.find((d) => d.code === code) || {}).blurb || null;
+const nameOf = (code) => (destinations.find((d) => d.code === code) || {}).name || code;
 
 const ROOT = path.join(__dirname, "..");
 const settings = JSON.parse(fs.readFileSync(path.join(ROOT, "config/settings.json"), "utf8"));
@@ -63,6 +68,20 @@ function median(nums) {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
+// Flight details shown next to every price (dashboard + Telegram). All optional:
+// the cached API data doesn't always include airline / time / when it was found.
+async function flightDetails(best) {
+  return {
+    airline: best.airline || null,
+    airlineName: best.airline ? ((FlightInfo.airlineInfo(best.airline) || {}).name || await getAirlineName(best.airline)) : null,
+    airlineLink: best.airlineLink || null,
+    flightNumber: best.flightNumber || null,
+    departTime: best.departTime || null,
+    transfers: typeof best.transfers === "number" ? best.transfers : null,
+    foundAt: best.foundAt || null,
+  };
+}
+
 async function scanDestination(dest) {
   const best = tripType === "oneway"
     ? await cheapestOneWay({
@@ -99,8 +118,7 @@ async function scanDestination(dest) {
     returnDate: best.returnDate,
     approxPrice: Math.round(best.price),
     bookingLink: best.bookingLink || null,
-    airline: best.airline || null,
-    transfers: best.transfers,
+    ...(await flightDetails(best)),
     historyMedian: hist,
     discountPercent,
     historyPoints: pastPrices.length,
@@ -148,8 +166,7 @@ async function scanWatchlistItem(item) {
     requestedReturnDate: item.returnDate,
     price: Math.round(best.price),
     bookingLink: best.bookingLink || null,
-    airline: best.airline || null,
-    transfers: best.transfers,
+    ...(await flightDetails(best)),
   };
 }
 
@@ -196,19 +213,22 @@ async function scanBudgetDestination(dest, cfg) {
     }
   }
 
-  return found.map((f) => ({
-    code: dest.code,
-    name: dest.name,
-    country: dest.country,
-    tripType: f.tripType,
-    departureDate: f.departDate,
-    returnDate: f.returnDate,
-    price: Math.round(f.price * 100) / 100,
-    currency: "USD",
-    airline: f.airline,
-    transfers: f.transfers,
-    bookingLink: f.bookingLink,
-  }));
+  const out = [];
+  for (const f of found) {
+    out.push({
+      code: dest.code,
+      name: dest.name,
+      country: dest.country,
+      tripType: f.tripType,
+      departureDate: f.departDate,
+      returnDate: f.returnDate,
+      price: Math.round(f.price * 100) / 100,
+      currency: "USD",
+      bookingLink: f.bookingLink,
+      ...(await flightDetails(f)),
+    });
+  }
+  return out;
 }
 
 function budgetKey(r) {
@@ -294,25 +314,7 @@ async function main() {
   });
 
   for (const r of alerts) {
-    const airlineName = await getAirlineName(r.airline);
-    const stopsText = r.transfers === 0 ? "ישירה ✅" : r.transfers === 1 ? "קפיצה אחת" : r.transfers > 1 ? `${r.transfers} קפיצות` : null;
-    const tripLabel = r.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
-
-    const lines = [
-      `🎉 <b>${r.name} מ-${r.approxPrice} ${settings.currency}</b> 🎉`,
-      `${r.discountPercent}% מתחת לחציון ההיסטורי`,
-      "",
-      `📅 תאריכים: ${r.departureDate}${r.returnDate ? " - " + r.returnDate : ""}`,
-    ];
-    if (airlineName) lines.push(`✈️ חברת תעופה: ${airlineName}`);
-    if (stopsText) lines.push(`🔁 טיסה: ${stopsText}`);
-    lines.push(`🧳 כבודה: בדקו בעת ההזמנה (לרוב לא כלולה במחיר הבסיס)`);
-    lines.push(`🌍 מסלול: ${tripLabel}`);
-    lines.push("");
-    if (r.bookingLink) lines.push(`🔗 לפרטים והזמנה: ${r.bookingLink}`);
-    if (r.hotel) lines.push(`🏨 מלונות ב-${r.name}: ${r.hotel.bookingUrl}`);
-
-    await sendTelegramMessage(lines.join("\n"));
+    await sendTelegramMessage(Messages.dealMessage(r, { origin: settings.origin, currency: settings.currency, blurb: blurbOf(r.code) }));
   }
 
   if (alerts.length === 0) {
@@ -334,20 +336,14 @@ async function main() {
         const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
 
         if (lastPrice === null || lastPrice !== w.price) {
-          const changeText = lastPrice === null
-            ? "נבדק לראשונה"
-            : (w.price < lastPrice ? `ירד מ-${lastPrice} ל-${w.price}` : `עלה מ-${lastPrice} ל-${w.price}`);
-          const airlineName = await getAirlineName(w.airline);
-          const stopsText = w.transfers === 0 ? "ישירה ✅" : w.transfers === 1 ? "קפיצה אחת" : w.transfers > 1 ? `${w.transfers} קפיצות` : null;
-          const wLines = [
-            `👀 <b>עדכון לחיפוש שסימנת: ${w.note}</b>`,
-            `📅 ${w.departureDate} → ${w.returnDate}`,
-            `💰 מחיר: <b>${w.price} ${settings.currency}</b> (${changeText})`,
-          ];
-          if (airlineName) wLines.push(`✈️ חברת תעופה: ${airlineName}`);
-          if (stopsText) wLines.push(`🔁 טיסה: ${stopsText}`);
-          if (w.bookingLink) wLines.push(`🔗 לפרטים והזמנה: ${w.bookingLink}`);
-          await sendTelegramMessage(wLines.join("\n"));
+          const hotel = await cheapestHotel({ cityCode: w.code, cityName: nameOf(w.code), checkIn: w.departureDate, checkOut: w.returnDate, adults: settings.hotelAdults || 2, currency: settings.currency });
+          await sendTelegramMessage(Messages.watchMessage(w, {
+            origin: settings.origin,
+            currency: settings.currency,
+            destName: nameOf(w.code),
+            lastPrice,
+            hotelUrl: hotel && hotel.bookingUrl,
+          }));
         }
 
         history[key] = [...prevPoints, { date: today, price: w.price }].slice(-HISTORY_LIMIT);
@@ -373,17 +369,15 @@ async function main() {
           const lastPrice = prevPoints.length > 0 ? prevPoints[prevPoints.length - 1].price : null;
 
           if (lastPrice === null || lastPrice !== m.price) {
-            const tripLabel = m.tripType === "oneway" ? "הלוך בלבד" : "הלוך-חזור";
-            const airlineName = await getAirlineName(m.airline);
-            const stopsText = m.transfers === 0 ? "ישירה ✅" : m.transfers === 1 ? "קפיצה אחת" : m.transfers > 1 ? `${m.transfers} קפיצות` : null;
-            const bLines = [
-              `🔥 <b>דיל תקציב: ${m.name} ב-$${m.price}</b> (${tripLabel}) 🔥`,
-              `📅 ${m.departureDate}${m.returnDate ? " → " + m.returnDate : ""}`,
-            ];
-            if (airlineName) bLines.push(`✈️ חברת תעופה: ${airlineName}`);
-            if (stopsText) bLines.push(`🔁 טיסה: ${stopsText}`);
-            if (m.bookingLink) bLines.push(`🔗 לפרטים והזמנה: ${m.bookingLink}`);
-            await sendTelegramMessage(bLines.join("\n"));
+            const hotel = m.returnDate
+              ? await cheapestHotel({ cityCode: m.code, cityName: m.name, checkIn: m.departureDate, checkOut: m.returnDate, adults: settings.hotelAdults || 2, currency: settings.currency })
+              : null;
+            await sendTelegramMessage(Messages.budgetMessage(m, {
+              origin: settings.origin,
+              ceiling: m.tripType === "oneway" ? budgetCfg.maxOneWayUSD : budgetCfg.maxRoundTripUSD,
+              blurb: blurbOf(m.code),
+              hotelUrl: hotel && hotel.bookingUrl,
+            }));
           }
 
           history[key] = [...prevPoints, { date: today, price: m.price }].slice(-HISTORY_LIMIT);
