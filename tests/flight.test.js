@@ -232,3 +232,18 @@ test('dashboard loads flight-info.js before the inline script', () => {
   const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
   assert.match(html, /<script src="flight-info\.js"><\/script>[\s\S]*<script src="charts\.js"><\/script>[\s\S]*<script>/);
 });
+
+test('cheapestRoundTrip: no usable price -> one [no-price] log line with counts and rejected offers', async () => {
+  mockApi({
+    [WM]: () => [{ value: 1652, depart_date: '2027-04-22', return_date: '2027-06-02' }], // 41-day "trip" -> rejected
+    [V3]: () => ({ unexpected: 'object instead of array' }),
+  });
+  const lines = [];
+  const orig = console.log; console.log = (m) => lines.push(String(m));
+  const r = await tp.cheapestRoundTrip({ ...base, destination: 'LIS', departureDate: '2027-04-20', returnDate: '2027-04-30' });
+  console.log = orig;
+  assert.strictEqual(r, null);
+  const diag = lines.find((l) => l.includes('[no-price]'));
+  assert.ok(diag, 'diagnostic line missing: ' + lines.join(' | '));
+  assert.match(diag, /TLV->LIS 2027-04-20\.\.2027-04-30: week-matrix 1 raw\/1 usable, v3 0 raw\/0 usable; cheapest rejected: 2027-04-22\.\.2027-06-02 1652 \(wm\)/);
+});
