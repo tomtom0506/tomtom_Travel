@@ -45,7 +45,7 @@ async function weekMatrix({ origin, destination, departDate, returnDate, currenc
       currency,
       show_to_affiliates: true,
     });
-    return data.data || [];
+    return Array.isArray(data.data) ? data.data : [];
   } catch (err) {
     console.log(`  weekMatrix ${origin}->${destination}: ${err.message}`);
     return [];
@@ -166,7 +166,7 @@ async function roundTripForDates({ origin, destination, departDate, returnDate, 
       limit: 30,
       currency,
     });
-    return data.data || [];
+    return Array.isArray(data.data) ? data.data : [];
   } catch (err) {
     console.log(`  roundTripForDates ${origin}->${destination}: ${err.message}`);
     return [];
@@ -197,10 +197,28 @@ async function cheapestRoundTrip({ origin, destination, departureDate, returnDat
   ]);
   logFieldsOnce("week-matrix", wm[0]);
   logFieldsOnce("prices_for_dates (round-trip)", v3[0]);
-  const offers = [...wm.map((e) => toOffer(e, "week-matrix")), ...v3.map((e) => toOffer(e, "prices_for_dates"))].filter(Boolean);
+  const wmOffers = wm.map((e) => toOffer(e, "week-matrix")).filter(Boolean);
+  const v3Offers = v3.map((e) => toOffer(e, "prices_for_dates")).filter(Boolean);
+  const offers = [...wmOffers, ...v3Offers];
   const best = pickBest(offers, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
-  if (!best) return null;
+  if (!best) {
+    console.log(noPriceDiagnostic({ origin, destination, departureDate, returnDate, wm, v3, wmOffers, v3Offers }));
+    return null;
+  }
   return withLinks(enrichOffer(best, offers), { origin, destination });
+}
+
+// One log line explaining why a route got no price: how many raw entries each endpoint
+// returned, how many were usable, and the cheapest few that were rejected (dates + price).
+function noPriceDiagnostic({ origin, destination, departureDate, returnDate, wm, v3, wmOffers, v3Offers }) {
+  const sample = [...wmOffers, ...v3Offers]
+    .sort((a, b) => a.price - b.price)
+    .slice(0, 4)
+    .map((o) => `${o.departDate}..${o.returnDate || "-"} ${o.price} (${o.source === "week-matrix" ? "wm" : "v3"})`)
+    .join(", ");
+  const rawShape = (x) => (Array.isArray(x) ? x.length : typeof x);
+  return `  [no-price] ${origin}->${destination} ${departureDate}..${returnDate}: week-matrix ${rawShape(wm)} raw/${wmOffers.length} usable, v3 ${rawShape(v3)} raw/${v3Offers.length} usable` +
+    (sample ? `; cheapest rejected: ${sample}` : "");
 }
 
 // One-way fare for a single date (or nearby, when flexible) using the
@@ -344,7 +362,7 @@ async function getAirlineName(code) {
 
 module.exports = {
   // exported for tests
-  _internal: { toOffer, enrichOffer, pickBest },
+  _internal: { toOffer, enrichOffer, pickBest, noPriceDiagnostic },
   cheapestRoundTrip,
   cheapestOneWay,
   cheapestOneWayInMonth,
