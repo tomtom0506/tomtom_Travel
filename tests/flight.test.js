@@ -247,3 +247,40 @@ test('cheapestRoundTrip: no usable price -> one [no-price] log line with counts 
   assert.ok(diag, 'diagnostic line missing: ' + lines.join(' | '));
   assert.match(diag, /TLV->LIS 2027-04-20\.\.2027-04-30: week-matrix 1 raw\/1 usable, v3 0 raw\/0 usable; cheapest rejected: 2027-04-22\.\.2027-06-02 1652 \(wm\)/);
 });
+
+test('cheapestRoundTripNear: exact dates first; otherwise cheapest within ±3 days and ±2 nights', async () => {
+  const req = { ...base, destination: 'LIS', departureDate: '2027-04-20', returnDate: '2027-04-30' };
+  // exact dates available -> used, no wider search
+  let calls = mockApi({ [WM]: () => [{ value: 1800, depart_date: '2027-04-20', return_date: '2027-04-30' }] });
+  let restore = quiet();
+  let r = await tp.cheapestRoundTripNear(req);
+  restore();
+  assert.deepStrictEqual([r.departDate, r.returnDate, r.price], ['2027-04-20', '2027-04-30', 1800]);
+  assert.strictEqual(calls.filter((u) => u.pathname === V3).length, 1, 'only the exact search ran');
+
+  // exact empty -> wider search (v3 by month); 5-night trip and 5-days-away departure rejected
+  calls = mockApi({
+    [WM]: (p) => [],
+    [V3]: (p) => p.get('return_at') ? [] : [
+      { price: 900, departure_at: '2027-04-22T06:00:00+03:00', return_at: '2027-04-27T06:00:00+03:00', airline: 'W6' }, // 5 nights
+      { price: 950, departure_at: '2027-04-15T06:00:00+03:00', return_at: '2027-04-25T06:00:00+03:00', airline: 'W6' }, // 5 days early
+      { price: 1500, departure_at: '2027-04-22T06:00:00+03:00', return_at: '2027-05-03T06:00:00+03:00', airline: 'TP' }, // 11 nights, +2 days
+    ],
+  });
+  restore = quiet();
+  r = await tp.cheapestRoundTripNear(req);
+  restore();
+  assert.deepStrictEqual([r.departDate, r.returnDate, r.price], ['2027-04-22', '2027-05-03', 1500]);
+  assert.strictEqual(calls.filter((u) => u.pathname === V3)[1].searchParams.get('departure_at'), '2027-04');
+
+  // nothing near either -> null
+  mockApi({});
+  restore = quiet();
+  assert.strictEqual(await tp.cheapestRoundTripNear(req), null);
+  restore();
+});
+
+test('scan.js: watchlist uses the near-dates search', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/scan.js'), 'utf8');
+  assert.match(src, /async function scanWatchlistItem[\s\S]*?cheapestRoundTripNear\(/);
+});

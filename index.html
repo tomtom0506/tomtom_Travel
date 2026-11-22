@@ -193,6 +193,7 @@
   .watch-row:last-child { border-bottom: none; }
   .watch-row .wname { font-weight: 600; }
   .watch-row .wdates { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 11px; direction: ltr; }
+  .watch-row .wshift { color: var(--amber); font-family: 'IBM Plex Mono', monospace; font-size: 10px; margin-top: 2px; }
   .watch-row .wprice { font-family: 'IBM Plex Mono', monospace; font-weight: 700; direction: ltr; }
   .watchlist-box .edit-link {
     display: inline-block;
@@ -897,7 +898,7 @@
 <script src="flight-info.js"></script>
 <script src="charts.js"></script>
 <script>
-const APP_VERSION = "1.18.1";
+const APP_VERSION = "1.19.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -1720,7 +1721,10 @@ function render(latest, history) {
     watchBox.style.display = 'block';
     document.getElementById('watchlistRows').innerHTML = watchlistResults.map((w) => (
       '<div class="watch-row row-chart" style="cursor:pointer;" tabindex="0" role="button" data-chart-key="' + TravelCharts.esc(watchHistoryKey(w)) + '" data-chart-title="' + TravelCharts.esc(w.note || w.code) + '" title="לחצו לגרף היסטוריית מחיר">' +
-        '<div><div class="wname">' + (w.note || w.code) + '</div><div class="wdates">' + w.departureDate + ' → ' + w.returnDate + '</div></div>' +
+        '<div><div class="wname">' + (w.note || w.code) + '</div><div class="wdates">' + w.departureDate + ' → ' + w.returnDate + '</div>' +
+          (w.requestedDepartureDate && (w.requestedDepartureDate !== w.departureDate || w.requestedReturnDate !== w.returnDate)
+            ? '<div class="wshift" title="אין מחיר לתאריכים המדויקים - מוצג הזול ביותר בטווח ±3 ימים">ביקשת: <span style="direction:ltr; unicode-bidi:isolate;">' + w.requestedDepartureDate + ' → ' + w.requestedReturnDate + '</span></div>' : '') +
+        '</div>' +
         '<div style="text-align:left;"><div class="wprice">' + Math.round(w.price) + ' ' + (s.currency || 'ILS') + '</div>' + flightMetaHTML(w) + buyLinksHTML(w) + '</div>' +
       '</div>'
     )).join('');

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { cheapestRoundTrip, cheapestOneWay, cheapestOneWayInMonth, cheapestRoundTripInMonth, cheapestHotel, getAirlineName } = require("./travelpayouts");
+const { cheapestRoundTrip, cheapestRoundTripNear, cheapestOneWay, cheapestOneWayInMonth, cheapestRoundTripInMonth, cheapestHotel, getAirlineName } = require("./travelpayouts");
 const { sendTelegramMessage } = require("./telegram");
 const FlightInfo = require("../flight-info");
 const Messages = require("./messages");
@@ -146,7 +146,8 @@ async function scanHotelOnly(dest) {
 }
 
 async function scanWatchlistItem(item) {
-  const best = await cheapestRoundTrip({
+  // exact dates first, then the cheapest trip within ±3 days (message says the dates differ)
+  const best = await cheapestRoundTripNear({
     origin: settings.origin,
     destination: item.destination,
     departureDate: item.departureDate,
