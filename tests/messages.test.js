@@ -77,6 +77,14 @@ test('watchlist message: item without a note shows the city name, not the code',
   assert.match(M.watchMessage(w, { origin: 'TLV', currency: 'ILS', destName: 'אתונה', lastPrice: null, now: NOW }), /^👀 <b>אתונה: /);
 });
 
+test('watchlist message: says when the dates differ from what was asked', () => {
+  const w = { code: 'LIS', note: 'טיול לפסח', departureDate: '2027-04-22', returnDate: '2027-05-03', requestedDepartureDate: '2027-04-20', requestedReturnDate: '2027-04-30', price: 1500 };
+  const msg = M.watchMessage(w, { origin: 'TLV', currency: 'ILS', destName: 'ליסבון', lastPrice: null, now: NOW });
+  assert.match(msg, /📅 22\.4 – 3\.5\.2027 \(11 לילות\)\nℹ️ אין מחיר לתאריכים שביקשת \(20\.4 – 30\.4\.2027\) - זה הזול ביותר בטווח של ±3 ימים\n💰/);
+  const exact = M.watchMessage({ ...w, departureDate: '2027-04-20', returnDate: '2027-04-30' }, { origin: 'TLV', currency: 'ILS', destName: 'ליסבון', lastPrice: null, now: NOW });
+  assert.doesNotMatch(exact, /ℹ️/);
+});
+
 test('budget message: round-trip with ceiling; one-way without hotel', () => {
   const m = { code: 'PMI', name: 'פלמה דה מיורקה', tripType: 'roundtrip', departureDate: '2026-11-15', returnDate: '2026-11-22', price: 90, currency: 'USD', transfers: 0, airlineName: 'Wizz Air', airlineLink: 'https://wizzair.com/', bookingLink: 'https://g.example/x' };
   const rt = M.budgetMessage(m, { origin: 'TLV', ceiling: 120, blurb: 'מפרצים.', hotelUrl: 'https://www.booking.com/x', now: NOW });

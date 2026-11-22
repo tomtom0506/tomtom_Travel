@@ -160,3 +160,10 @@ test('scripts: every local require() resolves, and there is no stale root copy o
   }
   assert.ok(!fs.existsSync(path.join(ROOT, 'travelpayouts.js')), 'stale root travelpayouts.js is back');
 });
+
+// Bug found in QA (v1.19.0): Hebrew label inside a direction:ltr block rendered the dates reversed.
+test('dashboard: watchlist "requested dates" line keeps Hebrew RTL and isolates the LTR dates', () => {
+  const html = read('index.html');
+  assert.doesNotMatch(html, /\.wshift \{[^}]*direction: ltr/);
+  assert.match(html, />ביקשת: <span style="direction:ltr; unicode-bidi:isolate;">'/);
+});

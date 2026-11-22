@@ -126,11 +126,11 @@ function daysBetween(a, b) {
 // date from an unrelated one, producing nonsensical "trips" (e.g. returning before
 // departing, or a 90-day trip when 7 was requested). We only trust offers whose
 // actual trip length is close to what was asked for.
-function pickBest(offers, { exactDepartDate, exactReturnDate, flexible, flexDays }) {
+function pickBest(offers, { exactDepartDate, exactReturnDate, flexible, flexDays, durationTolerance }) {
   if (!offers || offers.length === 0) return null;
 
   const intendedDuration = daysBetween(exactDepartDate, exactReturnDate);
-  const tolerance = flexible ? flexDays + 1 : 1;
+  const tolerance = durationTolerance != null ? durationTolerance : (flexible ? flexDays + 1 : 1);
 
   const sane = offers.filter((o) => {
     if (!o || !o.departDate || !o.returnDate) return false;
@@ -190,7 +190,7 @@ function withLinks(offer, { origin, destination }) {
   };
 }
 
-async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, currency, adults }) {
+async function cheapestRoundTrip({ origin, destination, departureDate, returnDate, flexible, flexDays, durationTolerance, currency, adults }) {
   const [wm, v3] = await Promise.all([
     weekMatrix({ origin, destination, departDate: departureDate, returnDate, currency }),
     roundTripForDates({ origin, destination, departDate: departureDate, returnDate, flexible, currency }),
@@ -200,12 +200,23 @@ async function cheapestRoundTrip({ origin, destination, departureDate, returnDat
   const wmOffers = wm.map((e) => toOffer(e, "week-matrix")).filter(Boolean);
   const v3Offers = v3.map((e) => toOffer(e, "prices_for_dates")).filter(Boolean);
   const offers = [...wmOffers, ...v3Offers];
-  const best = pickBest(offers, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays });
+  const best = pickBest(offers, { exactDepartDate: departureDate, exactReturnDate: returnDate, flexible, flexDays, durationTolerance });
   if (!best) {
     console.log(noPriceDiagnostic({ origin, destination, departureDate, returnDate, wm, v3, wmOffers, v3Offers }));
     return null;
   }
   return withLinks(enrichOffer(best, offers), { origin, destination });
+}
+
+// Watchlist items have fixed dates, and the price cache is often empty for exactly those
+// dates (especially months ahead). Try the exact dates first; if nothing usable comes back,
+// take the cheapest trip departing within ±nearDays whose length is within ±2 nights.
+// The caller compares the returned dates to the requested ones and tells the user.
+async function cheapestRoundTripNear(args, nearDays = 3) {
+  const exact = await cheapestRoundTrip(args);
+  if (exact) return exact;
+  if (args.flexible && args.flexDays >= nearDays) return null; // already searched that wide
+  return cheapestRoundTrip({ ...args, flexible: true, flexDays: nearDays, durationTolerance: 2 });
 }
 
 // One log line explaining why a route got no price: how many raw entries each endpoint
@@ -364,6 +375,7 @@ module.exports = {
   // exported for tests
   _internal: { toOffer, enrichOffer, pickBest, noPriceDiagnostic },
   cheapestRoundTrip,
+  cheapestRoundTripNear,
   cheapestOneWay,
   cheapestOneWayInMonth,
   cheapestRoundTripInMonth,

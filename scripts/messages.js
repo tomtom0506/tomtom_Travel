@@ -48,6 +48,15 @@ function datesText(dep, ret) {
   return `${start} – ${b.d}.${b.m}.${b.y} (${tripLengthText(nights(dep, ret))})`;
 }
 
+// "20.4–30.4.2027" (no trip-length suffix) - used for the dates the user asked for
+function shortDates(dep, ret) {
+  return datesText(dep, ret).replace(/ \(.*\)$/, "");
+}
+
+function datesShifted(w) {
+  return !!(w.requestedDepartureDate && (w.requestedDepartureDate !== w.departureDate || (w.requestedReturnDate || null) !== (w.returnDate || null)));
+}
+
 function tripLabel(r) {
   return r.returnDate ? "הלוך-חזור" : "הלוך בלבד";
 }
@@ -128,6 +137,7 @@ function watchMessage(w, { origin, currency, destName, lastPrice, hotelUrl, now 
     [
       routeLine(w, origin, destName),
       `📅 ${datesText(w.departureDate, w.returnDate)}`,
+      ...(datesShifted(w) ? [`ℹ️ אין מחיר לתאריכים שביקשת (${shortDates(w.requestedDepartureDate, w.requestedReturnDate)}) - זה הזול ביותר בטווח של ±3 ימים`] : []),
       `💰 ${tripLabel(w)} ${price}${change}`,
     ],
     bookingLines(w, destName, hotelUrl),
