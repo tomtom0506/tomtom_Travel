@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-11-22T13:57:45.973Z",
+  "lastRun": "2026-11-22T16:26:09.996Z",
   "settings": {
     "origin": "TLV",
     "currency": "ILS",
@@ -85,8 +85,8 @@
       "departTime": null,
       "transfers": 0,
       "foundAt": "2026-11-20T18:49:24Z",
-      "historyMedian": 664,
-      "discountPercent": 29,
+      "historyMedian": 652,
+      "discountPercent": 27,
       "historyPoints": 60,
       "hotel": {
         "price": null,
@@ -137,7 +137,7 @@
       "departTime": null,
       "transfers": 1,
       "foundAt": "2026-11-19T20:08:59Z",
-      "historyMedian": 1148,
+      "historyMedian": 1147,
       "discountPercent": 18,
       "historyPoints": 60,
       "hotel": {
@@ -214,26 +214,6 @@
       "historyPoints": 60
     },
     {
-      "code": "MAD",
-      "name": "מדריד",
-      "country": "ספרד",
-      "tripType": "roundtrip",
-      "departureDate": "2026-12-21",
-      "returnDate": "2026-12-29",
-      "approxPrice": 659,
-      "bookingLink": "https://www.aviasales.com/search/TLV2112MAD29121",
-      "airline": null,
-      "airlineName": null,
-      "airlineLink": null,
-      "flightNumber": null,
-      "departTime": null,
-      "transfers": 1,
-      "foundAt": "2026-11-18T15:26:37Z",
-      "historyMedian": 742,
-      "discountPercent": 11,
-      "historyPoints": 60
-    },
-    {
       "code": "SKG",
       "name": "סלוניקי",
       "country": "יוון",
@@ -254,26 +234,6 @@
       "historyPoints": 60
     },
     {
-      "code": "LCA",
-      "name": "לרנקה",
-      "country": "קפריסין",
-      "tripType": "roundtrip",
-      "departureDate": "2026-12-21",
-      "returnDate": "2026-12-27",
-      "approxPrice": 259,
-      "bookingLink": "https://www.aviasales.com/search/TLV2112LCA27121",
-      "airline": null,
-      "airlineName": null,
-      "airlineLink": null,
-      "flightNumber": null,
-      "departTime": null,
-      "transfers": 0,
-      "foundAt": "2026-11-22T07:56:34Z",
-      "historyMedian": 291,
-      "discountPercent": 11,
-      "historyPoints": 60
-    },
-    {
       "code": "PRG",
       "name": "פראג",
       "country": "צ'כיה",
@@ -289,8 +249,28 @@
       "departTime": null,
       "transfers": 1,
       "foundAt": "2026-11-16T21:38:44Z",
-      "historyMedian": 911,
+      "historyMedian": 907.5,
       "discountPercent": 10,
+      "historyPoints": 60
+    },
+    {
+      "code": "MAD",
+      "name": "מדריד",
+      "country": "ספרד",
+      "tripType": "roundtrip",
+      "departureDate": "2026-12-21",
+      "returnDate": "2026-12-29",
+      "approxPrice": 659,
+      "bookingLink": "https://www.aviasales.com/search/TLV2112MAD29121",
+      "airline": null,
+      "airlineName": null,
+      "airlineLink": null,
+      "flightNumber": null,
+      "departTime": null,
+      "transfers": 1,
+      "foundAt": "2026-11-18T15:26:37Z",
+      "historyMedian": 721,
+      "discountPercent": 9,
       "historyPoints": 60
     },
     {
@@ -314,6 +294,26 @@
       "historyPoints": 60
     },
     {
+      "code": "LCA",
+      "name": "לרנקה",
+      "country": "קפריסין",
+      "tripType": "roundtrip",
+      "departureDate": "2026-12-21",
+      "returnDate": "2026-12-27",
+      "approxPrice": 259,
+      "bookingLink": "https://www.aviasales.com/search/TLV2112LCA27121",
+      "airline": null,
+      "airlineName": null,
+      "airlineLink": null,
+      "flightNumber": null,
+      "departTime": null,
+      "transfers": 0,
+      "foundAt": "2026-11-22T07:56:34Z",
+      "historyMedian": 286,
+      "discountPercent": 9,
+      "historyPoints": 60
+    },
+    {
       "code": "ROM",
       "name": "רומא",
       "country": "איטליה",
@@ -329,7 +329,7 @@
       "departTime": null,
       "transfers": 0,
       "foundAt": "2026-11-18T08:38:32Z",
-      "historyMedian": 454,
+      "historyMedian": 453.5,
       "discountPercent": 7,
       "historyPoints": 60
     },
@@ -349,7 +349,7 @@
       "departTime": "11:00",
       "transfers": 2,
       "foundAt": "2026-11-19T16:32:23Z",
-      "historyMedian": 1163.5,
+      "historyMedian": 1163,
       "discountPercent": 7,
       "historyPoints": 60
     },
@@ -369,8 +369,8 @@
       "departTime": null,
       "transfers": 1,
       "foundAt": "2026-11-22T12:38:56Z",
-      "historyMedian": 1099,
-      "discountPercent": 5,
+      "historyMedian": 1091.5,
+      "discountPercent": 4,
       "historyPoints": 60
     },
     {
@@ -389,7 +389,7 @@
       "departTime": null,
       "transfers": 0,
       "foundAt": "2026-11-21T19:04:06Z",
-      "historyMedian": 563,
+      "historyMedian": 560,
       "discountPercent": 4,
       "historyPoints": 60
     },
@@ -429,7 +429,7 @@
       "departTime": null,
       "transfers": 0,
       "foundAt": "2026-11-16T06:18:15Z",
-      "historyMedian": 448.5,
+      "historyMedian": 448,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -469,7 +469,7 @@
       "departTime": null,
       "transfers": 1,
       "foundAt": "2026-11-15T19:08:16Z",
-      "historyMedian": 874.5,
+      "historyMedian": 873,
       "discountPercent": 0,
       "historyPoints": 60
     },
@@ -529,8 +529,8 @@
       "departTime": null,
       "transfers": 1,
       "foundAt": "2026-11-16T13:02:16Z",
-      "historyMedian": 894,
-      "discountPercent": -6,
+      "historyMedian": 907,
+      "discountPercent": -4,
       "historyPoints": 60
     },
     {
@@ -549,7 +549,7 @@
       "departTime": "11:00",
       "transfers": 1,
       "foundAt": "2026-11-17T18:35:36Z",
-      "historyMedian": 674,
+      "historyMedian": 675,
       "discountPercent": -7,
       "historyPoints": 60
     },
