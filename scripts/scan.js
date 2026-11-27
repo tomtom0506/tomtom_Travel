@@ -4,6 +4,7 @@ const { cheapestRoundTrip, cheapestRoundTripNear, cheapestOneWay, cheapestOneWay
 const { sendTelegramMessage } = require("./telegram");
 const FlightInfo = require("../flight-info");
 const Messages = require("./messages");
+const { applyRemoteSettings } = require("./remote-settings");
 
 const blurbOf = (code) => (destinations.find((d) => d.code === code) || {}).blurb || null;
 const nameOf = (code) => (destinations.find((d) => d.code === code) || {}).name || code;
@@ -237,6 +238,10 @@ function budgetKey(r) {
 }
 
 async function main() {
+  // רשימת מעקב ותקרות מחיר מ-Supabase (נערכות באתר אחרי התחברות). בחיפוש חד-פעמי לא צריך אותן.
+  if (!isOneOffSearch) {
+    await applyRemoteSettings(settings, { previousLatest, password: process.env.SUPABASE_BOT_PASSWORD });
+  }
   console.log(`Mode: ${searchMode}, tripType: ${tripType}. Scanning ${destinationsToScan.length} destinations from ${settings.origin}...`);
 
   // ---- hotels-only mode: skip flights entirely ----

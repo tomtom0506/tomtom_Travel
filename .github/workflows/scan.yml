@@ -64,6 +64,8 @@ jobs:
           TRAVELPAYOUTS_TOKEN: ${{ secrets.TRAVELPAYOUTS_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # משתמש קריאה-בלבד ב-Supabase: קורא רשימת מעקב ותקרות מחיר
+          SUPABASE_BOT_PASSWORD: ${{ secrets.SUPABASE_BOT_PASSWORD }}
           OVERRIDE_DEPARTURE_DATE: ${{ github.event.inputs.departureDate }}
           OVERRIDE_RETURN_DATE: ${{ github.event.inputs.returnDate }}
           OVERRIDE_FLEXIBLE: ${{ github.event.inputs.flexible }}
