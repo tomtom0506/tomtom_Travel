@@ -690,7 +690,7 @@
 
   <div class="toolbar">
     <button class="version-badge" onclick="openVersionModal()" id="versionBadge">v...</button>
-    <button class="icon-btn" onclick="openTokenModal()" title="חיבור לחיפוש חי">🔑</button>
+    <button class="icon-btn" id="loginBtn" onclick="openLoginModal()" title="התחברות">🔑</button>
     <button class="icon-btn" onclick="refreshApp()" title="רענן לגרסה אחרונה">⟳</button>
     <button class="icon-btn" onclick="toggleTheme()" title="החלף מצב כהה/בהיר" id="themeToggleBtn">🌙</button>
   </div>
@@ -835,22 +835,19 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="tokenModal" onclick="if(event.target===this) closeTokenModal()">
+<div class="modal-overlay" id="loginModal" onclick="if(event.target===this) closeLoginModal()">
   <div class="modal">
-    <h2>חיבור לחיפוש חי <button class="close-x" onclick="closeTokenModal()">✕</button></h2>
+    <h2>התחברות <button class="close-x" onclick="closeLoginModal()">✕</button></h2>
     <p style="font-size:13px; color:var(--muted); line-height:1.6;">
-      טוקן גישה אישי לגיטהאב (חד-פעמי, נשמר רק בדפדפן שלכם). כדי שגם החיפוש החי וגם הוספה לרשימת המעקב יעבדו, צריך שתי הרשאות.
+      אותו משתמש כמו באפליקציית החשבוניות. ההתחברות נשמרת בטלפון, וצריך אותה רק לחיפוש חי, לרשימת המעקב ולתקרות המחיר.
     </p>
-    <ol style="font-size:13px; padding-right:18px; line-height:1.8;">
-      <li>גשו ל-<a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--teal);">יצירת טוקן חדש</a></li>
-      <li>Repository access → Only select repositories → tomtom_Travel</li>
-      <li>Permissions → Actions → Read and write</li>
-      <li>Permissions → Contents → Read and write</li>
-      <li>Generate token והדביקו אותו כאן:</li>
-    </ol>
-    <input type="password" class="token-input" id="tokenInput" placeholder="github_pat_...">
-    <button class="search-btn" onclick="saveToken()">שמור טוקן</button>
-    <div class="search-status" id="tokenStatus"></div>
+    <form id="loginForm" onsubmit="event.preventDefault(); doLogin();">
+      <input type="email" class="token-input" id="loginEmail" name="email" autocomplete="username" placeholder="אימייל" required>
+      <input type="password" class="token-input" id="loginPassword" name="password" autocomplete="current-password" placeholder="סיסמה" required>
+      <button class="search-btn" type="submit">כניסה</button>
+    </form>
+    <button class="search-btn" id="logoutBtn" type="button" onclick="doLogout()" style="display:none; background:var(--card); color:var(--text);">התנתקות</button>
+    <div class="search-status" id="loginStatus"></div>
   </div>
 </div>
 
@@ -895,10 +892,11 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="flight-info.js"></script>
 <script src="charts.js"></script>
 <script>
-const APP_VERSION = "1.19.0";
+const APP_VERSION = "1.20.0";
 const GH_OWNER = "tomtom0506";
 const GH_REPO = "tomtom_Travel";
 const GH_WORKFLOW = "scan.yml";
@@ -906,21 +904,98 @@ let allResults = [];
 let allHistory = {};
 let allSettings = {};
 
-// ---- GitHub token (stored only in this browser, used to trigger live searches) ----
-function getToken() { return localStorage.getItem("gh_pat") || ""; }
-function openTokenModal() {
-  document.getElementById("tokenInput").value = getToken();
-  document.getElementById("tokenModal").classList.add("open");
+// ---- התחברות ל-Supabase (1.20.0): במקום טוקן GitHub בדפדפן ----
+// המפתח הציבורי מיועד להיות גלוי; ההגנה היא התחברות + RLS. אין כאן שום טוקן GitHub.
+const SUPABASE_URL = "https://ipllrhdsinqdwfsvzjdk.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwbGxyaGRzaW5xZHdmc3Z6amRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3MjAxOTQsImV4cCI6MjExMTI5NjE5NH0.PHDPpmTItNL7WX20pRPl_OEKQ6XcAn4dYJpdjCXRpM0";
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+let currentUser = null;
+try { localStorage.removeItem("gh_pat"); } catch (e) { /* טוקן ישן מגרסה קודמת נמחק מהטלפון */ }
+
+function updateLoginButton() {
+  const b = document.getElementById("loginBtn");
+  if (!b) return;
+  b.textContent = currentUser ? "👤" : "🔑";
+  b.title = currentUser ? "מחובר – לחצו להתנתקות" : "התחברות";
 }
-function closeTokenModal() { document.getElementById("tokenModal").classList.remove("open"); }
-function saveToken() {
-  const val = document.getElementById("tokenInput").value.trim();
-  const statusEl = document.getElementById("tokenStatus");
-  if (!val) { statusEl.textContent = "הדביקו טוקן תקין"; statusEl.className = "search-status error"; return; }
-  localStorage.setItem("gh_pat", val);
-  statusEl.textContent = "✓ נשמר";
+function openLoginModal() {
+  document.getElementById("loginForm").style.display = currentUser ? "none" : "block";
+  document.getElementById("logoutBtn").style.display = currentUser ? "block" : "none";
+  document.getElementById("loginStatus").textContent = currentUser ? "מחובר" : "";
+  document.getElementById("loginStatus").className = "search-status";
+  document.getElementById("loginModal").classList.add("open");
+}
+function closeLoginModal() { document.getElementById("loginModal").classList.remove("open"); }
+async function doLogin() {
+  const statusEl = document.getElementById("loginStatus");
+  if (!sb) { statusEl.textContent = "שירות ההתחברות לא נטען, נסו לרענן"; statusEl.className = "search-status error"; return; }
+  statusEl.textContent = "מתחבר...";
+  statusEl.className = "search-status";
+  const { data, error } = await sb.auth.signInWithPassword({
+    email: document.getElementById("loginEmail").value.trim(),
+    password: document.getElementById("loginPassword").value,
+  });
+  if (error) { statusEl.textContent = "כניסה נכשלה: " + error.message; statusEl.className = "search-status error"; return; }
+  currentUser = data.user;
+  updateLoginButton();
+  statusEl.textContent = "✓ מחובר";
   statusEl.className = "search-status success";
-  setTimeout(closeTokenModal, 900);
+  await afterLogin();
+  setTimeout(closeLoginModal, 800);
+}
+async function doLogout() {
+  if (sb) await sb.auth.signOut();
+  currentUser = null;
+  updateLoginButton();
+  closeLoginModal();
+}
+/** מחזיר true אם מחובר; אחרת פותח את חלון ההתחברות */
+function requireLogin() {
+  if (currentUser) return true;
+  openLoginModal();
+  return false;
+}
+async function initAuth() {
+  if (!sb) return;
+  const { data } = await sb.auth.getSession();
+  currentUser = data.session ? data.session.user : null;
+  updateLoginButton();
+  sb.auth.onAuthStateChange((_ev, session) => { currentUser = session ? session.user : null; updateLoginButton(); });
+  if (currentUser) afterLogin();
+}
+
+/** אחרי התחברות: טוענים תקרות מחיר, ומייבאים פעם אחת את רשימת המעקב הישנה מהקובץ */
+async function afterLogin() {
+  try {
+    const { data } = await sb.from("travel_settings").select("max_round_trip_usd,max_one_way_usd").maybeSingle();
+    if (data) {
+      if (data.max_round_trip_usd) budgetThresholds.roundtrip = Number(data.max_round_trip_usd);
+      if (data.max_one_way_usd) budgetThresholds.oneway = Number(data.max_one_way_usd);
+      updateBudgetThresholdField();
+    }
+    await importOldWatchlistOnce();
+  } catch (e) { /* לא קריטי */ }
+}
+async function importOldWatchlistOnce() {
+  const old = (allSettings && Array.isArray(allSettings.watchlist)) ? allSettings.watchlist : [];
+  if (old.length === 0) return;
+  const { count, error } = await sb.from("travel_watchlist").select("id", { count: "exact", head: true });
+  if (error || count > 0) return;
+  const rows = old.filter((w) => /^[A-Z]{3}$/.test(w.destination || "") && w.departureDate && w.returnDate)
+    .map((w) => ({ destination: w.destination, departure_date: w.departureDate, return_date: w.returnDate, note: (w.note || w.destination).slice(0, 200) }));
+  if (rows.length) await sb.from("travel_watchlist").insert(rows);
+}
+
+/** מפעיל את הסריקה ב-GitHub דרך השרת (פונקציית dispatch). inputs ריק = סריקה מלאה. */
+async function dispatchScan(inputs) {
+  const { data, error } = await sb.functions.invoke("dispatch", { body: { app: "travel", inputs: inputs || {} } });
+  if (error) {
+    let msg = error.message;
+    try { const b = await error.context.json(); if (b && b.error) msg = b.error; } catch (e) { /* ignore */ }
+    throw new Error(msg);
+  }
+  if (data && data.error) throw new Error(data.error);
+  return data;
 }
 
 // ---- trip type toggle (one-off search panel only) ----
@@ -956,46 +1031,17 @@ function updateBudgetThresholdField() {
 }
 
 async function saveBudgetThreshold() {
-  const token = getToken();
-  if (!token) { openTokenModal(); return; }
-
+  if (!requireLogin()) return;
   const val = parseFloat(document.getElementById("budgetThreshold").value);
   const statusEl = document.getElementById("budgetThresholdStatus");
   if (!val || val <= 0) { statusEl.textContent = "הזינו מספר חיובי"; statusEl.className = "search-status error"; return; }
-
   statusEl.textContent = "שומר...";
   statusEl.className = "search-status";
-
   try {
-    const path = "config/settings.json";
-    const getRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
-      headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" },
-    });
-    if (!getRes.ok) throw new Error("לא ניתן לקרוא את settings.json");
-    const fileData = await getRes.json();
-    const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-
-    if (!content.budgetAlerts || typeof content.budgetAlerts !== "object") {
-      content.budgetAlerts = { enabled: true, monthsAhead: 2, maxTripNights: 14 };
-    }
-    content.budgetAlerts.enabled = true;
-    if (budgetTripType === "oneway") {
-      content.budgetAlerts.maxOneWayUSD = val;
-    } else {
-      content.budgetAlerts.maxRoundTripUSD = val;
-    }
-
-    const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2) + "\n")));
-    const putRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
-      method: "PUT",
-      headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "Update budget threshold (" + budgetTripType + "): $" + val, content: updatedContent, sha: fileData.sha }),
-    });
-    if (!putRes.ok) {
-      const body = await putRes.json().catch(() => ({}));
-      throw new Error(body.message || ("שגיאה " + putRes.status));
-    }
-
+    const row = { user_id: currentUser.id, updated_at: new Date().toISOString() };
+    if (budgetTripType === "oneway") row.max_one_way_usd = val; else row.max_round_trip_usd = val;
+    const { error } = await sb.from("travel_settings").upsert(row, { onConflict: "user_id" });
+    if (error) throw new Error(error.message);
     if (budgetTripType === "oneway") budgetThresholds.oneway = val; else budgetThresholds.roundtrip = val;
     statusEl.textContent = "✓ נשמר - הסריקה הבאה תשתמש בתקרה הזו";
     statusEl.className = "search-status success";
@@ -1013,8 +1059,7 @@ function setSearchStatus(text, cls) {
 }
 
 async function triggerSearch(mode) {
-  const token = getToken();
-  if (!token) { openTokenModal(); return; }
+  if (!requireLogin()) return;
 
   let dest = document.getElementById("searchDestCode").value;
   const typedText = document.getElementById("searchDestText").value.trim();
@@ -1048,56 +1093,31 @@ async function triggerSearch(mode) {
   const startedAt = new Date();
 
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/vnd.github+json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ref: "main",
-          inputs: {
-            departureDate: depart,
-            returnDate: ret || "",
-            flexible: String(flexible),
-            flexDays: String(flexDays),
-            destination: dest || "",
-            tripType: currentTripType,
-            searchMode: mode,
-            adults: document.getElementById("searchAdults").value,
-          },
-        }),
-      }
-    );
-
-    if (res.status === 204) {
-      setSearchStatus("מריץ חיפוש... זה יכול לקחת עד דקה", "");
-      const alertMe = document.getElementById("searchAlertMe").checked;
-      pollForResult(startedAt, token, [flightsBtn, hotelsBtn], {
-        alertMe: alertMe && mode === "flights" && currentTripType === "roundtrip" && !!dest,
-        dest, depart, ret,
-        note: document.getElementById("searchDestText").value.trim() || dest,
-      });
-    } else if (res.status === 401 || res.status === 403) {
-      setSearchStatus("הטוקן לא תקין/פג תוקף - פתחו 🔑 והזינו טוקן חדש", "error");
-      flightsBtn.disabled = false;
-      hotelsBtn.disabled = false;
-    } else {
-      setSearchStatus("שגיאה מגיטהאב (קוד " + res.status + ")", "error");
-      flightsBtn.disabled = false;
-      hotelsBtn.disabled = false;
-    }
+    await dispatchScan({
+      departureDate: depart,
+      returnDate: ret || "",
+      flexible: String(flexible),
+      flexDays: String(flexDays),
+      destination: dest || "",
+      tripType: currentTripType,
+      searchMode: mode,
+      adults: document.getElementById("searchAdults").value,
+    });
+    setSearchStatus("מריץ חיפוש... זה יכול לקחת עד דקה", "");
+    const alertMe = document.getElementById("searchAlertMe").checked;
+    pollForResult(startedAt, [flightsBtn, hotelsBtn], {
+      alertMe: alertMe && mode === "flights" && currentTripType === "roundtrip" && !!dest,
+      dest, depart, ret,
+      note: document.getElementById("searchDestText").value.trim() || dest,
+    });
   } catch (e) {
-    setSearchStatus("שגיאת רשת - נסו שוב", "error");
+    setSearchStatus("שגיאה: " + e.message, "error");
     flightsBtn.disabled = false;
     hotelsBtn.disabled = false;
   }
 }
 
-function pollForResult(since, token, btns, opts) {
+function pollForResult(since, btns, opts) {
   const enableButtons = () => btns.forEach((b) => { b.disabled = false; });
   let attempts = 0;
   const maxAttempts = 24; // ~2.5 minutes at 6s interval
@@ -1106,7 +1126,7 @@ function pollForResult(since, token, btns, opts) {
     try {
       const res = await fetch(
         `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/actions/workflows/${GH_WORKFLOW}/runs?event=workflow_dispatch&per_page=5`,
-        { headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" } }
+        { headers: { Accept: "application/vnd.github+json" } } // ריפו ציבורי: קריאת סטטוס בלי טוקן
       );
       const data = await res.json();
       const run = (data.workflow_runs || []).find((r) => new Date(r.created_at) >= new Date(since.getTime() - 5000));
@@ -1331,43 +1351,15 @@ function openWatchlistModal() {
 function closeWatchlistModal() { document.getElementById("watchlistModal").classList.remove("open"); }
 
 async function addWatchlistEntry({ dest, depart, ret, note }) {
-  const token = getToken();
-  if (!token) throw new Error("אין טוקן שמור");
+  if (!currentUser) throw new Error("צריך להתחבר");
   if (!dest || !depart || !ret) throw new Error("חסר יעד או תאריכים");
   if (new Date(ret) <= new Date(depart)) throw new Error("תאריך החזרה חייב להיות אחרי היציאה");
-
-  const path = "config/settings.json";
-  const getRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
-    headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" },
+  const { error } = await sb.from("travel_watchlist").insert({
+    destination: dest, departure_date: depart, return_date: ret, note: (note || dest).slice(0, 200),
   });
-  if (!getRes.ok) throw new Error("לא ניתן לקרוא את settings.json (בדקו שלטוקן יש הרשאת Contents)");
-  const fileData = await getRes.json();
-  const content = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-
-  if (!Array.isArray(content.watchlist)) content.watchlist = [];
-  const already = content.watchlist.some((w) => w.destination === dest && w.departureDate === depart && w.returnDate === ret);
-  if (already) return { added: false };
-
-  content.watchlist.push({ destination: dest, departureDate: depart, returnDate: ret, note: note || dest });
-
-  const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2) + "\n")));
-  const putRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`, {
-    method: "PUT",
-    headers: {
-      Authorization: "Bearer " + token,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      message: "Add watchlist item: " + (note || dest),
-      content: updatedContent,
-      sha: fileData.sha,
-    }),
-  });
-
-  if (!putRes.ok) {
-    const body = await putRes.json().catch(() => ({}));
-    throw new Error(body.message || ("שגיאה " + putRes.status));
+  if (error) {
+    if (error.code === "23505") return { added: false }; // כבר במעקב
+    throw new Error(error.message);
   }
   return { added: true };
 }
@@ -1379,14 +1371,16 @@ async function submitWatchlistItem() {
   const note = document.getElementById("wlNote").value.trim();
   const statusEl = document.getElementById("watchlistModalStatus");
 
-  if (!getToken()) { closeWatchlistModal(); openTokenModal(); return; }
+  if (!currentUser) { closeWatchlistModal(); openLoginModal(); return; }
 
   statusEl.textContent = "שומר...";
   statusEl.className = "search-status";
 
   try {
     await addWatchlistEntry({ dest, depart, ret, note });
-    statusEl.textContent = "✓ נוסף! הסריקה הבאה תתחיל לעקוב";
+    // קודם שמירה בקובץ הפעילה סריקה מיד; עכשיו מבקשים סריקה מלאה במפורש
+    try { await dispatchScan({}); } catch (e) { /* הסריקה הקבועה תאסוף את זה */ }
+    statusEl.textContent = "✓ נוסף! סריקה מתחילה עכשיו, התוצאה תופיע תוך כמה דקות";
     statusEl.className = "search-status success";
     setTimeout(closeWatchlistModal, 1200);
   } catch (e) {
@@ -1780,7 +1774,7 @@ function render(latest, history) {
   renderDealMap();
 }
 
-loadData();
+loadData().finally(initAuth);
 </script>
 </body>
 </html>
