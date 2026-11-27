@@ -21,7 +21,13 @@ async function getJson(fetchFn, url, init) {
 }
 
 /** מחזיר { watchlist: [...], budget: {maxRoundTripUSD, maxOneWayUSD} | null } או זורק שגיאה */
+/** מסיר רווחים בקצוות ותווים נסתרים שנכנסים בהעתקה מהאייפון (סימני כיוון RTL ודומיהם) */
+function cleanSecret(v) {
+  return String(v || "").replace(/[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g, "").trim();
+}
+
 async function fetchRemoteSettings({ password, fetchFn = fetch, url = SUPABASE_URL, anonKey = SUPABASE_ANON_KEY } = {}) {
+  password = cleanSecret(password);
   if (!password) throw new Error("SUPABASE_BOT_PASSWORD not set");
   const auth = await getJson(fetchFn, `${url}/auth/v1/token?grant_type=password`, {
     method: "POST",
@@ -82,4 +88,4 @@ async function applyRemoteSettings(settings, { previousLatest, password, fetchFn
   }
 }
 
-module.exports = { fetchRemoteSettings, applyRemoteSettings, watchlistFromLatest, SUPABASE_URL, SUPABASE_ANON_KEY, BOT_EMAIL };
+module.exports = { cleanSecret, fetchRemoteSettings, applyRemoteSettings, watchlistFromLatest, SUPABASE_URL, SUPABASE_ANON_KEY, BOT_EMAIL };

@@ -71,3 +71,10 @@ test('scan workflow passes only the bot password, and scan.js loads remote setti
   const scan = fs.readFileSync(require('node:path').join(__dirname, '../scripts/scan.js'), 'utf8');
   assert.match(scan, /if \(!isOneOffSearch\) \{\s*await applyRemoteSettings/);
 });
+
+test('password copied from iPhone with hidden direction marks still works (bug seen in tom-health)', async () => {
+  assert.strictEqual(R.cleanSecret('\u200f pa ss\u200e\n'), 'pa ss');
+  const f = OK();
+  await R.applyRemoteSettings(base(), { password: '\u200fpw\u200e ', fetchFn: f, log: () => {} });
+  assert.strictEqual(JSON.parse(f.calls[0].init.body).password, 'pw');
+});
